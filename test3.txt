@@ -1,0 +1,12 @@
+//Here's hoping this works
+
+#include <iostream>
+
+using std::cout;
+
+int main(int argc, char** argv)
+{
+    cout << "Derp.\n";
+
+    return 0;
+}

@@ -35,7 +35,6 @@ public class SparkHunterTitleScreen extends Activity {
 			}
 		});
         
-      // TODO Causes crash
         Button d = (Button)findViewById(R.id.button3);
         d.setOnClickListener(new View.OnClickListener() {
 			

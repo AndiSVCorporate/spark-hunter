@@ -3,11 +3,23 @@ package com.sparkhunter.main;
 import java.util.Vector;
 import android.util.Log;
 import com.sparkhunter.res.Item;
+import com.sparkhunter.res.RubberDuck;
 
+//TODO make static and connect to master game state
 public class Inventory {
 	//TODO loads/store inventory locally
-	//TODO figure out how to interface this with the damn activity
-	private Vector<Item> inventoryItems; // actual item list
+	private Vector<Item> inventoryItems = new Vector<Item>(); // actual item list
+	
+	public Inventory(){
+		//the player only has rubber ducks for now, dealwithit.jpg
+		for(int i = 0; i < 6; i++){
+			inventoryItems.add(new RubberDuck());
+		}
+	}
+	
+	public Vector<Item> getItemList(){
+		return inventoryItems;
+	}
 	
 	public void addItem(Item newItem){
 		inventoryItems.add(newItem);

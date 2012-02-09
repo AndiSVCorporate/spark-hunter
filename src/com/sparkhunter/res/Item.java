@@ -3,12 +3,13 @@ package com.sparkhunter.res;
 public abstract class Item {
 	//ABC for in-game items
 	//subclasses exist for potions and what-not
-	private int identifier; //unique identifier for the item
-	private int itemClass; 	//item class, e.g. "01 (potion)"
-	private int target; 	//target of item effect
-	private int magnitude;	//magnitude of item effect (absolute/relative)
-	private String effect;	//item effect
-	private String name;	//name field for the item, e.g. "Potion of Doom"
+	private int identifier; 		//unique identifier for the item
+	private int itemClass; 			//item class, e.g. "01 (potion)"
+	private int target; 			//target of item effect
+	private int magnitude;			//magnitude of item effect (absolute/relative)
+	private String effect;			//item effect
+	private String name;			//name field for the item, e.g. "Potion of Doom"
+	private Integer resourceID; 	//resource tied to item (image, extend to sounds)
 	
 	//getters and setters
 	public int getIdentifier() {
@@ -62,6 +63,16 @@ public abstract class Item {
 		return;
 	}
 	
+	public Integer getResourceID() {
+		return resourceID;
+	}
+
+	public void setResourceID(Integer resourceID) {
+		this.resourceID = resourceID;
+	}
+
 	//need to setup some sort of game state interface for this stuff
 	public abstract void useItem(int target);
+	
+	//resource tied to item
 }

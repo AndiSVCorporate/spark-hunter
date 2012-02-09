@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.sparkhunter.facebook;
+package com.sparkhunter.main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class FbfriendsActivity extends Activity {
     	
     	//initialize screen
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.friends);
         output = (TextView) findViewById(OUTPUT);
         output.setText("You should login.");
         

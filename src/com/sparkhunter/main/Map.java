@@ -1,4 +1,4 @@
-package com.sparkhunter.map;
+package com.sparkhunter.main;
 
 //import android.app.Activity;
 import android.content.Context;

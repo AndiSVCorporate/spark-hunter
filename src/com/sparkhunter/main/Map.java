@@ -6,6 +6,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -14,19 +17,23 @@ import com.google.android.maps.MapView;
 
 public class Map extends MapActivity {
     /** Called when the activity is first created. */
-    private static final String MAP_KEY = " 0aQZHC-JYT990u_AGNX1OXgS98N_MUnaAyxda4Q";
+    private static final String MAP_KEY = "0BpOKOGaNV--pQ-Km6inD4BSIY4viUJnBo6RViQ";
     
     private MapController mapController;
     private MapView mapView;
-    
+    private TextView debug;
 	@Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        mapView = new MapView(this, MAP_KEY);
+        //setContentView(R.layout.viewmap);
+        //mapView = new MapView(this, MAP_KEY);
+        setContentView(R.layout.viewmap);
+        mapView = (MapView)findViewById(R.id.mapview1);
+        mapView.setSatellite(true);
+        debug = (TextView)findViewById(R.id.textViewMap);
         mapController = mapView.getController();
         mapController.setZoom(22);
-        setContentView(mapView);
         /* Using the locationmanager class */
         LocationListener loclistener=new myLocationListener();
         LocationManager locmanager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -44,11 +51,8 @@ public class Map extends MapActivity {
     		
     		GeoPoint geo = new GeoPoint((int)(loc.getLatitude()*1E6),(int)(loc.getLongitude()*1E6));
     		mapController.setCenter(geo);
-    		setContentView(mapView);
-    		//String text = " Latitude = "+loc.getLatitude()+" Longitude = "+loc.getLongitude();
-    		//TextView tv = new TextView(getApplicationContext());
-    		//tv.setText(text);
-    		//setContentView(tv);    		
+    		String text = " Latitude = "+loc.getLatitude()+" Longitude = "+loc.getLongitude();
+    		debug.setText(text); 		
     	}
 
     	@Override

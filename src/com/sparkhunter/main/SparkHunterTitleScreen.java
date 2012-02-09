@@ -17,10 +17,10 @@ public class SparkHunterTitleScreen extends Activity {
         Button b = (Button)findViewById(R.id.button1);
         b.setOnClickListener(new View.OnClickListener(){
 
-			public void onClick(View v1) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i1 = new Intent(SparkHunterTitleScreen.this, FbfriendsActivity.class);
-				startActivity(i1);
+				Intent i = new Intent(SparkHunterTitleScreen.this, FbfriendsActivity.class);
+				startActivity(i);
 			}
         	
         });
@@ -28,23 +28,23 @@ public class SparkHunterTitleScreen extends Activity {
         Button c = (Button)findViewById(R.id.button2);
         c.setOnClickListener(new View.OnClickListener() {
 			
-			public void onClick(View v2) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i2 = new Intent(SparkHunterTitleScreen.this, InventoryScreen.class);
-				startActivity(i2);
+				Intent i = new Intent(SparkHunterTitleScreen.this, InventoryScreen.class);
+				startActivity(i);
 			}
 		});
         
       // TODO Causes crash
-      /*  Button d = (Button)findViewById(R.id.button3);
-        c.setOnClickListener(new View.OnClickListener() {
+        Button d = (Button)findViewById(R.id.button3);
+        d.setOnClickListener(new View.OnClickListener() {
 			
-			public void onClick(View v3) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i3 = new Intent(SparkHunterTitleScreen.this, Map.class);
-				startActivity(i3);
+				Intent i = new Intent(SparkHunterTitleScreen.this, Map.class);
+				startActivity(i);
 			}
-		});*/
+		});
       
         
         

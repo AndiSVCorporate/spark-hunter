@@ -45,7 +45,6 @@ import com.sparkhunter.main.R;
 
 public class FbfriendsActivity extends Activity {
 	
-	//Assign APP_ID here, intentially removed APP ID
 	public static final String APP_ID = "263739193698958";
 	
 	

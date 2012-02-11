@@ -1,6 +1,7 @@
 bin/
 gen/
-
+lint.xml
+proguard.cfg
 #generated android class
 R.java
 

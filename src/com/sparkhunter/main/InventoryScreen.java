@@ -1,6 +1,7 @@
 package com.sparkhunter.main;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,9 @@ public class InventoryScreen extends Activity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	//useItem calls go here, in general
                 Toast.makeText(InventoryScreen.this, "quack.", Toast.LENGTH_SHORT).show();
+                //TODO tie sound resource into Item class
+                MediaPlayer itemSound = MediaPlayer.create(InventoryScreen.this, R.raw.squee);
+        		itemSound.start();
             }
         });
 	}

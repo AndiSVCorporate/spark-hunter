@@ -1,6 +1,9 @@
 package com.sparkhunter.res;
 
+import com.sparkhunter.main.R;
 import android.util.Log;
+import android.content.Context;
+import android.media.MediaPlayer;
 
 public class RubberDuck extends Item {
 	
@@ -17,7 +20,6 @@ public class RubberDuck extends Item {
 	
 	@Override
 	public void useItem(int target) {
-		// TODO Auto-generated method stub
 		Log.d("DEBUG", "quack.");
 	}
 }

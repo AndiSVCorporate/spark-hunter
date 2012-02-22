@@ -8,12 +8,13 @@
         android:id="@+id/textViewMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Spark em All" />
     
     <com.google.android.maps.MapView
         android:id="@+id/mapview1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:clickable="true"
         android:apiKey="0BpOKOGaNV--TVsbH10n7oRYVjfRXOnUtZjXGqw"
      />
 </LinearLayout>

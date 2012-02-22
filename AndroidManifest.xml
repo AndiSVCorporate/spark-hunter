@@ -25,6 +25,7 @@
         <activity android:name=".FbfriendsActivity"></activity>
         <activity android:name=".Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
+        <service android:label="BackgroundMusic" android:name="com.sparkhunter.res.BackgroundMusic"></service>
     </application>
 
 </manifest>

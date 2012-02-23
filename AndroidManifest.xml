@@ -26,6 +26,7 @@
         <activity android:name=".Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
         <service android:label="BackgroundMusic" android:name="com.sparkhunter.res.BackgroundMusic" android:process=":bgm_service"></service>
+        <activity android:name=".GetSpark"></activity>
     </application>
 
 </manifest>

@@ -44,6 +44,16 @@ public class SparkHunterTitleScreen extends Activity {
 				startActivity(i);
 			}
 		});
+        Button e = (Button)findViewById(R.id.button4);
+        e.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(SparkHunterTitleScreen.this, GetSpark.class);
+				startActivity(i);
+			}
+		});
+      
       
         
         

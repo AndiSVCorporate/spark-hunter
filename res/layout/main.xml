@@ -28,6 +28,12 @@
         android:layout_marginTop="15dp"
         android:onClick="ButtonClick1"
         android:text="Battle!" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Spark" />
 
     <Button
         android:id="@+id/button1"

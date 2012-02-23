@@ -32,16 +32,14 @@ public class InventoryScreen extends Activity {
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	//useItem calls go here, in general
-            	Intent itemSoundIntent = new Intent();
+            	Intent itemSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
             	
             	//KLUDGE-TASTIC, find a better way to package the sound data
-            	itemSoundIntent.setAction(R.string.music_intent+Integer.toString(R.raw.squee));
+            	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
+            	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
+            	InventoryScreen.this.startService(itemSoundIntent);
             	
                 Toast.makeText(InventoryScreen.this, "quack.", Toast.LENGTH_SHORT).show();
-
-                //InventoryScreen.this.bindService(itemSoundIntent, Service);
-                //MediaPlayer itemSound = MediaPlayer.create(InventoryScreen.this, R.raw.squee);
-        		//itemSound.start();
             }
         });
 	}

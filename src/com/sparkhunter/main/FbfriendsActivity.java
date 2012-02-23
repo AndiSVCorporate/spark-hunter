@@ -16,9 +16,14 @@
 
 package com.sparkhunter.main;
 
+import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
+import java.io.FilterInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,127 +31,38 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.AsyncFacebookRunner.RequestListener;
-import com.facebook.android.DialogError;
-import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 import com.sparkhunter.main.R;
 
+
 public class FbfriendsActivity extends Activity {
-	
-	public static final String APP_ID = "263739193698958";
-	
-	
-    public static final int LOGIN = R.id.login;
-    public static final int OUTPUT = R.id.output;
-    public static final int FRIEND = R.id.getfriends;
-    public static final int FRIENDLIST = R.id.friendlist;
-    
-    public static TextView output;
-    
+
     
     private Activity mActivity;
     private Handler mHandler = new Handler();
-    private AsyncFacebookRunner mAsync;
-    private Facebook facebook;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	mActivity = this;
-    	
     	//initialize screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friends);
-        output = (TextView) findViewById(OUTPUT);
-        output.setText("You should login.");
-        
-        //initialize facebook
-        facebook = new Facebook(APP_ID);
-        mAsync = new AsyncFacebookRunner(facebook);
-        
-        //Setup button listeners
-        Button button = (Button)findViewById(LOGIN);
-        button.setOnClickListener(mLoginListener);
-        button = (Button)findViewById(FRIEND);
-        button.setOnClickListener(mFriendListener);
+        //get friend list
+		FacebookUtils.getFriends(new FriendListener());
     }
     
-    private class LoginListener implements DialogListener{
-
-        @Override
-        public void onComplete(Bundle values) {
-        	output.setText("Great Success.");
-        }
-
-        @Override
-        public void onFacebookError(FacebookError error) {
-        	output.setText(error.getMessage());
-        	}
-
-        @Override
-        public void onError(DialogError e) {
-        	output.setText(e.getMessage());
-        	}
-
-        @Override
-        public void onCancel() {
-        	output.setText("Canceled");
-        	}
-    	
-    }
-    private class LogoutListener implements RequestListener{
-
-		@Override
-		public void onComplete(String response, Object state) {
-			mHandler.post(new Runnable() {
-				public void run(){
-					output.setText("Logged out");
-					TextView list = (TextView) findViewById(FRIENDLIST);
-					list.setText("");
-				}
-			}
-			);
-			
-		}
-
-		@Override
-		public void onIOException(IOException e, Object state) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onFileNotFoundException(FileNotFoundException e,
-				Object state) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onMalformedURLException(MalformedURLException e,
-				Object state) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onFacebookError(FacebookError e, Object state) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    }
     public class FriendListener implements RequestListener {
 
 		@Override
@@ -163,11 +79,17 @@ public class FbfriendsActivity extends Activity {
 							while(!jsonFriends.isNull(i))
 							{
 								//print out friend data
-								TextView list = (TextView) findViewById(FRIENDLIST);
+								TextView list = (TextView) findViewById(R.id.friendlist);
+								//ListView list = (ListView) findViewById(R.id.friendlist);
+								//ImageView img = (ImageView) findViewById(R.id.imageView1);
 								list.setMovementMethod(new ScrollingMovementMethod());
-								list.append(jsonFriends.getString(i)+"\n");
+								String[] tokens = jsonFriends.getString(i).split("\"");
+								list.append(tokens[7]+"\n");
+								//if(i==1)
+								//	img.setImageBitmap(getBitmap("https://graph.facebook.com/"+ tokens[3] +"/picture"));
 								i++;
 							}
+							
 							
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -188,24 +110,20 @@ public class FbfriendsActivity extends Activity {
 
 		@Override
 		public void onIOException(IOException e, Object state) {
-			output.setText(e.getMessage());
 			
 		}
 		@Override
 		public void onFileNotFoundException(FileNotFoundException e,
 				Object state) {
-			output.setText(e.getMessage());
 			
 		}
 		@Override
 		public void onMalformedURLException(MalformedURLException e,
 				Object state) {
-			output.setText(e.getMessage());
 			
 		}
 		@Override
 		public void onFacebookError(FacebookError e, Object state) {
-			output.setText(e.getMessage());
 			
 		}
     	
@@ -213,37 +131,62 @@ public class FbfriendsActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
-        facebook.authorizeCallback(requestCode, resultCode, data);
+        FacebookUtils.authorizeCallback(requestCode, resultCode, data);
     }
 
-    
-    private OnClickListener mLoginListener = new OnClickListener() {
-    	@Override
-    	public void onClick(View item){
-    		//toggle logout/login depending on current state
-    		if (facebook.isSessionValid()){
-    			output.setText("Logging out...");
-    			AsyncFacebookRunner tempRunner = new AsyncFacebookRunner(facebook);
-    			tempRunner.logout(getBaseContext(),new LogoutListener());
-    		}
-    		else{
-    			output.setText("Logging in...");
-    			facebook.authorize(mActivity,new LoginListener());
-    		}
-    	}
 
-    };
-    private OnClickListener mFriendListener = new OnClickListener() {
-    	@Override
-    	public void onClick(View item){
-    		//request friend list from facebook
-    		if (facebook.isSessionValid()){
-    			 mAsync.request("me/friends",new FriendListener());
-    			 output.setText("Fetching datas...");
-    		}
-    	}
-
-    };
+//copy pasted from Hackbook (Facebook's example app)
+//not used yet
+public Bitmap getBitmap(String url) {
+	AndroidHttpClient httpclient = null;
+    Bitmap bm = null;
+    try {
+        URL aURL = new URL(url);
+        URLConnection conn = aURL.openConnection();
+        conn.connect();
+        InputStream is = conn.getInputStream();
+        BufferedInputStream bis = new BufferedInputStream(is);
+        bm = BitmapFactory.decodeStream(new FlushedInputStream(is));
+        bis.close();
+        is.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (httpclient != null) {
+            httpclient.close();
+        }
+    }
+    return bm;
 }
+
+class FlushedInputStream extends FilterInputStream {
+    public FlushedInputStream(InputStream inputStream) {
+        super(inputStream);
+    }
+
+    @Override
+    public long skip(long n) throws IOException {
+        long totalBytesSkipped = 0L;
+        while (totalBytesSkipped < n) {
+            long bytesSkipped = in.skip(n - totalBytesSkipped);
+            if (bytesSkipped == 0L) {
+                int b = read();
+                if (b < 0) {
+                    break; // we reached EOF
+                } else {
+                    bytesSkipped = 1; // we read one byte
+                }
+            }
+            totalBytesSkipped += bytesSkipped;
+        }
+        return totalBytesSkipped;
+    }
+}
+}
+
+
+
+
+
+
     

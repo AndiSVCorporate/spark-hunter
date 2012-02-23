@@ -26,6 +26,15 @@
         <activity android:name=".Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
         <activity android:name=".GetSpark"></activity>
+        <activity android:name=".Info"
+            	  android:theme="@android:style/Theme.Dialog"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+        </activity>
     </application>
 
 </manifest>

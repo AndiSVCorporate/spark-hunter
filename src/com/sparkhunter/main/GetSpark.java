@@ -39,12 +39,12 @@ public class GetSpark extends Activity implements OnClickListener {
 		case R.id.IVimage1:
 			display.setImageResource(R.drawable.duckedit);
 			chosenSpark = new Spark("Dingus");
-			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
+			chosenSpark.setDescript("Starting water type Spark, Don't duck with 'em!");
 			break;
 		case R.id.IVimage2:
 			display.setImageResource(R.drawable.androidmarker);
 			chosenSpark = new Spark("Biggy");
-			chosenSpark.setDescript("Starting fire type Spark, Carefull for his hidden gun!");
+			chosenSpark.setDescript("Starting fire type Spark, Careful for his hidden gun!");
 			break;
 		case R.id.IVimage3:
 			display.setImageResource(R.drawable.item_square);

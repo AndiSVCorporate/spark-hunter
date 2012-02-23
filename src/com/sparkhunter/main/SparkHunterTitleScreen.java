@@ -45,7 +45,7 @@ public class SparkHunterTitleScreen extends Activity {
         bgm.start();
         menuSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
         
-        Button b = (Button)findViewById(R.id.button1);
+        b = (Button)findViewById(R.id.button1);
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
@@ -105,4 +105,5 @@ public class SparkHunterTitleScreen extends Activity {
 			}
 		});
       }
+    
 }

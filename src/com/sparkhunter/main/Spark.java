@@ -15,6 +15,7 @@ public class Spark {
 	{
 		mName = name;
 		mDescription = "";
+		setStats();
 	}
 	
 	//sets 

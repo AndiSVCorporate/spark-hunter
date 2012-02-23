@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, SparkHunterTitleScreen!</string>
     <string name="app_name">Spark-hunter</string>
     <string name="login">Login To Bookface</string>
+    <string name="music_intent">com.sparkhunter.res</string>
 
 </resources>

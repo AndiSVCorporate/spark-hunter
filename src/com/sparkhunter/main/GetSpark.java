@@ -11,7 +11,7 @@ import android.widget.ImageView;
 public class GetSpark extends Activity implements OnClickListener {
 
 	ImageView display;
-	Spark chosenSpark;
+	static Spark chosenSpark;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,26 +29,30 @@ public class GetSpark extends Activity implements OnClickListener {
 		image2.setOnClickListener(this);
 		image3.setOnClickListener(this);
 		choosespark.setOnClickListener(this);
+		
+		//default spark
+		chosenSpark = new Spark("Dingus",R.drawable.duckedit);
+		chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
 				
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+
 		switch (v.getId()){
 		case R.id.IVimage1:
 			display.setImageResource(R.drawable.duckedit);
-			chosenSpark = new Spark("Dingus");
+			chosenSpark = new Spark("Dingus",R.drawable.duckedit);
 			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
 			break;
 		case R.id.IVimage2:
 			display.setImageResource(R.drawable.androidmarker);
-			chosenSpark = new Spark("Biggy");
+			chosenSpark = new Spark("Biggy",R.drawable.androidmarker);
 			chosenSpark.setDescript("Starting fire type Spark, Carefull for his hidden gun!");
 			break;
 		case R.id.IVimage3:
 			display.setImageResource(R.drawable.item_square);
-			chosenSpark = new Spark("SquarePants");
+			chosenSpark = new Spark("SquarePants",R.drawable.item_square);
 			chosenSpark.setDescript("Starting grass type Spark, Makes a mean burger!");
 			break;
 		case R.id.GetSpark:

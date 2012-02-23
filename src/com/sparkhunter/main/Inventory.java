@@ -6,6 +6,7 @@ import com.sparkhunter.res.Item;
 import com.sparkhunter.res.RubberDuck;
 
 //TODO make static and connect to master game state
+//TODO verify that state changes in InventoryScreen don't mess with this
 public class Inventory {
 	//TODO loads/store inventory locally
 	private Vector<Item> inventoryItems = new Vector<Item>(); // actual item list

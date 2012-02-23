@@ -25,6 +25,7 @@
         <activity android:name=".FbfriendsActivity"></activity>
         <activity android:name=".Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
+        <service android:label="BackgroundMusic" android:name="com.sparkhunter.res.BackgroundMusic"></service>
         <activity android:name=".GetSpark"></activity>
         <activity android:name=".BattleActivity"></activity>
         <activity android:name=".Info"
@@ -37,5 +38,4 @@
                 </intent-filter>
         </activity>
     </application>
-
 </manifest>

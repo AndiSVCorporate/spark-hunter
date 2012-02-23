@@ -42,6 +42,7 @@ public class GetSpark extends Activity implements OnClickListener {
 		switch (v.getId()){
 		case R.id.IVimage1:
 			display.setImageResource(R.drawable.duckedit);
+<<<<<<< HEAD
 			chosenSpark = new Spark("Dingus",R.drawable.duckedit);
 			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
 			break;

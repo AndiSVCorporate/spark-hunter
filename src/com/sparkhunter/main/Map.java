@@ -9,18 +9,22 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.widget.Button;
 import android.widget.TextView;
+
+
+
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
-public class Map extends MapActivity {
+
+
+public class Map extends MapActivity{
+	private static final int ZOOM_LEVEL = 22;
+
 	/** Called when the activity is first created. */
 	private static final String MAP_KEY = "0BpOKOGaNV--pQ-Km6inD4BSIY4viUJnBo6RViQ";
 
@@ -28,35 +32,49 @@ public class Map extends MapActivity {
 	private MapView mapView;
 	private TextView debug;
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.viewmap);
-		// mapView = new MapView(this, MAP_KEY);
-		setContentView(R.layout.viewmap); 
+
+		// Creating the map
+		setContentView(R.layout.viewmap);
 		mapView = (MapView) findViewById(R.id.mapview1);
 		mapView.setBuiltInZoomControls(true);
-		//.setSatellite(true);
 		debug = (TextView) findViewById(R.id.textViewMap);
 		mapController = mapView.getController();
-		mapController.setZoom(22);
+		mapController.setZoom(ZOOM_LEVEL);
+
 		/* Using the locationmanager class */
 		LocationListener loclistener = new myLocationListener();
 		LocationManager locmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
 				0, loclistener);
-		List<Overlay> mapOverlays = mapView.getOverlays();
-		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_dagger);
-		MapItemizedoverlay itemizedOverlay = new MapItemizedoverlay(drawable, this);
-		GeoPoint point = new GeoPoint(19240000,-99120000);
-		OverlayItem overlayitem = new OverlayItem(point, "Test", "I'm in Mexico City!");
 	
-		itemizedOverlay.addOverlay(overlayitem);
-		mapOverlays.add(itemizedOverlay);
-	}
+	
+		// Registering the overlays on starting the activity
+		List<Overlay> mapOverlays = mapView.getOverlays();        
+		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_dagger);
+		MapItemizedoverlay myOverlay = new MapItemizedoverlay(drawable, this);
+		mapOverlays.add(myOverlay);
+	  }
+
+	/**
+	 * A class that listens to the changes in location of the device
+	 * 
+	 * @author Divyang
+	 * 
+	 */
 
 	public class myLocationListener implements LocationListener {
 
+		/**
+		 * A method to receive the location and center the map while displaying
+		 * the latitude and longitude.
+		 * 
+		 * @param loc
+		 *            The location of the device
+		 */
 		@Override
 		public void onLocationChanged(Location loc) {
 
@@ -93,25 +111,5 @@ public class Map extends MapActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	/* @Override
-     public boolean onTouchEvent(MotionEvent event, MapView mapView) 
-     {   
-         //---when user lifts his finger---
-         if (event.getAction() == 1) {                
-             GeoPoint p = mapView.getProjection().fromPixels(
-                 (int) event.getX(),
-                 (int) event.getY());
-             GeoPoint point = new GeoPoint(p.getLatitudeE6(),p.getLongitudeE6());
-             OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-             
-                Toast.makeText(getBaseContext(), 
-                     p.getLatitudeE6() / 1E6 + "," + 
-                     p.getLongitudeE6() /1E6 , 
-                     Toast.LENGTH_SHORT).show();
-         
-         }                            
-         return false;
-     } */       
 
 }

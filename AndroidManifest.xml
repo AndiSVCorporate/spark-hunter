@@ -26,6 +26,7 @@
         <activity android:name=".Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
         <activity android:name=".GetSpark"></activity>
+        <activity android:name=".BattleActivity"></activity>
         <activity android:name=".Info"
             	  android:theme="@android:style/Theme.Dialog"
             >

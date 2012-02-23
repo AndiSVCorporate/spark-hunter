@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ProgressBar
+        android:id="@+id/leftHP"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_x="1dp"
+        android:layout_y="27dp" />
+
+    <TextView
+        android:id="@+id/leftName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="125dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/leftImage"
+        android:layout_width="68dp"
+        android:layout_height="78dp"
+        android:layout_x="3dp"
+        android:layout_y="49dp"
+        android:src="@drawable/androidmarker" />
+
+    <ProgressBar
+        android:id="@+id/rightHP"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_x="238dp"
+        android:layout_y="28dp" />
+
+    <ImageView
+        android:id="@+id/rightImage"
+        android:layout_width="68dp"
+        android:layout_height="78dp"
+        android:layout_x="252dp"
+        android:layout_y="49dp"
+        android:src="@drawable/androidmarker" />
+
+    <TextView
+        android:id="@+id/rightName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="214dp"
+        android:layout_y="124dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/Button03"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="6dp"
+        android:layout_y="482dp"
+        android:text="Does Nothing!" />
+
+    <Button
+        android:id="@+id/Button02"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="380dp"
+        android:text="Does Nothing!" />
+
+    <Button
+        android:id="@+id/Button04"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="-1dp"
+        android:layout_y="422dp"
+        android:text="Does Nothing!" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="338dp"
+        android:text="Does Nothing!" />
+
+    <Button
+        android:id="@+id/attack"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="296dp"
+        android:text="Attack!" />
+
+    <TextView
+        android:id="@+id/battleLog"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:layout_x="5dp"
+        android:layout_y="158dp"
+        android:text="" />
+
+</AbsoluteLayout>

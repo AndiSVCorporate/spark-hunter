@@ -3,25 +3,24 @@ package com.sparkhunter.main;
 public class Spark {
 	//stats
 	private int mMaxHP;
-	private int mCurHP;
+	public int mCurHP;
 	private int mSpeed;
 	
 	private String mName;
 	private String mDescription;
+	public int mResId;
 	
 	private Ability[] mAblty;
 	
-	public Spark(String name)
+	public Spark(String name, int resId)
 	{
 		mName = name;
 		mDescription = "";
+		mResId = resId;
 		setStats();
 	}
 	
-	//sets 
-	public void setName(String name){
-		mName = name;
-	}
+	//sets
 	public void setDescript(String descript){
 		mDescription = descript;
 	}

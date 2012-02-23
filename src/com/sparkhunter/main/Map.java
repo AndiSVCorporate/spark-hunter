@@ -46,7 +46,7 @@ public class Map extends MapActivity {
 		locmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
 				0, loclistener);
 		List<Overlay> mapOverlays = mapView.getOverlays();
-		Drawable drawable = this.getResources().getDrawable(R.drawable.item_circle);
+		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_dagger);
 		MapItemizedoverlay itemizedOverlay = new MapItemizedoverlay(drawable, this);
 		GeoPoint point = new GeoPoint(19240000,-99120000);
 		OverlayItem overlayitem = new OverlayItem(point, "Test", "I'm in Mexico City!");

@@ -1,5 +1,8 @@
 package com.sparkhunter.main;
 
+import com.sparkhunter.res.Battle;
+import com.sparkhunter.res.Spark;
+
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;

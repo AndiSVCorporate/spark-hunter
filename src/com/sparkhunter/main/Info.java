@@ -1,5 +1,7 @@
 package com.sparkhunter.main;
 
+import com.sparkhunter.res.Spark;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;

@@ -2,6 +2,7 @@ package com.sparkhunter.main;
 
 import java.util.Vector;
 
+import com.sparkhunter.res.Inventory;
 import com.sparkhunter.res.Item;
 import com.sparkhunter.res.BackgroundMusic;
 import android.app.Activity;

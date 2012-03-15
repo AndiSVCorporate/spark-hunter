@@ -51,7 +51,7 @@ public class BattleActivity extends Activity{
         
         //setup log
         mBattleLog = (TextView) findViewById(R.id.battleLog);
-        mBattleLog.append("BATARU SUTATO!");
+        print("BATARU SUTATO!");
         
         //setup listeners
         Button b = (Button) findViewById(R.id.attack);
@@ -61,21 +61,20 @@ public class BattleActivity extends Activity{
 			public void onClick(View v) {
 				//this is really crappy, hardcoded battle scene, please forgive me
 				if(mBattle.mHisSpark.mCurHP<=0){
-					mBattleLog.append(("You already killed him you monster!" + "\n"));
+					print("You already killed him you monster!");
 				}
 				else {
-				mBattleLog.append((mBattle.mYourSpark.getName() +" attacks and does 20 damage!" + "\n"));
+				print(mBattle.mYourSpark.getName() +" attacks and does 20 damage!");
 				mBattle.mHisSpark.mCurHP -=20;
 				if(mBattle.mHisSpark.mCurHP<=0){
-					mBattleLog.append((mBattle.mHisSpark.getName() +" dies a horrible death!" + "\n"));
+					print(mBattle.mHisSpark.getName() +" dies a horrible death!");
 				}
 				else
 				{
-					mBattleLog.append((mBattle.mHisSpark.getName() +" attacks and does 1 damage!" + "\n"));
+					print(mBattle.mHisSpark.getName() +" attacks and does 1 damage!");
 					mBattle.mYourSpark.mCurHP -=1;
 				}
 				}
-				mBattleLog.scrollBy(0, 20);
 				refresh();
 				
 			}
@@ -84,6 +83,10 @@ public class BattleActivity extends Activity{
         refresh();
 	}
 	
+	public void print(String text){
+		//mBattleLog.scrollTo(x, y)
+		mBattleLog.append(text + "\n");
+	}
 	@Override
 	public void onPause(){
 		music.pause();

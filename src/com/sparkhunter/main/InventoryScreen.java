@@ -2,6 +2,7 @@ package com.sparkhunter.main;
 
 import java.util.Vector;
 
+import com.sparkhunter.res.Entity;
 import com.sparkhunter.res.Inventory;
 import com.sparkhunter.res.Item;
 import com.sparkhunter.res.Player;
@@ -21,6 +22,8 @@ import android.widget.ImageView;
 public class InventoryScreen extends Activity {
 	private Inventory items;
 	private Inventory sparks;
+	
+	//TODO GET RID OF ALL THE ITEM CASTS
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class InventoryScreen extends Activity {
             	//useItem calls go here, in general
             	//need a way to ID which item is which, except not really
             	
-            	items.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
+            	((Item) items.getItemList().elementAt(position)).useItem(InventoryScreen.this, 0);
             }
         });
         
@@ -56,7 +59,7 @@ public class InventoryScreen extends Activity {
 		    	//useItem calls go here, in general
 		    	//need a way to ID which item is which, except not really
 		    	
-		    	sparks.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
+		    	//sparks.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
 		    }
 		});
 	}
@@ -71,12 +74,12 @@ public class InventoryScreen extends Activity {
 	        itemContext = c;
 	        dispInventory = inv;
 	        
-	        Vector<Item> itemList = dispInventory.getItemList();
+	        Vector<Entity> itemList = dispInventory.getItemList();
 	        thumbIds = new Integer[itemList.size()];
 
 	        //read in the inventory
 	        for(int i = 0; i < itemList.size(); i++){
-	        	thumbIds[i] = itemList.elementAt(i).getResourceID();
+	        	thumbIds[i] = ((Item) itemList.elementAt(i)).getResourceID();
 	        }
 	    }
 
@@ -85,7 +88,7 @@ public class InventoryScreen extends Activity {
 	    }
 
 	    public Item getItem(int position) {
-	        return dispInventory.getItemList().elementAt(position);
+	        return (Item) dispInventory.getItemList().elementAt(position);
 	    }
 
 	    public long getItemId(int position) {

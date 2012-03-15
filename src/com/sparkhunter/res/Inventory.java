@@ -7,16 +7,17 @@ import android.util.Log;
 //TODO verify that state changes in InventoryScreen don't mess with this
 public class Inventory {
 	//TODO loads/store inventory locally
-	private Vector<Item> inventoryItems = new Vector<Item>(); // actual item list
+	private Vector<Entity> inventoryItems = new Vector<Entity>(); // actual item list
 	
 	public Inventory(){
 	}
 	
-	public Vector<Item> getItemList(){
+	public Vector<Entity> getItemList(){
 		return inventoryItems;
 	}
 	
-	public void addItem(Item newItem){
+	//TODO refactor to something more generic
+	public void addItem(Entity newItem){
 		inventoryItems.add(newItem);
 		return;
 	}
@@ -28,7 +29,8 @@ public class Inventory {
 		//scan the inventory for the matching ID, then delete it.
 		try{
 			while(!found){
-				if(inventoryItems.elementAt(i).getIdentifier() == itemID){
+				//TODO make this work for sparks too, things'll get ugly otherwise
+				if(((Item) inventoryItems.elementAt(i)).getIdentifier() == itemID){
 					inventoryItems.remove(i);
 					found = true;
 				}

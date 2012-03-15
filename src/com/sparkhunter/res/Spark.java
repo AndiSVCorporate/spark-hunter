@@ -3,7 +3,7 @@ package com.sparkhunter.res;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spark {
+public class Spark extends Entity{
 	//stats
 	private int mMaxHP;
 	public int mCurHP;

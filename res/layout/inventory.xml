@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="5dp"
+        android:text="Items"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#F6FF00" />
+    
 	<GridView
 	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/iteminventorygrid"
@@ -11,8 +21,17 @@
 	    android:layout_height="263dp"
 	    android:gravity="center"
 	    android:numColumns="auto_fit" >
-
 	</GridView>
+	
+	<TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="5dp"
+        android:text="Sparks"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#F6FF00" />
 	
 	<GridView xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/sparkinventorygrid"

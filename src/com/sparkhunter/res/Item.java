@@ -2,7 +2,7 @@ package com.sparkhunter.res;
 
 import android.content.Context;
 
-public abstract class Item {
+public abstract class Item extends Entity {
 	//ABC for in-game items
 	//subclasses exist for potions and what-not
 	private int identifier; 		//unique identifier for the item

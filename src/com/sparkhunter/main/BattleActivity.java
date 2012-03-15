@@ -1,5 +1,6 @@
 package com.sparkhunter.main;
 
+import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
 import com.sparkhunter.res.Spark;
 
@@ -7,9 +8,14 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class BattleActivity extends Activity{
@@ -51,42 +57,41 @@ public class BattleActivity extends Activity{
         
         //setup log
         mBattleLog = (TextView) findViewById(R.id.battleLog);
-        print("BATARU SUTATO!");
+        print("BATTLE START");
         
-        //setup listeners
-        Button b = (Button) findViewById(R.id.attack);
-        b.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				//this is really crappy, hardcoded battle scene, please forgive me
-				if(mBattle.mHisSpark.mCurHP<=0){
-					print("You already killed him you monster!");
-				}
-				else {
-				print(mBattle.mYourSpark.getName() +" attacks and does 20 damage!");
-				mBattle.mHisSpark.mCurHP -=20;
-				if(mBattle.mHisSpark.mCurHP<=0){
-					print(mBattle.mHisSpark.getName() +" dies a horrible death!");
-				}
-				else
-				{
-					print(mBattle.mHisSpark.getName() +" attacks and does 1 damage!");
-					mBattle.mYourSpark.mCurHP -=1;
-				}
-				}
-				refresh();
-				
-			}
-		});
+        initializeAttackMenu();
         
         refresh();
 	}
-	
+	private void initializeAttackMenu(){
+        Spinner s = (Spinner) findViewById(R.id.attack);
+        ArrayAdapter<CharSequence> adapter;
+        adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, Ability.extractChar(mBattle.mYourSpark.getAbilities()));
+       s.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parentView, View v, int pos,
+				long id) {
+			if(parentView.getSelectedItemPosition()>0)
+			{
+				print(mBattle.attack(((TextView) v).getText().toString(),mBattle.mYourSpark,mBattle.mHisSpark, true));
+				refresh();
+				parentView.setSelection(0);
+			}
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
+
+        });
+        
+        s.setAdapter(adapter);
+	}
 	public void print(String text){
-		//mBattleLog.scrollTo(x, y)
 		mBattleLog.append(text + "\n");
 	}
+
 	@Override
 	public void onPause(){
 		music.pause();
@@ -106,5 +111,15 @@ public class BattleActivity extends Activity{
 	public void refresh(){
 		mLeftBar.setProgress(mBattle.mYourSpark.mCurHP);
 		mRightBar.setProgress(mBattle.mHisSpark.mCurHP);
+		if(mBattle.mHisSpark.mCurHP<=0){
+			print(mBattle.setWin());
+			Spinner s = (Spinner) findViewById(R.id.attack);
+			s.setClickable(false);
+		}
+		if(mBattle.mYourSpark.mCurHP<=0){
+			print(mBattle.setLose());
+			Spinner s = (Spinner) findViewById(R.id.attack);
+			s.setClickable(false);
+		}
 	}
 }

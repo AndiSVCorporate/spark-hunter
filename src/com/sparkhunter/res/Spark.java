@@ -1,5 +1,8 @@
 package com.sparkhunter.res;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Spark {
 	//stats
 	private int mMaxHP;
@@ -10,13 +13,14 @@ public class Spark {
 	private String mDescription;
 	public int mResId;
 	
-	private Ability[] mAblty;
+	private List<Ability> mAblty;
 	
 	public Spark(String name, int resId)
 	{
 		mName = name;
 		mDescription = "";
 		mResId = resId;
+		mAblty = new ArrayList<Ability>();
 		setStats();
 	}
 	
@@ -31,9 +35,9 @@ public class Spark {
 		mMaxHP = 100;
 		mCurHP = mMaxHP;
 		mSpeed = 10;
-		mAblty = new Ability[2];
-		mAblty[0] = new Ability("Herp",20);
-		mAblty[1] = new Ability("Derp",50);
+		mAblty.add(new Ability("Choose an Attack",0)); //TODO: Spinner-work around
+		mAblty.add(new Ability("Herp",20));
+		mAblty.add(new Ability("Derp",50));
 	}
 	//gets
 	public String getName(){
@@ -43,22 +47,9 @@ public class Spark {
 	public String getDescript(){
 		return mDescription;
 	}
-}
-
-class Ability{
-	private int mDmg;
-	private String mName;
 	
-	public Ability(String name, int damage){
-		mName = name;
-		mDmg = damage;
-	}
-	
-	public String getName(){
-		return mName;
-	}
-	
-	public int getDamage(){
-		return mDmg;
+	public List<Ability> getAbilities(){
+		
+		return mAblty;
 	}
 }

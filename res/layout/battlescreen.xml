@@ -86,20 +86,29 @@
         android:layout_y="338dp"
         android:text="Does Nothing!" />
 
-    <Button
+    <Spinner
         android:id="@+id/attack"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
         android:layout_x="0dp"
         android:layout_y="296dp"
-        android:text="Attack!" />
+        android:prompt="@string/attack"
+		android:padding="5dip"
+		android:paddingLeft="10dip"/>
 
-    <TextView
-        android:id="@+id/battleLog"
+    <ScrollView
+        android:id="@+id/battleLogScroll"
         android:layout_width="match_parent"
         android:layout_height="136dp"
         android:layout_x="5dp"
         android:layout_y="158dp"
-        android:text="" />
+        >
+        
+        <TextView
+            android:id="@+id/battleLog"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+    </ScrollView>
 
 </AbsoluteLayout>

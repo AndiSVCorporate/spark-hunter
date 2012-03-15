@@ -1,5 +1,7 @@
 package com.sparkhunter.res;
 
+import android.content.Context;
+
 public abstract class Item {
 	//ABC for in-game items
 	//subclasses exist for potions and what-not
@@ -72,7 +74,7 @@ public abstract class Item {
 	}
 
 	//need to setup some sort of game state interface for this stuff
-	public abstract void useItem(int target);
+	public abstract void useItem(Context c, int target);
 	
 	//resource tied to item
 }

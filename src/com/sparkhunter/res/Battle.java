@@ -1,4 +1,5 @@
-package com.sparkhunter.main;
+package com.sparkhunter.res;
+
 
 public class Battle {
 	public Spark mYourSpark;

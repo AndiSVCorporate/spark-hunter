@@ -2,6 +2,8 @@ package com.sparkhunter.main;
 
 
 import com.sparkhunter.res.BackgroundMusic;
+import com.sparkhunter.res.Map;
+
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -71,7 +73,7 @@ public class SparkHunterTitleScreen extends Activity {
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
 		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-		    	
+		    	getApplicationContext();
 				startActivity(i);
 			}
 		});

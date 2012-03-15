@@ -1,4 +1,4 @@
-package com.sparkhunter.main;
+package com.sparkhunter.res;
 
 //import android.app.Activity;
 import java.util.List;
@@ -19,6 +19,11 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.sparkhunter.main.MapItemizedoverlay;
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.drawable;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
 
 
 

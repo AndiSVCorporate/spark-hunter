@@ -1,4 +1,4 @@
-package com.sparkhunter.main;
+package com.sparkhunter.res;
 
 public class Spark {
 	//stats

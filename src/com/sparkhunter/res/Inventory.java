@@ -1,9 +1,7 @@
-package com.sparkhunter.main;
+package com.sparkhunter.res;
 
 import java.util.Vector;
 import android.util.Log;
-import com.sparkhunter.res.Item;
-import com.sparkhunter.res.RubberDuck;
 
 //TODO make static and connect to master game state
 //TODO verify that state changes in InventoryScreen don't mess with this

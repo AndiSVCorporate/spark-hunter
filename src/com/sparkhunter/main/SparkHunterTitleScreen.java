@@ -73,7 +73,7 @@ public class SparkHunterTitleScreen extends Activity {
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
 		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-		    	
+		    	getApplicationContext();
 				startActivity(i);
 			}
 		});

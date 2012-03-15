@@ -3,6 +3,7 @@ package com.sparkhunter.main;
 
 import com.sparkhunter.res.BackgroundMusic;
 import com.sparkhunter.res.Map;
+import com.sparkhunter.res.Player;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -23,6 +24,9 @@ public class SparkHunterTitleScreen extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        //Initial player state settings go here
+        Player.getInstance().initializeInventory();
         
         Button b = (Button)findViewById(R.id.Battle);
         b.setOnClickListener(new View.OnClickListener(){
@@ -97,6 +101,21 @@ public class SparkHunterTitleScreen extends Activity {
 			
 			public void onClick(View v) {
 				Intent i = new Intent(SparkHunterTitleScreen.this, GetSpark.class);
+				
+				bgm.stop();
+				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
+		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
+		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
+				
+				startActivity(i);
+			}
+		});
+        
+        b = (Button)findViewById(R.id.button5);
+        b.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent i = new Intent(SparkHunterTitleScreen.this, AdventureTime.class);
 				
 				bgm.stop();
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));

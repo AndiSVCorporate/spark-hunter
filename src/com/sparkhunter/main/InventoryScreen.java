@@ -4,10 +4,8 @@ import java.util.Vector;
 
 import com.sparkhunter.res.Inventory;
 import com.sparkhunter.res.Item;
-import com.sparkhunter.res.BackgroundMusic;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class InventoryScreen extends Activity {
 
@@ -28,19 +25,15 @@ public class InventoryScreen extends Activity {
         
         //setup the gridview for all the items
         GridView gridview = (GridView) findViewById(R.id.inventorygrid);
-        gridview.setAdapter(new ItemAdapter(this));
+        gridview.setAdapter(new ItemAdapter(this, null)); //CHANGE
         
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	//useItem calls go here, in general
-            	Intent itemSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
+            	//need a way to ID which item is which, except not really
             	
-            	//KLUDGE-TASTIC, find a better way to package the sound data
-            	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
-            	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
-            	InventoryScreen.this.startService(itemSoundIntent);
             	
-                Toast.makeText(InventoryScreen.this, "quack.", Toast.LENGTH_SHORT).show();
+            	
             }
         });
 	}
@@ -48,13 +41,14 @@ public class InventoryScreen extends Activity {
 	private class ItemAdapter extends BaseAdapter {
 		//essentially reads the inventory and displays it.
 	    private Context itemContext;
-	    private Inventory playerInventory;
 	    private Integer[] thumbIds;
+	    private Inventory dispInventory;
 
-	    public ItemAdapter(Context c) {
+	    public ItemAdapter(Context c, Inventory inv) {
 	        itemContext = c;
-	        playerInventory = new Inventory();
-	        Vector<Item> itemList = playerInventory.getItemList();
+	        dispInventory = inv;
+	        
+	        Vector<Item> itemList = dispInventory.getItemList();
 	        thumbIds = new Integer[itemList.size()];
 
 	        //read in the inventory
@@ -68,7 +62,7 @@ public class InventoryScreen extends Activity {
 	    }
 
 	    public Item getItem(int position) {
-	        return playerInventory.getItemList().elementAt(position);
+	        return dispInventory.getItemList().elementAt(position);
 	    }
 
 	    public long getItemId(int position) {

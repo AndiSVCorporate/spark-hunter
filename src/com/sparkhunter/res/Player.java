@@ -9,6 +9,18 @@ public class Player {
 	
 	private Player() {}
 	
+	public void initializeInventory() {
+		//the player only has rubber ducks for now, dealwithit.jpg
+		for(int i = 0; i < 6; i++){
+			itemInventory.addItem(new RubberDuck());
+		}
+		
+		//the player only has Dingus(es) for now, dealwithit.jpg
+		for(int i = 0; i < 6; i++){
+			sparkInventory.addItem(new RubberDuck());
+		}
+	}
+	
 	public static Player getInstance() {
 		return singletonPlayer;
 	}

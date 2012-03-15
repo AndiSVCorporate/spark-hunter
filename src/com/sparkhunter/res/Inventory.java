@@ -10,10 +10,6 @@ public class Inventory {
 	private Vector<Item> inventoryItems = new Vector<Item>(); // actual item list
 	
 	public Inventory(){
-		//the player only has rubber ducks for now, dealwithit.jpg
-		for(int i = 0; i < 6; i++){
-			inventoryItems.add(new RubberDuck());
-		}
 	}
 	
 	public Vector<Item> getItemList(){

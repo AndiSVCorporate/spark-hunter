@@ -35,10 +35,10 @@ public class InventoryScreen extends Activity {
         Log.d("DEBUG", "inventories linked.");
         
         //setup the gridview for all the items
-        GridView gridview = (GridView) findViewById(R.id.inventorygrid);
-        gridview.setAdapter(new ItemAdapter(this, items)); //CHANGE
+        GridView itemGridView = (GridView) findViewById(R.id.iteminventorygrid);
+        itemGridView.setAdapter(new ItemAdapter(this, items)); //CHANGE
         
-        gridview.setOnItemClickListener(new OnItemClickListener() {
+        itemGridView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	//useItem calls go here, in general
             	//need a way to ID which item is which, except not really
@@ -46,6 +46,19 @@ public class InventoryScreen extends Activity {
             	items.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
             }
         });
+        
+        //setup the gridview for all the items
+		GridView sparkGridView = (GridView) findViewById(R.id.sparkinventorygrid);
+		sparkGridView.setAdapter(new ItemAdapter(this, sparks)); //CHANGE
+		
+		sparkGridView.setOnItemClickListener(new OnItemClickListener() {
+		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		    	//useItem calls go here, in general
+		    	//need a way to ID which item is which, except not really
+		    	
+		    	sparks.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
+		    }
+		});
 	}
 	
 	private class ItemAdapter extends BaseAdapter {

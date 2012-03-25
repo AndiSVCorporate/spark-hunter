@@ -2,6 +2,7 @@ package com.sparkhunter.main;
 
 
 import com.sparkhunter.res.BackgroundMusic;
+import com.sparkhunter.res.BattleHistoryView;
 import com.sparkhunter.res.Map;
 import com.sparkhunter.res.Player;
 

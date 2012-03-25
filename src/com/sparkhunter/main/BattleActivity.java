@@ -1,10 +1,13 @@
 package com.sparkhunter.main;
 
+import java.io.IOException;
+
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +20,10 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationListener;
+
 
 public class BattleActivity extends Activity{
 	private Activity mActivity;
@@ -25,9 +32,14 @@ public class BattleActivity extends Activity{
     ProgressBar mRightBar;
     static MediaPlayer music;
     static TextView mBattleLog;
-	@Override
+    LocationManager sparklocman; 
+    LocationListener sparkloclistener = new SparkLocationListener();
+    HistoryWriter hw;
+    @Override
 	public void onCreate(Bundle savedInstanceState){
-		mActivity = this;
+		 hw = new HistoryWriter(this);
+		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+    	mActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battlescreen);
         mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
@@ -35,6 +47,9 @@ public class BattleActivity extends Activity{
         
         mLeftBar.setMax(100);
         mRightBar.setMax(100);
+        
+        // Adding Battle Location to Overlays
+        sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,sparkloclistener);
         
         
         //BATTLE MOOSIC
@@ -62,7 +77,11 @@ public class BattleActivity extends Activity{
         initializeAttackMenu();
         
         refresh();
+        
+       
 	}
+    
+    
 	private void initializeAttackMenu(){
         Spinner s = (Spinner) findViewById(R.id.attack);
         ArrayAdapter<CharSequence> adapter;
@@ -121,5 +140,50 @@ public class BattleActivity extends Activity{
 			Spinner s = (Spinner) findViewById(R.id.attack);
 			s.setClickable(false);
 		}
+	}
+	
+	/**
+	 * A class that gets the location of a battle so that it can be used to create a map of all battles
+	 * @author Divyang
+	 *
+	 */
+	public class SparkLocationListener implements LocationListener{
+
+		@Override
+		/**
+		 * A method that writes the location when a battle starts.
+		 */
+		public void onLocationChanged(Location loc) {
+			double latitude = loc.getLatitude();
+			double longitude = loc.getLongitude();
+			String battle = "Battled "+mBattle.mHisSpark.getName()+" with "+mBattle.mYourSpark.getName();
+			BattleField bf = new BattleField(battle, latitude, longitude);
+			
+			//Writing to a file using the HistoryWriter class.
+			try{
+				hw.write(bf);
+			}
+			catch (IOException except){
+				except.printStackTrace();
+			}
+			
+		}
+
+
+		
+		
+		
+		@Override
+		public void onProviderDisabled(String provider) {
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
+		
 	}
 }

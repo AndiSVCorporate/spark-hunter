@@ -223,7 +223,7 @@ public class BattleActivity extends Activity{
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
-}	
+	}	
 	public void endBattle(){
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
@@ -236,7 +236,7 @@ public class BattleActivity extends Activity{
 				mActivity.finish();
 			}
 			
-		}
+		});
 
 	}
 }

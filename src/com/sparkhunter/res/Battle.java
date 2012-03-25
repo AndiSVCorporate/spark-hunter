@@ -17,7 +17,7 @@ public class Battle {
 	}
 	public String attack(String sName, Spark attacker, Spark defender, boolean counter)
 	{
-		String retVal;
+		String retVal = null;
 		//TODO: this is hardcoded until there is a lookup table for abilites
 		int dmg = 0;
 		if(sName == "Herp")
@@ -37,6 +37,12 @@ public class Battle {
 		else
 			retVal = retVal + "\n" + defender.getName() +" dies a tragic death.";
 		
+		
+		return retVal;
+		
+	}
+	public boolean run(){
+		boolean retVal = true;
 		
 		return retVal;
 		

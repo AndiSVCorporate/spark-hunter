@@ -28,7 +28,7 @@ import com.sparkhunter.main.R.layout;
 
 
 public class Map extends MapActivity{
-	private static final int ZOOM_LEVEL = 22;
+	private static final int ZOOM_LEVEL = 18;
 
 	/** Called when the activity is first created. */
 	private static final String MAP_KEY = "0BpOKOGaNV--pQ-Km6inD4BSIY4viUJnBo6RViQ";
@@ -47,22 +47,23 @@ public class Map extends MapActivity{
 		mapView = (MapView) findViewById(R.id.mapview1);
 		mapView.setBuiltInZoomControls(true);
 		debug = (TextView) findViewById(R.id.textViewMap);
+		
 		mapController = mapView.getController();
 		mapController.setZoom(ZOOM_LEVEL);
 
 		/* Using the locationmanager class */
 		LocationListener loclistener = new myLocationListener();
 		LocationManager locmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locmanager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
+		locmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
 				0, loclistener);
 	
 	
-		// Registering the overlays on starting the activity
+/*		// Registering the overlays on starting the activity
 		List<Overlay> mapOverlays = mapView.getOverlays();        
 		Drawable drawable = this.getResources().getDrawable(R.drawable.icon_dagger);
 		MapItemizedoverlay myOverlay = new MapItemizedoverlay(drawable, this);
 		mapOverlays.add(myOverlay);
-	  }
+	*/  }
 
 	/**
 	 * A class that listens to the changes in location of the device

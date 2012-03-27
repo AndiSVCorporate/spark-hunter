@@ -26,6 +26,14 @@ public class SparkHunterTitleScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        
+        /* Divyang TEST*/
+        Intent  i = new Intent(getApplicationContext(), AdventureService.class);
+        startService(i);
+        Log.v("Service_CLASS", "CALLING SERVICE");
+        /* END DIVYANG TEST*/
+        
+        
         //Initial player state settings go here
         Player.getInstance().initializeInventory();
         

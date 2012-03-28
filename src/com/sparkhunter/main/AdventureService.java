@@ -5,8 +5,9 @@ package com.sparkhunter.main;
 
 import java.io.IOException;
 
-import com.sparkhunter.main.BattleActivity.SparkLocationListener;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -107,7 +108,25 @@ public class AdventureService extends Service {
 				setLastLon(longitude);
 				setLastLat(latitude);
 				Toast.makeText(getApplicationContext(), " " + latitude + " " + longitude, Toast.LENGTH_LONG).show();
+				/*
+				 * Notification
+				 */
+				String ns = Context.NOTIFICATION_SERVICE;
+				NotificationManager mNotManager = (NotificationManager)getSystemService(ns);
 				
+				int icon = R.drawable.icon_dagger;
+				CharSequence ticker = "You have been attacked";
+				long when = System.currentTimeMillis();
+				Notification note = new Notification(icon,ticker,when);
+				note.flags = note.FLAG_AUTO_CANCEL;
+				Context context = getApplicationContext();
+				CharSequence content = "Spark Hunter";
+				CharSequence text = "You have been attacked";
+				Intent noteIntent = new Intent(AdventureService.this, AdventureTime.class);
+				PendingIntent contentIntent = PendingIntent.getActivity(AdventureService.this,0,noteIntent,0);
+				note.setLatestEventInfo(context, content, text, contentIntent);
+				
+				mNotManager.notify(1,note);
 			}
 			}
 

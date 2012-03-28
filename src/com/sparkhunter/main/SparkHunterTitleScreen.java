@@ -56,7 +56,7 @@ public class SparkHunterTitleScreen extends Activity {
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, FbfriendsActivity.class);
+				Intent i = new Intent(SparkHunterTitleScreen.this, NetworkTestActivity.class);
 				
 				bgm.stop();
 		    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));

@@ -16,7 +16,9 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.Toast;
 public class Catch extends Activity {
-
+	
+	private Activity mActivity = this;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -33,6 +35,7 @@ public class Catch extends Activity {
 					}
 					else {
 					Intent i = new Intent(Catch.this, BattleActivity.class);					
+					mActivity.finish();
 					startActivity(i);
 					}}
 			});
@@ -41,11 +44,23 @@ public class Catch extends Activity {
 	        b.setOnClickListener(new View.OnClickListener() {
 				
 				public void onClick(View v) {
-					Intent i = new Intent(Catch.this, SparkHunterTitleScreen.class);					
-					startActivity(i);
+					//Intent i = new Intent(Catch.this, SparkHunterTitleScreen.class);					
+					//startActivity(i);
+					mActivity.finish();
 				}
 			});
 		
+	   b=(Button)findViewById(R.id.getSpark);
+		   b.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Catch.this, GetSpark.class);					
+				startActivity(i);
+				
+			}
+		});
+	   
 	}
 
 }

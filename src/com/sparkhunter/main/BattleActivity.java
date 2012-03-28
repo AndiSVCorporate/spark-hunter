@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
-import com.sparkhunter.res.Map;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;

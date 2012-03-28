@@ -26,6 +26,14 @@ public class SparkHunterTitleScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        
+        /* Background Service*/
+        Intent  i = new Intent(getApplicationContext(), AdventureService.class);
+        startService(i);
+        Log.v("Service_CLASS", "CALLING SERVICE");
+        
+        
+        
         //Initial player state settings go here
         Player.getInstance().initializeInventory();
         
@@ -122,7 +130,6 @@ public class SparkHunterTitleScreen extends Activity {
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
 		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-				
 				startActivity(i);
 			}
 		});

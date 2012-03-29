@@ -86,9 +86,18 @@ public class ServerInterface {
             data += "&id1=" + URLEncoder.encode(id,"UTF-8");
             return executeHttpRequest(data);
 		}
-		public static String sendStats(String id, String name) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("checkbattle","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+		public static String sendStats(String ... args) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("sendstats","UTF-8");
+            data += "&id1=" + URLEncoder.encode(args[0],"UTF-8");
+            data += "&name=" + URLEncoder.encode(args[1],"UTF-8");
+            data += "&sparkid=" + URLEncoder.encode(args[2],"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String getStats(String ... args) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("getstats","UTF-8");
+            data += "&id1=" + URLEncoder.encode(args[0],"UTF-8");
+            data += "&name=" + URLEncoder.encode(args[1],"UTF-8");
+            data += "&sparkid=" + URLEncoder.encode(args[2],"UTF-8");
             return executeHttpRequest(data);
 		}
         /**

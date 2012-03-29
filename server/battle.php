@@ -12,7 +12,7 @@ mysql_connect(localhost,$username,$password);
 @mysql_select_db($database) or die( "Unable to select database");
 
 
-if($cmd == "setturn"){
+if($cmd == "setstats"){
 	$id = $_REQUEST['id'];
 	$hp = $_REQUEST['hp'];
 	$mp = $_REQUEST['mp'];
@@ -24,6 +24,16 @@ if($cmd == "setturn"){
 	$p1 = $_REQUEST['p1'];
 	$p2 = $_REQUEST['p2'];
 	$p3 = $_REQUEST['p3'];
+	mysql_insert('turn', array(
+		'ID' => $id,
+		'HP'=> $hp,'MP'=> $mp,
+		'STR'=> $str,'INT'=> $int,
+		'AGI'=> $agi,'DEF'=> $def,
+		'CMD'=> $cmd,'P1'=> $p1,'P2'=> $p2,'P3'=> $p3));
+	$out = "Insert Successful";
+}
+if else($cmd == "getstats"){
+	$id = $_REQUEST['id'];
 	mysql_insert('turn', array(
 		'ID' => $id,
 		'HP'=> $hp,'MP'=> $mp,

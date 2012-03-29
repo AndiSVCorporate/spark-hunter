@@ -33,19 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Get Spark" />
-    
-	 <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Adventure Time!" />
 	 
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="ButtonClick1"
-        android:text="Friends" />
+        android:text="Multiplayer" />
 
     <Button
         android:id="@+id/button2"

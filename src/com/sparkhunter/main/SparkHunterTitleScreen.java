@@ -61,14 +61,18 @@ public class SparkHunterTitleScreen extends Activity {
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, NetworkBattleActivity.class);
-				
-				bgm.stop();
-		    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-				
-				startActivity(i);
+				if(GetSpark.chosenSpark==null){
+					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Intent i = new Intent(SparkHunterTitleScreen.this, NetworkBattleActivity.class);
+					bgm.stop();
+			    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
+			    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
+			    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
+					
+					startActivity(i);
+				}
 			}
         	
         });
@@ -116,21 +120,7 @@ public class SparkHunterTitleScreen extends Activity {
 				startActivity(i);
 			}
 		});
-        
-        b = (Button)findViewById(R.id.button5);
-        b.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, AdventureTime.class);
-				
-				bgm.stop();
-				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-
-				startActivity(i);
-			}
-		});
+    
       }
     
 }

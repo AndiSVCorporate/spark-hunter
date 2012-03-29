@@ -17,6 +17,7 @@ import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.FacebookUtils;
+import com.sparkhunter.res.Player;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -35,7 +36,7 @@ import android.widget.Toast;
 import static java.util.concurrent.TimeUnit.*;
 
 
-//TODO: this class could use some breaking up, need to 
+//TODO: no mortal eyes should have to witness my abomination @author Travis
 //Shows the network game screen, allows players to create and join each other's games
 public class NetworkBattleActivity extends Activity {
 
@@ -91,6 +92,12 @@ public class NetworkBattleActivity extends Activity {
 	
 	private void StartBattle(){
 		//get rid of the battle on the list
+		
+		//we need this for passing battle data back and forth
+		Player ash = Player.getInstance();
+		ash.playerID =mID;
+		ash.enemyID = mIDenemy;
+		
 		(new DeleteBattleTask()).execute(mID);
 		battleFound = false;
 		

@@ -17,12 +17,6 @@
         android:text="Login to Facebook" />
 
     <Button
-        android:id="@+id/skipButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Skip Login" />
-
-    <Button
         android:id="@+id/exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

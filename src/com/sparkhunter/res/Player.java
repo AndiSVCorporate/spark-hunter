@@ -12,12 +12,12 @@ public class Player {
 	public void initializeInventory() {
 		//the player only has rubber ducks for now, dealwithit.jpg
 		for(int i = 0; i < 5; i++){
-			itemInventory.addItem(new RubberDuck());
+			itemInventory.addEntity(new RubberDuck());
 		}
 		
 		//the player only has Dingus(es) for now, dealwithit.jpg
 		for(int i = 0; i < 3; i++){
-			sparkInventory.addItem(new DummySpark());
+			sparkInventory.addEntity(new DummySpark());
 		}
 	}
 	

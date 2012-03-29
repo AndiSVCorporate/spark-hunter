@@ -3,6 +3,8 @@ package com.sparkhunter.res;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+
 public class Spark extends Entity{
 	//stats
 	private int mMaxHP;
@@ -51,5 +53,11 @@ public class Spark extends Entity{
 	public List<Ability> getAbilities(){
 		
 		return mAblty;
+	}
+
+	@Override
+	public void activate(Context c, int target) {
+		// TODO Auto-generated method stub
+		
 	}
 }

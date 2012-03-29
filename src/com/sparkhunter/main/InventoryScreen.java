@@ -22,8 +22,6 @@ import android.widget.ImageView;
 public class InventoryScreen extends Activity {
 	private Inventory items;
 	private Inventory sparks;
-	
-	//TODO GET RID OF ALL THE ITEM CASTS
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,10 +41,9 @@ public class InventoryScreen extends Activity {
         
         itemGridView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	//useItem calls go here, in general
-            	//need a way to ID which item is which, except not really
             	
-            	((Item) items.getItemList().elementAt(position)).useItem(InventoryScreen.this, 0);
+            	//activate the items
+            	items.getItemList().elementAt(position).activate(InventoryScreen.this, 0);
             }
         });
         
@@ -56,10 +53,9 @@ public class InventoryScreen extends Activity {
 		
 		sparkGridView.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		    	//useItem calls go here, in general
-		    	//need a way to ID which item is which, except not really
 		    	
-		    	//sparks.getItemList().elementAt(position).useItem(InventoryScreen.this, 0);
+		    	//do something with the spark
+		    	sparks.getItemList().elementAt(position).activate(InventoryScreen.this, 0);
 		    }
 		});
 	}

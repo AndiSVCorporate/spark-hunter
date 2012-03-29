@@ -7,22 +7,22 @@ import android.util.Log;
 //TODO verify that state changes in InventoryScreen don't mess with this
 public class Inventory {
 	//TODO loads/store inventory locally
-	private Vector<Entity> inventoryItems = new Vector<Entity>(); // actual item list
+	private Vector<Entity> inventoryEntities = new Vector<Entity>(); // actual item list
 	
 	public Inventory(){
 	}
 	
 	public Vector<Entity> getItemList(){
-		return inventoryItems;
+		return inventoryEntities;
 	}
 	
 	//TODO refactor to something more generic
-	public void addItem(Entity newItem){
-		inventoryItems.add(newItem);
+	public void addEntity(Entity newEntity){
+		inventoryEntities.add(newEntity);
 		return;
 	}
 	
-	public boolean removeItem(int itemID){
+	public boolean removeEntity(int entityID){
 		int i = 0;
 		boolean found = false;
 		
@@ -30,8 +30,8 @@ public class Inventory {
 		try{
 			while(!found){
 				//TODO make this work for sparks too, things'll get ugly otherwise
-				if(((Item) inventoryItems.elementAt(i)).getIdentifier() == itemID){
-					inventoryItems.remove(i);
+				if(((Item) inventoryEntities.elementAt(i)).getIdentifier() == entityID){
+					inventoryEntities.remove(i);
 					found = true;
 				}
 			}

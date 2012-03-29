@@ -49,9 +49,6 @@ public class BattleActivity extends Activity{
         mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
         mRightBar = (ProgressBar) findViewById(R.id.rightHP);
         
-        mLeftBar.setMax(100);
-        mRightBar.setMax(100);
-        
         // Adding Battle Location to Overlays
         sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,sparkloclistener);
         
@@ -65,8 +62,15 @@ public class BattleActivity extends Activity{
         //setup names
         TextView temp = (TextView) findViewById(R.id.leftName);
         temp.setText(mBattle.mYourSpark.getName());
+        temp = (TextView) findViewById(R.id.leftlevel);
+        temp.setText(Integer.toString(mBattle.mYourSpark.getLevel()));
         temp = (TextView) findViewById(R.id.rightName);
         temp.setText(mBattle.mHisSpark.getName());
+        temp = (TextView) findViewById(R.id.rightlevel);
+        temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
+        
+        mLeftBar.setMax(GetSpark.chosenSpark.getHP());
+        mRightBar.setMax(100);
         
         //setup images
         ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
@@ -224,6 +228,12 @@ public class BattleActivity extends Activity{
 		}
 	}	
 	public void endBattle(){
+		GetSpark.chosenSpark.gainExp();
+		if (GetSpark.chosenSpark.getExp() >= 100){
+			GetSpark.chosenSpark.LevelUp();
+			Intent i = new Intent(BattleActivity.this, LevelUp.class);
+			startActivity(i);
+		}
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
 

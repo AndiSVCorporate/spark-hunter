@@ -30,33 +30,18 @@
         <activity android:name=".GetSpark"></activity>
         <activity android:name=".BattleActivity"></activity>
         <activity android:name=".Info"
-            	  android:theme="@android:style/Theme.Dialog"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-         
+            	  android:theme="@android:style/Theme.Dialog">                 
         </activity>
         <activity android:name=".AdventureTime"
-				android:theme="@android:style/Theme.Dialog"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-        </activity>
+				  android:theme="@android:style/Theme.Dialog">
+                  </activity>
         <activity android:name=".Catch"
-            		android:theme="@android:style/Theme.Dialog"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            	  android:theme="@android:style/Theme.Dialog">
         </activity>
+        <activity android:name=".LevelUp"></activity>
+        <activity android:name=".Waiting"
+            	  android:theme="@android:style/Theme.Dialog"></activity>
+
         <activity android:name=".NetworkBattleActivity"></activity>
     </application>
 </manifest>

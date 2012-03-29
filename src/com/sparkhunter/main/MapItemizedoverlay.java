@@ -25,7 +25,7 @@ public class MapItemizedoverlay extends ItemizedOverlay  {
 
 	private ArrayList<OverlayItem> mapOverlays = new ArrayList<OverlayItem>();
 	Context mapcontext;
-	GestureDetector.SimpleOnGestureListener gd= new GestureDetector.SimpleOnGestureListener();
+//	GestureDetector.SimpleOnGestureListener gd= new GestureDetector.SimpleOnGestureListener();
 	/**
 	 * @param defaultMarker
 	 */
@@ -80,7 +80,7 @@ public class MapItemizedoverlay extends ItemizedOverlay  {
 		
 	}
 	
-	
+/*	
 	@Override
 	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
 		GeoPoint gp=mapView.getProjection().fromPixels((int) event.getX(),(int) event.getY());
@@ -89,4 +89,4 @@ public class MapItemizedoverlay extends ItemizedOverlay  {
 		        return super.onTouchEvent(event, mapView);
     
 		}
-}
+*/}

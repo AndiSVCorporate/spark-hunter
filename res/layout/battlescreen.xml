@@ -53,49 +53,33 @@
         android:layout_y="124dp"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+    A
     <Button
-        android:id="@+id/Button03"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_x="6dp"
-        android:layout_y="482dp"
-        android:text="Does Nothing!" />
-
-    <Button
-        android:id="@+id/Button02"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_x="0dp"
-        android:layout_y="380dp"
-        android:text="Does Nothing!" />
-
-    <Button
-        android:id="@+id/Button04"
+        android:id="@+id/battleRun"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
         android:layout_x="-1dp"
         android:layout_y="422dp"
-        android:text="Does Nothing!" />
+         android:text="@string/battleRun" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/battleInventory"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
         android:layout_x="0dp"
         android:layout_y="338dp"
-        android:text="Does Nothing!" />
+        android:text="Inventory" />
 
     <Spinner
-        android:id="@+id/attack"
+        android:id="@+id/battleAttack"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
         android:layout_x="0dp"
         android:layout_y="296dp"
-        android:prompt="@string/attack"
+        android:prompt="@string/battleAttack"
 		android:padding="5dip"
 		android:paddingLeft="10dip"/>
-
+
     <ScrollView
         android:id="@+id/battleLogScroll"
         android:layout_width="match_parent"

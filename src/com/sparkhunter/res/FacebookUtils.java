@@ -1,4 +1,4 @@
-package com.sparkhunter.main;
+package com.sparkhunter.res;
 
 import android.app.Activity;
 import android.app.Application;
@@ -52,5 +52,10 @@ public class FacebookUtils{
 	public static void getFriends(RequestListener listen){
 		mAsync.request("me/friends",listen);
 	}
-	
+	public static void getUserID(RequestListener listen){
+		mAsync.request("me", listen);
+	}
+	public static void getName(RequestListener listen){
+		mAsync.request("me", listen);
+	}
 }

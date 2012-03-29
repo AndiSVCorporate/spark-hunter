@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Spark-hunter</string>
-    <string name="login">Login To Bookface</string>
+    <string name="app_name">Spark-Hunter</string>
     <string name="music_intent">com.sparkhunter.res.PLAY_MUSIC</string>
     <string name="music_id">com.sparkhunter.res.MUSIC_ID</string>
-    <string name="attack">Attack</string>
-
+    <string name="battleAttack">Attack</string>
+    <string name="battleRun">Run</string>
 </resources>

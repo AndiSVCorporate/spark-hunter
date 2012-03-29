@@ -3,6 +3,7 @@ package com.sparkhunter.main;
 import com.facebook.android.DialogError;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Facebook.DialogListener;
+import com.sparkhunter.res.FacebookUtils;
 
 import android.app.Activity;
 import android.content.Intent;

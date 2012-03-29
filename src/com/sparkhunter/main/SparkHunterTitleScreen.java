@@ -2,6 +2,7 @@ package com.sparkhunter.main;
 
 
 import com.sparkhunter.res.BackgroundMusic;
+import com.sparkhunter.res.BattleHistoryView;
 import com.sparkhunter.res.Map;
 import com.sparkhunter.res.Player;
 
@@ -25,6 +26,11 @@ public class SparkHunterTitleScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        /* Background Service*/
+        Intent  i = new Intent(getApplicationContext(), AdventureService.class);
+        startService(i);
+        Log.v("Service_CLASS", "CALLING SERVICE");
+
         //Initial player state settings go here
         Player.getInstance().initializeInventory();
         
@@ -55,7 +61,7 @@ public class SparkHunterTitleScreen extends Activity {
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, FbfriendsActivity.class);
+				Intent i = new Intent(SparkHunterTitleScreen.this, NetworkBattleActivity.class);
 				
 				bgm.stop();
 		    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
@@ -121,7 +127,7 @@ public class SparkHunterTitleScreen extends Activity {
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
 		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-				
+
 				startActivity(i);
 			}
 		});

@@ -45,6 +45,7 @@ import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 import com.sparkhunter.main.R;
+import com.sparkhunter.res.FacebookUtils;
 
 
 public class FbfriendsActivity extends Activity {

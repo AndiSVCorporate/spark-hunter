@@ -38,9 +38,10 @@
         <activity android:name=".Catch"
             	  android:theme="@android:style/Theme.Dialog">
         </activity>
-        <activity android:name=".NetworkTestActivity"></activity>
         <activity android:name=".LevelUp"></activity>
         <activity android:name=".Waiting"
             	  android:theme="@android:style/Theme.Dialog"></activity>
+
+        <activity android:name=".NetworkBattleActivity"></activity>
     </application>
 </manifest>

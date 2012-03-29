@@ -46,34 +46,16 @@ public class ServerInterface {
         // Declared Constants
         public static final String SERVER_URL = "http://www.vtlan.net/test.php";
 
-        public static String getAnimalList() throws UnsupportedEncodingException {
-                /*
-                 * Let's construct the query string. It should be a key/value pair. In
-                 * this case, we just need to specify the command, so no additional
-                 * arguments are needed.
-                 */
-                String data = "command=" + URLEncoder.encode("test","UTF-8");
+        public static String getList() throws UnsupportedEncodingException {
+                String data = "command=" + URLEncoder.encode("getBattles","UTF-8");
                 return executeHttpRequest(data);
         }
 
-        /**
-         * Gets the sound that the animal makes from the server.
-         * @param animal String specifying the animal.
-         * @return A string representing the sound an animal makes.
-         * @throws UnsupportedEncodingException 
-         */
-
-		public static String getAnimalSound(String animal) throws UnsupportedEncodingException {
-                /*
-                 * Let's construct the query string. We need the command getAnimalSound.
-                 * In addition, we need to set the animal value to specify which
-                 * animal we're talking about.
-                 */
-                String data = "command=" + URLEncoder.encode("getAnimalSound","UTF-8");
-                data += "&animal=" + URLEncoder.encode(animal,"UTF-8");
-                return executeHttpRequest(data);
-        }
-
+		public static String addBattle(String name) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("addBattle","UTF-8");
+            data += "&name=" + URLEncoder.encode(name,"UTF-8");
+            return executeHttpRequest(data);
+		}
         /**
          * Helper function used to communicate with the server by sending/receiving
          * POST commands.

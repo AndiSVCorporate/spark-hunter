@@ -42,6 +42,15 @@ public class LevelUp extends Activity {
 		TextView HP = (TextView)findViewById(R.id.hp);
 		HP.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getHP()));
 		
+		Button b = (Button)findViewById(R.id.button1);
+        b.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent i = new Intent(LevelUp.this, SparkHunterTitleScreen.class);			
+				startActivity(i);
+			}
+		});
+		
 	ImageView image = (ImageView) findViewById(R.id.IVdisplay);
 	image.setImageResource(GetSpark.chosenSpark.mResId);
 }

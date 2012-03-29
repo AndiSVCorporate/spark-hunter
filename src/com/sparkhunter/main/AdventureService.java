@@ -39,7 +39,7 @@ public class AdventureService extends Service {
 	
 	@Override
 	public void onCreate(){
-		Toast.makeText(this, "Adventure Service Created", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Adventure Service Created", Toast.LENGTH_SHORT).show();
 		Log.v("ADV_SERV", "onCreate called");
 		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		 sparklocman.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,sparkloclistener);
@@ -54,11 +54,11 @@ public class AdventureService extends Service {
 	
 	@Override
 	public void onStart(Intent intent, int startid){
-		Toast.makeText(this, "Adventure Service Started", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Adventure Service Started", Toast.LENGTH_SHORT).show();
 		Log.v("ADV_SERV", "onStart called");
 		sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		sparklocman.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,sparkloclistener);
-		Toast.makeText(this, "Adventure Service Started", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Adventure Service Started", Toast.LENGTH_SHORT).show();
 		 
 	}
 	
@@ -70,7 +70,7 @@ public class AdventureService extends Service {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Toast.makeText(getApplicationContext(), "Testing Adventure Service", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Testing Adventure Service", Toast.LENGTH_SHORT).show();
 		Log.v("TEST_SERVICE", "WORKING");
 		
 	}*/
@@ -103,11 +103,11 @@ public class AdventureService extends Service {
 		public void onLocationChanged(Location loc) {
 			double latitude = loc.getLatitude();
 			double longitude = loc.getLongitude();
-			//Toast.makeText(getApplicationContext(), " " + latitude + " " + longitude, Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), " " + latitude + " " + longitude, Toast.LENGTH_SHORT).show();
 			if((getLastLon()==0) || (getLastLat()==0) || (Math.abs(getLastLon()-longitude)>MINIMUM_DISTANCE) || (Math.abs(getLastLat()-latitude)>MINIMUM_DISTANCE)){
 				setLastLon(longitude);
 				setLastLat(latitude);
-				Toast.makeText(getApplicationContext(), " " + latitude + " " + longitude, Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), " " + latitude + " " + longitude, Toast.LENGTH_SHORT).show();
 				/*
 				 * Notification
 				 */

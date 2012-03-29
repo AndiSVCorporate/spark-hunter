@@ -175,6 +175,12 @@ public class BattleActivity extends Activity{
 		mRightBar.setProgress(mBattle.mHisSpark.mCurHP);
 		if(mBattle.mHisSpark.mCurHP<=0){
 			print(mBattle.setWin());
+			GetSpark.chosenSpark.gainExp();
+			if (GetSpark.chosenSpark.getExp() >= 100){
+				GetSpark.chosenSpark.LevelUp();
+				Intent i = new Intent(BattleActivity.this, LevelUp.class);
+				startActivity(i);
+			}
 			endBattle();
 		}
 		else if(mBattle.mYourSpark.mCurHP<=0){
@@ -228,12 +234,6 @@ public class BattleActivity extends Activity{
 		}
 	}	
 	public void endBattle(){
-		GetSpark.chosenSpark.gainExp();
-		if (GetSpark.chosenSpark.getExp() >= 100){
-			GetSpark.chosenSpark.LevelUp();
-			Intent i = new Intent(BattleActivity.this, LevelUp.class);
-			startActivity(i);
-		}
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
 

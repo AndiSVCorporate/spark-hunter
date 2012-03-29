@@ -8,13 +8,13 @@
         android:id="@+id/battleListStartMatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Host Match" />
 
     <Button
         android:id="@+id/battleListGetMatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Refresh Match List" />
 
     <ListView
         android:id="@+id/battleListList"

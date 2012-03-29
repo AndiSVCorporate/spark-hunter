@@ -34,12 +34,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import android.widget.Toast;
+
 /**
  * Class: ServerInterface - Provides static methods to abstract the server
  * calls. This makes it easy for calling classes to use these functions without
  * worrying about the details of the server communication.
  * 
  * @author Mujtaba Hassanpur
+ * @author Travis Porter
  */
 public class ServerInterface {
 
@@ -55,6 +58,37 @@ public class ServerInterface {
             String data = "command=" + URLEncoder.encode("addBattle","UTF-8");
             data += "&id=" + URLEncoder.encode(id,"UTF-8");
             data += "&desc=" + URLEncoder.encode(desc,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String joinBattle(String id, String id2) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("acceptBattle","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+            data += "&id2=" + URLEncoder.encode(id2,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String pollPlayers(String id) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("checkforplayer","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String deleteBattle(String id) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("deletebattle","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String startBattle(String id) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("startbattle","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String checkBattle(String id) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("checkbattle","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+            return executeHttpRequest(data);
+		}
+		public static String sendStats(String id, String name) throws UnsupportedEncodingException{
+            String data = "command=" + URLEncoder.encode("checkbattle","UTF-8");
+            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
             return executeHttpRequest(data);
 		}
         /**

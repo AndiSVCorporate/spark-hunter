@@ -13,7 +13,7 @@ public class Waiting extends Dialog {
 		setContentView(R.layout.waiting);
 		Button b = (Button)findViewById(R.id.Cancel);
         b.setOnClickListener(new View.OnClickListener(){
-
+        	
 			public void onClick(View v) {
 				mDialog.dismiss();
 			}

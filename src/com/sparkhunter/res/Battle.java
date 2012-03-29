@@ -7,6 +7,7 @@ public class Battle {
 	public Spark mHisSpark;
 	public boolean mVictory;
 	public boolean mLose;
+	static public boolean ah;
 	public Battle(Spark your, Spark his)
 	{
 		mVictory = false;

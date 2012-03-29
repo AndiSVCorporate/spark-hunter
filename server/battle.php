@@ -12,7 +12,7 @@ mysql_connect(localhost,$username,$password);
 @mysql_select_db($database) or die( "Unable to select database");
 
 
-if($cmd == "setTurn"){
+if($cmd == "setturn"){
 	$id = $_REQUEST['id'];
 	$hp = $_REQUEST['hp'];
 	$mp = $_REQUEST['mp'];

@@ -9,6 +9,8 @@
 		$values = array_map('mysql_real_escape_string', array_values($inserts));
 		$keys = array_keys($inserts);
         
-		return mysql_query('UPDATE `'.$table.'` (`'.implode('`,`', $keys).'`) VALUES (\''.implode('\',\'', $values).'\') WHERE ID=`'.$id);
+		//return mysql_query('UPDATE `'.$table.'` (`'.implode('`,`', $keys).'`) VALUES (\''.implode('\',\'', $values).'\') WHERE ID=`'.$id);
+		//return mysql_query('UPDATE INTO %s (%s) VALUES ("%s") WHERE ID="%s"', $table, implode(', ',$keys), implode('", "',$values), $id);
+		return mysql_query('UPDATE INTO $table ID2 VALUES ("
 	}
 ?>

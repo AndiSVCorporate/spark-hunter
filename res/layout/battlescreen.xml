@@ -79,7 +79,7 @@
         android:prompt="@string/battleAttack"
 		android:padding="5dip"
 		android:paddingLeft="10dip"/>
-
+
     <ScrollView
         android:id="@+id/battleLogScroll"
         android:layout_width="match_parent"
@@ -94,5 +94,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/rightlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="184dp"
+        android:layout_y="128dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/leftlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="128dp"
+        android:text="TextView" />
 
 </AbsoluteLayout>

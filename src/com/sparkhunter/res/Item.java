@@ -2,7 +2,7 @@ package com.sparkhunter.res;
 
 import android.content.Context;
 
-public abstract class Item extends Entity {
+public class Item extends Entity {
 	//ABC for in-game items
 	//subclasses exist for potions and what-not
 	private int identifier; 		//unique identifier for the item
@@ -74,7 +74,9 @@ public abstract class Item extends Entity {
 	}
 
 	//need to setup some sort of game state interface for this stuff
-	public abstract void useItem(Context c, int target);
+	public void activate(Context c, int target){
+		
+	}
 	
 	//resource tied to item
 }

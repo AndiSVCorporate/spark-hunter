@@ -35,6 +35,7 @@ public class Catch extends Activity {
 					}
 					else {
 					Intent i = new Intent(Catch.this, BattleActivity.class);					
+					
 					mActivity.finish();
 					startActivity(i);
 					}}
@@ -44,6 +45,7 @@ public class Catch extends Activity {
 	        b.setOnClickListener(new View.OnClickListener() {
 				
 				public void onClick(View v) {
+
 					//Intent i = new Intent(Catch.this, SparkHunterTitleScreen.class);					
 					//startActivity(i);
 					mActivity.finish();
@@ -60,7 +62,6 @@ public class Catch extends Activity {
 				
 			}
 		});
-	   
 	}
 
 }

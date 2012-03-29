@@ -9,14 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="A Wild Spark has appeared!"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     <Button
         android:id="@+id/ignore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ignore..." />
-
+
     <Button
         android:id="@+id/catch1"
         android:layout_width="match_parent"

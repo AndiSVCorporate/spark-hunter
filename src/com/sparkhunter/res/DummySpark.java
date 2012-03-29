@@ -19,7 +19,7 @@ public class DummySpark extends Item {
 	}
 
 	@Override
-	public void useItem(Context c, int target) {
+	public void activate(Context c, int target) {
 		//May not be using the right context...
 		Toast.makeText(c, "I don't do squat.", Toast.LENGTH_SHORT).show();
 	}

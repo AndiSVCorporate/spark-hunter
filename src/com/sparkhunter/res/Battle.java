@@ -41,12 +41,14 @@ public class Battle {
 		return retVal;
 		
 	}
+
 	public boolean run(){
 		boolean retVal = true;
 		
 		return retVal;
 		
 	}
+
 	public String setWin(){
 		mVictory = true;
 		return "You win!";

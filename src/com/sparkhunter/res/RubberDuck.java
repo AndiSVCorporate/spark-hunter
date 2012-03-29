@@ -21,7 +21,7 @@ public class RubberDuck extends Item {
 	}
 	
 	@Override
-	public void useItem(Context c, int target) {
+	public void activate(Context c, int target) {
 		Log.d("DEBUG", "quack.");
 		Intent itemSoundIntent = new Intent(c, BackgroundMusic.class);
     	

@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,7 +31,8 @@ import android.widget.Toast;
 
 public class NetworkBattleActivity extends Activity {
 	public Activity mActivity;
-    public String mPlayerName = "Derp";//TODO: Put this in an initialize method
+    public String mName = null;//TODO: Put this in an initialize method on login and store it
+    public String mID = null;
     public ListView mBattleList;
     
 	@Override
@@ -43,7 +46,7 @@ public class NetworkBattleActivity extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				(new AddBattleTask()).execute(mPlayerName);
+				(new AddBattleTask()).execute(mID,mName);
 			}
 		});
         b = (Button)findViewById(R.id.battleListGetMatch);
@@ -55,22 +58,21 @@ public class NetworkBattleActivity extends Activity {
 		});
         
         if (FacebookUtils.isSessionValid()) {
-        	FacebookUtils.getName(new IDListener());
+        	FacebookUtils.getMe(new FBListener());
         }
         
 	}
-	public class IDListener implements RequestListener {
+	public class FBListener implements RequestListener {
 
 		@Override
 		public void onComplete(String response, Object state) {
 			try {
 				JSONObject json = Util.parseJson(response);
-				mPlayerName=json.getString("name");
+				mName=json.getString("name");
+				mID=json.getString("id");
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (FacebookError e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -132,6 +134,17 @@ public class NetworkBattleActivity extends Activity {
 
             }
     }
+    private class BattleClickListener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int pos,
+				long id) {
+			//When clicked, try to join the battle
+			
+			
+		}
+    	
+    }
     //Use to spawn thread
     @SuppressWarnings("unchecked")
     private class AddBattleTask extends AsyncTask {
@@ -141,9 +154,10 @@ public class NetworkBattleActivity extends Activity {
              */
             protected String doInBackground(Object... args) {
                     if(args != null && args[0] instanceof String) {
-                            String name = (String) args[0];
+                            String id = (String) args[0];
+                            String desc = (String) args[1];
                             try {
-								return ServerInterface.addBattle(name);
+								return ServerInterface.addBattle(id,desc);
 							} catch (UnsupportedEncodingException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

@@ -44,16 +44,17 @@ import java.net.URLEncoder;
 public class ServerInterface {
 
         // Declared Constants
-        public static final String SERVER_URL = "http://www.vtlan.net/test.php";
+        public static final String SERVER_URL = "http://www.vtlan.net/battle_list.php";
 
         public static String getList() throws UnsupportedEncodingException {
                 String data = "command=" + URLEncoder.encode("getBattles","UTF-8");
                 return executeHttpRequest(data);
         }
 
-		public static String addBattle(String name) throws UnsupportedEncodingException{
+		public static String addBattle(String id, String desc) throws UnsupportedEncodingException{
             String data = "command=" + URLEncoder.encode("addBattle","UTF-8");
-            data += "&name=" + URLEncoder.encode(name,"UTF-8");
+            data += "&id=" + URLEncoder.encode(id,"UTF-8");
+            data += "&desc=" + URLEncoder.encode(desc,"UTF-8");
             return executeHttpRequest(data);
 		}
         /**

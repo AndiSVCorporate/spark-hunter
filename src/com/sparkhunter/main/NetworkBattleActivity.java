@@ -17,6 +17,7 @@ import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.FacebookUtils;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class NetworkBattleActivity extends Activity {
 			
 			public void onClick(View v) {
 				(new AddBattleTask()).execute(mID,mName);
+				Dialog d = new Waiting(mActivity);
+				d.show();
 			}
 		});
         b = (Button)findViewById(R.id.battleListGetMatch);

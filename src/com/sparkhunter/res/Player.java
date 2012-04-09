@@ -4,6 +4,12 @@ public class Player {
 	//critical to make player a singleton, for cross-activity usage
 	private static Player singletonPlayer = new Player();
 	
+	
+	
+	//Im throwing these in here, dont' get mad!
+	public String playerID;
+	public String enemyID;
+	
 	private Inventory itemInventory = new Inventory();
 	private Inventory sparkInventory = new Inventory();
 	

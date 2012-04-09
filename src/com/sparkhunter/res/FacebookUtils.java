@@ -52,10 +52,7 @@ public class FacebookUtils{
 	public static void getFriends(RequestListener listen){
 		mAsync.request("me/friends",listen);
 	}
-	public static void getUserID(RequestListener listen){
-		mAsync.request("me", listen);
-	}
-	public static void getName(RequestListener listen){
+	public static void getMe(RequestListener listen){
 		mAsync.request("me", listen);
 	}
 }

@@ -26,8 +26,6 @@ public class LoginActivity extends Activity{
         mActivity = this;
         Button loginB = (Button)findViewById(R.id.loginButton);
         loginB.setOnClickListener(mLoginButtonListener);
-        loginB = (Button)findViewById(R.id.skipButton);
-        loginB.setOnClickListener(mSkipButtonListener);
         loginB = (Button)findViewById(R.id.exit);
         loginB.setOnClickListener(mExitButtonListener);
         
@@ -49,14 +47,6 @@ public class LoginActivity extends Activity{
     		else {
     			FacebookUtils.login(mActivity, new LoginListener());
     		}
-    	}
-
-    };
-    private OnClickListener mSkipButtonListener = new OnClickListener() {
-    	@Override
-    	public void onClick(View item){
-			Intent i = new Intent(mActivity, SparkHunterTitleScreen.class);
-			startActivity(i);
     	}
 
     };

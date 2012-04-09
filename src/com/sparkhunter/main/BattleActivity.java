@@ -1,7 +1,9 @@
 package com.sparkhunter.main;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
+import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
 import com.sparkhunter.res.Spark;
@@ -10,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +38,7 @@ public class BattleActivity extends Activity{
     private boolean mEnd = false;
     static MediaPlayer bgm;
     static TextView mBattleLog;
-
+    
     LocationManager sparklocman; 
     LocationListener sparkloclistener = new SparkLocationListener();
     HistoryWriter hw;
@@ -175,6 +178,12 @@ public class BattleActivity extends Activity{
 		mRightBar.setProgress(mBattle.mHisSpark.mCurHP);
 		if(mBattle.mHisSpark.mCurHP<=0){
 			print(mBattle.setWin());
+			GetSpark.chosenSpark.gainExp();
+			if (GetSpark.chosenSpark.getExp() >= 100){
+				GetSpark.chosenSpark.LevelUp();
+				Intent i = new Intent(BattleActivity.this, LevelUp.class);
+				startActivity(i);
+			}
 			endBattle();
 		}
 		else if(mBattle.mYourSpark.mCurHP<=0){
@@ -211,9 +220,6 @@ public class BattleActivity extends Activity{
 			
 		}
 
-
-		
-		
 		
 		@Override
 		public void onProviderDisabled(String provider) {
@@ -228,12 +234,6 @@ public class BattleActivity extends Activity{
 		}
 	}	
 	public void endBattle(){
-		GetSpark.chosenSpark.gainExp();
-		if (GetSpark.chosenSpark.getExp() >= 100){
-			GetSpark.chosenSpark.LevelUp();
-			Intent i = new Intent(BattleActivity.this, LevelUp.class);
-			startActivity(i);
-		}
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
 
@@ -248,4 +248,36 @@ public class BattleActivity extends Activity{
 		});
 
 	}
+	
+	//these shall go somewhere else soon
+    private class SendStatsTask extends AsyncTask {
+		@Override
+		protected Object doInBackground(Object... args) {
+            if(args != null && args[0] instanceof String) {
+                String id = (String) args[0];
+                try {
+					return ServerInterface.sendStats(id);
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            return null;
+		}
+    }
+    private class GetStatsTask extends AsyncTask {
+		@Override
+		protected Object doInBackground(Object... args) {
+            if(args != null && args[0] instanceof String) {
+                String id = (String) args[0];
+                try {
+					return ServerInterface.getStats();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            return null;
+		}
+    }
 }

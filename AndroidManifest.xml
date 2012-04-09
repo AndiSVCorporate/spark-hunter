@@ -43,5 +43,7 @@
             	  android:theme="@android:style/Theme.Dialog"></activity>
 
         <activity android:name=".NetworkBattleActivity"></activity>
+        <activity android:name="ItemInventoryActivity"></activity>
+        <activity android:name="SparkInventoryActivity"></activity>
     </application>
 </manifest>

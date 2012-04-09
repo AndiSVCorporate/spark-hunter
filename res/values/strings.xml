@@ -5,4 +5,5 @@
     <string name="music_id">com.sparkhunter.res.MUSIC_ID</string>
     <string name="battleAttack">Attack</string>
     <string name="battleRun">Run</string>
+    <string name="database">spark_hunter.db</string>
 </resources>

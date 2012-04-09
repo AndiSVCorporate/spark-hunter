@@ -3,8 +3,6 @@ package com.sparkhunter.res;
 import java.util.Vector;
 import android.util.Log;
 
-//TODO make static and connect to master game state
-//TODO verify that state changes in InventoryScreen don't mess with this
 public class Inventory {
 	//TODO loads/store inventory locally
 	private Vector<Entity> inventoryEntities = new Vector<Entity>(); // actual item list
@@ -16,7 +14,6 @@ public class Inventory {
 		return inventoryEntities;
 	}
 	
-	//TODO refactor to something more generic
 	public void addEntity(Entity newEntity){
 		inventoryEntities.add(newEntity);
 		return;
@@ -29,7 +26,6 @@ public class Inventory {
 		//scan the inventory for the matching ID, then delete it.
 		try{
 			while(!found){
-				//TODO make this work for sparks too, things'll get ugly otherwise
 				if(((Item) inventoryEntities.elementAt(i)).getIdentifier() == entityID){
 					inventoryEntities.remove(i);
 					found = true;

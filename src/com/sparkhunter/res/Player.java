@@ -10,15 +10,19 @@ public class Player {
 	private Player() {}
 	
 	public void initializeInventory() {
-		//the player only has rubber ducks for now, dealwithit.jpg
+		/*
+		the player only has rubber ducks for now, dealwithit.jpg
 		for(int i = 0; i < 5; i++){
 			itemInventory.addEntity(new RubberDuck());
 		}
 		
-		//the player only has Dingus(es) for now, dealwithit.jpg
+		the player only has Dingus(es) for now, dealwithit.jpg
 		for(int i = 0; i < 3; i++){
 			sparkInventory.addEntity(new DummySpark());
-		}
+		}*/
+		//create a database opener
+		SQLGameDataOpener openHelper = new SQLGameDataOpener(this);
+		
 	}
 	
 	public static Player getInstance() {

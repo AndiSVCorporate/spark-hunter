@@ -37,6 +37,7 @@ public class BattleActivity extends Activity{
 	ProgressBar mLeftBar;
     ProgressBar mRightBar;
     
+    
     private boolean mEnd = false;
     static MediaPlayer bgm;
     static TextView mBattleLog;
@@ -57,7 +58,7 @@ public class BattleActivity extends Activity{
         
         // Adding Battle Location to Overlays
         sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,sparkloclistener);
-        
+        //sparklocman.removeUpdates(sparkloclistener);
         
         //BATTLE MOOSIC
         bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
@@ -213,7 +214,7 @@ public class BattleActivity extends Activity{
 	 *
 	 */
 	public class SparkLocationListener implements LocationListener{
-
+		//private static int marked;
 		@Override
 		/**
 		 * A method that writes the location when a battle starts.
@@ -231,6 +232,7 @@ public class BattleActivity extends Activity{
 			catch (IOException except){
 				except.printStackTrace();
 			}
+			sparklocman.removeUpdates(sparkloclistener);
 			
 		}
 

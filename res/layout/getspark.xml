@@ -2,28 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000030"
     android:orientation="vertical" >
-
-  <ImageView android:src ="@drawable/duckedit" android:id="@+id/IVdisplay" android:layout_height="200dp"
-	android:layout_width="200dp" android:layout_gravity="center" />
+
+  <ImageView
+      android:id="@+id/IVdisplay"
+      android:layout_width="180dp"
+      android:layout_height="180dp"
+      android:layout_gravity="center"
+      android:src="@drawable/duckedit" />
   
-  <Button android:id="@+id/GetSpark" android:layout_width="fill_parent" android:layout_height="wrap_content"
-      android:text="Choose Spark" />
+  <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NAME:" />
+  
+  <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DESCRIPTION:" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+  
+  
   
   <HorizontalScrollView android:layout_width="200dp" android:layout_height="wrap_content"
       android:layout_gravity="center">
       
       <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
        android:orientation="horizontal">
-      
- 	 <ImageView android:src ="@drawable/duckedit" android:id="@+id/IVimage1" android:layout_height="125dp"
-		android:layout_width="150dp" android:layout_gravity="center" android:padding="15dp"/>/
+
+          <ImageView
+              android:id="@+id/IVimage1"
+              android:layout_width="150dp"
+              android:layout_height="125dp"
+              android:padding="15dp"
+              android:src="@drawable/duckedit" />
+
+/
  	 <ImageView android:src ="@drawable/androidmarker" android:id="@+id/IVimage2" android:layout_height="125dp"
 		android:layout_width="150dp" android:layout_gravity="center" android:padding="15dp"/>
  	 <ImageView android:src ="@drawable/item_square" android:id="@+id/IVimage3" android:layout_height="125dp"
 		android:layout_width="150dp" android:layout_gravity="center" android:padding="15dp"/>
-      
+ 	 
+     
 </LinearLayout>
 </HorizontalScrollView>
+
+  <Button
+      android:id="@+id/GetSpark"
+      android:layout_width="167dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="0.0"
+      android:layout_gravity="center"
+      android:text="Choose Spark" />
 
 </LinearLayout>

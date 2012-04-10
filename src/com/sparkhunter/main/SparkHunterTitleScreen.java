@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class SparkHunterTitleScreen extends Activity {
 	private Intent menuSoundIntent = null;
 	private MediaPlayer bgm = null;
+	private Activity mActivity = this;
 	
     /** Called when the activity is first created. */
     @Override
@@ -116,7 +117,7 @@ public class SparkHunterTitleScreen extends Activity {
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
 		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-				
+		    	//mActivity.finish();
 				startActivity(i);
 			}
 		});

@@ -1,14 +1,15 @@
 <?php
 include 'sqlutils.php';
 
-$username="vtlan_test";
-$password="M8Bp*bOK7UIC";
-$database="vtlan_sparkhunter_battle_data";
+$hostname="mysql11.000webhost.com";
+$username="a8493358_admin";
+$password="";
+$database="a8493358_sh";
 $command = $_REQUEST['command'];
 
 $out = "";
 
-mysql_connect(localhost,$username,$password);
+mysql_connect($hostname,$username,$password);
 @mysql_select_db($database) or die( "Unable to select database");
 
 if($command == "addBattle"){

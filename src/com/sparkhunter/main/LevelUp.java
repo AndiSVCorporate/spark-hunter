@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class LevelUp extends Activity {
 
+	private Activity mActivity = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -46,8 +47,9 @@ public class LevelUp extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent i = new Intent(LevelUp.this, SparkHunterTitleScreen.class);			
-				startActivity(i);
+				//Intent i = new Intent(LevelUp.this, SparkHunterTitleScreen.class);			
+				mActivity.finish();
+				//startActivity(i);
 			}
 		});
 		

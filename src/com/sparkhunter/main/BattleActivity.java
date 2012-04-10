@@ -6,11 +6,13 @@ import java.io.UnsupportedEncodingException;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
+import com.sparkhunter.res.BattleHistoryView;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class BattleActivity extends Activity{
 	ProgressBar mLeftBar;
     ProgressBar mRightBar;
     
+    
     private boolean mEnd = false;
     static MediaPlayer bgm;
     static TextView mBattleLog;
@@ -48,13 +51,14 @@ public class BattleActivity extends Activity{
 		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     	mActivity = this;
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.battlescreen);
         mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
         mRightBar = (ProgressBar) findViewById(R.id.rightHP);
         
         // Adding Battle Location to Overlays
         sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,sparkloclistener);
-        
+        //sparklocman.removeUpdates(sparkloclistener);
         
         //BATTLE MOOSIC
         bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
@@ -117,6 +121,17 @@ public class BattleActivity extends Activity{
 			}
 			
 		});
+        
+        b = (Button)findViewById(R.id.battlehistory);
+        b.setOnClickListener(new View.OnClickListener() {
+        	
+        	public void onClick(View v) {
+				bgm.stop();
+				Intent i = new Intent(mActivity, BattleHistoryView.class);
+				startActivity(i);
+			}
+		});
+        
         refresh();
         
        
@@ -199,7 +214,7 @@ public class BattleActivity extends Activity{
 	 *
 	 */
 	public class SparkLocationListener implements LocationListener{
-
+		//private static int marked;
 		@Override
 		/**
 		 * A method that writes the location when a battle starts.
@@ -217,6 +232,7 @@ public class BattleActivity extends Activity{
 			catch (IOException except){
 				except.printStackTrace();
 			}
+			sparklocman.removeUpdates(sparkloclistener);
 			
 		}
 

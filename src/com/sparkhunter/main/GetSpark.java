@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class GetSpark extends Activity implements OnClickListener {
 
 	ImageView display;
 	static Spark chosenSpark;
+	public static Spark target;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +43,47 @@ public class GetSpark extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
+		 String sname;
+		 String sdescription;
 		switch (v.getId()){
 		case R.id.IVimage1:
 			display.setImageResource(R.drawable.duckedit);
 			chosenSpark = new Spark("Dingus",R.drawable.duckedit);
 			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
+			Info.target = chosenSpark;
+			target = chosenSpark;
 			break;
 		case R.id.IVimage2:
 			display.setImageResource(R.drawable.androidmarker);
 			chosenSpark = new Spark("Biggy",R.drawable.androidmarker);
 			chosenSpark.setDescript("Starting fire type Spark, Carefull for his hidden gun!");
+			Info.target = chosenSpark;
+			target = chosenSpark;
 			break;
 		case R.id.IVimage3:
 			display.setImageResource(R.drawable.item_square);
 			chosenSpark = new Spark("SquarePants",R.drawable.item_square);
 			chosenSpark.setDescript("Starting grass type Spark, Makes a mean burger!");
+			Info.target = chosenSpark;
+			target = chosenSpark;
 			break;
 		case R.id.GetSpark:
 			Info.target = chosenSpark;
 			Intent i = new Intent(GetSpark.this, Info.class);
 			startActivity(i);
+			Info.target = chosenSpark;
+			Info.getSparkActivity = this;
+			
+			target = chosenSpark;
 			break;
 		}
+		sname = target.getName();
+		sdescription = target.getDescript();
+		TextView name = (TextView)findViewById(R.id.name);
+		name.setText((CharSequence) sname);
+		
+		TextView info = (TextView)findViewById(R.id.info);
+		info.setText((CharSequence) sdescription);
 	}
 
 }

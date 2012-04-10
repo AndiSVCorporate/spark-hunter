@@ -17,4 +17,14 @@
         android:clickable="true"
         android:apiKey="0BpOKOGaNV--TVsbH10n7oRYVjfRXOnUtZjXGqw"
      />
+
+    <Button
+		android:id="@+id/history"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="1dp"
+        android:layout_y="426dp"
+         />
+
+
 </LinearLayout>

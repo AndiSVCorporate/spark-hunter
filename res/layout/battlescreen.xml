@@ -2,6 +2,7 @@
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/AbsoluteLayout1"
     android:layout_width="match_parent"
+    android:background="#272c33"
     android:layout_height="match_parent" >
 
     <ProgressBar
@@ -54,13 +55,7 @@
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     A
-    <Button
-        android:id="@+id/battleRun"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_x="-1dp"
-        android:layout_y="422dp"
-         android:text="@string/battleRun" />
+    
 
     <Button
         android:id="@+id/battleInventory"
@@ -110,5 +105,21 @@
         android:layout_x="100dp"
         android:layout_y="128dp"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/battleRun"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_x="1dp"
+        android:layout_y="426dp"
+        android:text="@string/battleRun" />
+
+    <Button
+        android:id="@+id/battlehistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="382dp"
+        android:text="Battle History" />
 
 </AbsoluteLayout>

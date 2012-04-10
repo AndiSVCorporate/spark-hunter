@@ -3,6 +3,7 @@ package com.sparkhunter.activities;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
+import com.sparkhunter.mapping.Map;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -13,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.Random;
 import com.sparkhunter.res.BackgroundMusic;
-import com.sparkhunter.res.Map;
 
 import android.media.MediaPlayer;
 import android.util.Log;

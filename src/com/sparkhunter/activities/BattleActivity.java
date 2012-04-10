@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import com.sparkhunter.main.BattleField;
-import com.sparkhunter.main.HistoryWriter;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.drawable;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
 import com.sparkhunter.main.R.raw;
+import com.sparkhunter.mapping.BattleHistoryView;
+import com.sparkhunter.mapping.HistoryWriter;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;

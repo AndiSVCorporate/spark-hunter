@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/AbsoluteLayout1"
     android:layout_width="match_parent"
-    android:background="#272c33"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#272c33" >
 
     <ProgressBar
         android:id="@+id/leftHP"
@@ -12,114 +12,106 @@
         android:layout_height="wrap_content"
         android:layout_x="1dp"
         android:layout_y="27dp" />
-
-    <TextView
-        android:id="@+id/leftName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="0dp"
-        android:layout_y="125dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/leftImage"
-        android:layout_width="68dp"
-        android:layout_height="78dp"
-        android:layout_x="3dp"
-        android:layout_y="49dp"
-        android:src="@drawable/androidmarker" />
-
-    <ProgressBar
+    A	<ProgressBar
         android:id="@+id/rightHP"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="82dp"
         android:layout_height="wrap_content"
-        android:layout_x="238dp"
-        android:layout_y="28dp" />
-
-    <ImageView
+        android:layout_alignParentRight="true" />
+	    <ImageView
+        android:id="@+id/leftImage"
+        android:layout_width="68dp"
+        android:layout_height="78dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/leftHP"
+        android:src="@drawable/androidmarker" />
+		<ImageView
         android:id="@+id/rightImage"
         android:layout_width="68dp"
         android:layout_height="78dp"
-        android:layout_x="252dp"
-        android:layout_y="49dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rightHP"
         android:src="@drawable/androidmarker" />
-
-    <TextView
+    
+ <TextView
+        android:id="@+id/leftName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/leftImage"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+ <TextView
         android:id="@+id/rightName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="214dp"
-        android:layout_y="124dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rightImage"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    A
-    
+ 	
+     <TextView
+        android:id="@+id/leftlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leftName"
+         android:text="TextView" />
+ 
+    <TextView
+        android:id="@+id/rightlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rightName"
+        android:layout_alignParentRight="true"
+        android:text="TextView" />
+
+ 
+    <Button
+        android:id="@+id/battleRun"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/battleRun" />
 
     <Button
         android:id="@+id/battleInventory"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
-        android:layout_x="0dp"
-        android:layout_y="338dp"
+        android:layout_above="@+id/battleRun"
+        android:layout_alignParentLeft="true"
         android:text="Inventory" />
-
-    <Spinner
-        android:id="@+id/battleAttack"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_x="0dp"
-        android:layout_y="296dp"
-        android:prompt="@string/battleAttack"
-		android:padding="5dip"
-		android:paddingLeft="10dip"/>
-
-    <ScrollView
-        android:id="@+id/battleLogScroll"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
-        android:layout_x="5dp"
-        android:layout_y="158dp"
-        >
-        
-        <TextView
-            android:id="@+id/battleLog"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
-    </ScrollView>
-
-    <TextView
-        android:id="@+id/rightlevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="184dp"
-        android:layout_y="128dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/leftlevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="100dp"
-        android:layout_y="128dp"
-        android:text="TextView" />
-
-    <Button
-        android:id="@+id/battleRun"
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_x="1dp"
-        android:layout_y="426dp"
-        android:text="@string/battleRun" />
 
     <Button
         android:id="@+id/battlehistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_x="0dp"
-        android:layout_y="382dp"
+        android:layout_above="@+id/battleInventory"
+        android:layout_alignParentLeft="true"
         android:text="Battle History" />
 
-</AbsoluteLayout>
+    <Spinner
+        android:id="@+id/battleAttack"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/battlehistory"
+        android:layout_alignParentLeft="true"
+        android:padding="5dip"
+        android:paddingLeft="10dip"
+        android:prompt="@string/battleAttack" />
+
+    <ScrollView
+        android:id="@+id/battleLogScroll"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:layout_above="@+id/battleAttack"
+        android:layout_alignParentLeft="true" >
+
+        <TextView
+            android:id="@+id/battleLog"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </ScrollView>
+   
+</RelativeLayout>

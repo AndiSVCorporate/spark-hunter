@@ -126,7 +126,7 @@ public class AdventureService extends Service {
 				Context context = getApplicationContext();
 				CharSequence content = "Spark Hunter";
 				CharSequence text = "You have been attacked";
-				Intent noteIntent = new Intent(AdventureService.this, AdventureTime.class);
+				Intent noteIntent = new Intent(AdventureService.this, com.sparkhunter.activities.AdventureTime.class);
 				PendingIntent contentIntent = PendingIntent.getActivity(AdventureService.this,0,noteIntent,0);
 				note.setLatestEventInfo(context, content, text, contentIntent);
 				

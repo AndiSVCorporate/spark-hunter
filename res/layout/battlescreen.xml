@@ -114,4 +114,12 @@
         android:layout_y="426dp"
         android:text="@string/battleRun" />
 
+    <Button
+        android:id="@+id/battlehistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="382dp"
+        android:text="Battle History" />
+
 </AbsoluteLayout>

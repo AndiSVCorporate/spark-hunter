@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
+import com.sparkhunter.res.BattleHistoryView;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -119,6 +120,17 @@ public class BattleActivity extends Activity{
 			}
 			
 		});
+        
+        b = (Button)findViewById(R.id.battlehistory);
+        b.setOnClickListener(new View.OnClickListener() {
+        	
+        	public void onClick(View v) {
+				bgm.stop();
+				Intent i = new Intent(mActivity, BattleHistoryView.class);
+				startActivity(i);
+			}
+		});
+        
         refresh();
         
        

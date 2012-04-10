@@ -47,7 +47,7 @@ import android.widget.Toast;
 public class ServerInterface {
 
         // Declared Constants
-        public static final String SERVER_URL = "http://www.vtlan.net/battle_list.php";
+        public static final String SERVER_URL = "http://www.sparkhunter.hostzi.com/battle_list.php";
 
         public static String getList() throws UnsupportedEncodingException {
                 String data = "command=" + URLEncoder.encode("getBattles","UTF-8");

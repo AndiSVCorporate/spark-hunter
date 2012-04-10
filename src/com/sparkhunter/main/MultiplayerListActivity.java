@@ -38,7 +38,7 @@ import static java.util.concurrent.TimeUnit.*;
 
 //TODO: no mortal eyes should have to witness my abomination @author Travis
 //Shows the network game screen, allows players to create and join each other's games
-public class NetworkBattleActivity extends Activity {
+public class MultiplayerListActivity extends Activity {
 
 	public Activity mActivity;
     public String mName = null;//TODO: Put this in an initialize method on login and store it

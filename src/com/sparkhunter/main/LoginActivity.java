@@ -29,6 +29,11 @@ public class LoginActivity extends Activity{
         loginB = (Button)findViewById(R.id.exit);
         loginB.setOnClickListener(mExitButtonListener);
         
+        //if already logged in, skip this screen
+        if(FacebookUtils.isSessionValid()){
+			Intent i = new Intent(mActivity, SparkHunterTitleScreen.class);
+			startActivity(i);
+        }
 	}
 	
 	@Override

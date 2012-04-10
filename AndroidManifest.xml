@@ -42,6 +42,6 @@
         <activity android:name=".Waiting"
             	  android:theme="@android:style/Theme.Dialog"></activity>
 
-        <activity android:name=".NetworkBattleActivity"></activity>
+        <activity android:name=".MultiplayerListActivity"></activity>
     </application>
 </manifest>

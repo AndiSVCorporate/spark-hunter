@@ -16,6 +16,7 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
                 "type" + " TEXT, " +
                 "name" + " TEXT, " +
                 "level" + " INTEGER, " +
+                "exp" + " INTEGER, " +
                 "max_hp" + " INTEGER, " +
                 "cur_hp" + " INTEGER, " +
                 "speed" + " INTEGER, " +

@@ -8,17 +8,21 @@ import android.content.Context;
 public class Spark extends Entity{
 	//stats
 
-	public int mCurHP;
+	//public? 
+	public int mCurHp;
 	public int mExp;
-	private int mMaxHP;
+	private int mMaxHp;
 	private int mSpeed;
 	private int mAttack;
-	private int mDefence;
-	private int mHPgain;
-	private int mAtkgain;
-	private int mSpdgain;
-	private int mDefgain;
+	private int mDefense;
+	private int mHpGain;
+	private int mAttackGain;
+	private int mSpeedGain;
+	private int mDefenseGain;
 	private int mLevel;
+	private String mEffect;
+	private int mId;
+	private String mType;
 	
 	private String mName;
 	private String mDescription;
@@ -35,6 +39,10 @@ public class Spark extends Entity{
 		setStats();
 	}
 	
+	public Spark() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//sets
 	public void setDescript(String descript){
 		mDescription = descript;
@@ -45,16 +53,16 @@ public class Spark extends Entity{
 	{
 		mLevel = 1;
 		
-		mMaxHP = 100;
-		mCurHP = mMaxHP;
+		mMaxHp = 100;
+		mCurHp = mMaxHp;
 		mSpeed = 10;
 		mAttack = 15;
-		mDefence = 5;
+		mDefense = 5;
 		
-		mHPgain = 10;
-		mAtkgain = 5;
-		mSpdgain = 3;
-		mDefgain = 2;
+		mHpGain = 10;
+		mAttackGain = 5;
+		mSpeedGain = 3;
+		mDefenseGain = 2;
 		
 		mExp = 0;
 		
@@ -81,7 +89,7 @@ public class Spark extends Entity{
 	}
 	
 	public int getHP(){
-		return mMaxHP;
+		return mMaxHp;
 	}
 	
 	public int getSpeed(){
@@ -93,7 +101,7 @@ public class Spark extends Entity{
 	}
 	
 	public int getDefence(){
-		return mDefence;
+		return mDefense;
 	}
 	
 	public int getLevel(){
@@ -109,20 +117,22 @@ public class Spark extends Entity{
 			addExp(10);
 		}
 	}
+	
+	//where is this getting called from?
 	public void LevelUp(){
 		getLevel();
 		mLevel = mLevel + 1;
 		getExp();
 		mExp = mExp - 100;
 		getHP();
-		mMaxHP = mMaxHP + mHPgain;
-		mCurHP = mMaxHP;
+		mMaxHp = mMaxHp + mHpGain;
+		mCurHp = mMaxHp;
 		getSpeed();
-		mSpeed = mSpeed + mSpdgain;
+		mSpeed = mSpeed + mSpeedGain;
 		getAttack();
-		mAttack = mAttack + mAtkgain;
+		mAttack = mAttack + mAttackGain;
 		getDefence();
-		mDefence = mDefence + mDefgain;
+		mDefense = mDefense + mDefenseGain;
 		
 		if (mLevel == 16){
 			mAblty.add(new Ability("Derpina",70));
@@ -142,5 +152,80 @@ public class Spark extends Entity{
 	public void activate(Context c, int target) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setId(int newId) {
+		mId = newId;
+	}
+
+	@Override
+	public void setType(String newType) {
+		mType = newType;
+	}
+
+	@Override
+	public void setName(String newName) {
+		mName = newName;	
+	}
+
+	@Override
+	public void setLevel(int newLevel) {
+		mLevel = newLevel;
+	}
+
+	@Override
+	public void setMaxHp(int newMaxHp) {
+		mMaxHp = newMaxHp;
+	}
+
+	@Override
+	public void setCurHp(int newCurHp) {
+		mCurHp = newCurHp;
+	}
+
+	@Override
+	public void setSpeed(int newSpeed) {
+		mSpeed = newSpeed;
+	}
+
+	@Override
+	public void setAttack(int newAttack) {
+		mAttack = newAttack;
+	}
+
+	@Override
+	public void setDefense(int newDefense) {
+		mDefense = newDefense;
+	}
+
+	@Override
+	public void setHpGain(int newHpGain) {
+		mHpGain = newHpGain;
+	}
+
+	@Override
+	public void setSpeedGain(int newSpeedGain) {
+		mSpeedGain = newSpeedGain;
+	}
+
+	@Override
+	public void setAttackGain(int newAttackGain) {
+		mAttackGain = newAttackGain;
+	}
+
+	@Override
+	public void setDefenceGain(int newDefenceGain) {
+		mDefenseGain = newDefenceGain;
+	}
+
+	@Override
+	public void setEffect(String newEffect) {
+		mEffect = newEffect;
+	}
+
+	@Override
+	public void setExperience(int newExperience) {
+		mExp = newExperience;
 	}
 }

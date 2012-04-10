@@ -174,9 +174,9 @@ public class BattleActivity extends Activity{
 		   return;
 	}
 	public void refresh(){
-		mLeftBar.setProgress(mBattle.mYourSpark.mCurHP);
-		mRightBar.setProgress(mBattle.mHisSpark.mCurHP);
-		if(mBattle.mHisSpark.mCurHP<=0){
+		mLeftBar.setProgress(mBattle.mYourSpark.mCurHp);
+		mRightBar.setProgress(mBattle.mHisSpark.mCurHp);
+		if(mBattle.mHisSpark.mCurHp<=0){
 			print(mBattle.setWin());
 			GetSpark.chosenSpark.gainExp();
 			if (GetSpark.chosenSpark.getExp() >= 100){
@@ -186,7 +186,7 @@ public class BattleActivity extends Activity{
 			}
 			endBattle();
 		}
-		else if(mBattle.mYourSpark.mCurHP<=0){
+		else if(mBattle.mYourSpark.mCurHp<=0){
 			print(mBattle.setLose());
 			endBattle();
 		}

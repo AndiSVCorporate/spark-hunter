@@ -30,8 +30,8 @@ public class Battle {
 			
 		retVal = attacker.getName() +" uses " + sName +" and does " + dmg +" damage!";
 		//TODO: Future complicated battle calculations go here
-		defender.mCurHP-=dmg;
-		if(defender.mCurHP>0){
+		defender.mCurHp-=dmg;
+		if(defender.mCurHp>0){
 			if(counter==true) //stops infinite loop of counters
 				retVal = retVal + "\n" + attack("Poke",defender,attacker,false); // TODO:
 		}

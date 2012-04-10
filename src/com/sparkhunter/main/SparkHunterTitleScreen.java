@@ -32,7 +32,7 @@ public class SparkHunterTitleScreen extends Activity {
         Log.v("Service_CLASS", "CALLING SERVICE");
 
         //Initial player state settings go here
-        Player.getInstance().initializeInventory();
+        Player.getInstance().initializeInventory(SparkHunterTitleScreen.this);
         
         Button b = (Button)findViewById(R.id.Battle);
         b.setOnClickListener(new View.OnClickListener(){

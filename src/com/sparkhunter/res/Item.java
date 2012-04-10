@@ -1,5 +1,7 @@
 package com.sparkhunter.res;
 
+import com.sun.xml.internal.ws.wsdl.parser.MexEntityResolver;
+
 import android.content.Context;
 
 public class Item extends Entity {
@@ -12,6 +14,21 @@ public class Item extends Entity {
 	private String effect;			//item effect
 	private String name;			//name field for the item, e.g. "Potion of Doom"
 	private Integer resourceID; 	//resource tied to item (image, extend to sounds)
+	private int mId;
+	private String mType;
+	private String mName;
+	private int mLevel;
+	private int mMaxHp;
+	private int mSpeed;
+	private int mCurHp;
+	private int mAttack;
+	private int mDefense;
+	private int mSpeedGain;
+	private int mHpGain;
+	private int mAttackGain;
+	private int mDefenseGain;
+	private String mEffect;
+	private int mExp;
 	
 	//getters and setters
 	public int getIdentifier() {
@@ -52,17 +69,8 @@ public class Item extends Entity {
 		return effect;
 	}
 
-	public void setEffect(String effect) {
-		this.effect = effect;
-	}
-
 	public String getName() {
 		return name;
-	}
-	
-	public void setName(String newName) {
-		name = newName;
-		return;
 	}
 	
 	public Integer getResourceID() {
@@ -74,9 +82,83 @@ public class Item extends Entity {
 	}
 
 	//need to setup some sort of game state interface for this stuff
+	//all effect resolution logic should go in here
 	public void activate(Context c, int target){
 		
 	}
-	
-	//resource tied to item
+
+	@Override
+	public void setId(int newId) {
+		mId = newId;
+	}
+
+	@Override
+	public void setType(String newType) {
+		mType = newType;
+	}
+
+	@Override
+	public void setName(String newName) {
+		mName = newName;	
+	}
+
+	@Override
+	public void setLevel(int newLevel) {
+		mLevel = newLevel;
+	}
+
+	@Override
+	public void setMaxHp(int newMaxHp) {
+		mMaxHp = newMaxHp;
+	}
+
+	@Override
+	public void setCurHp(int newCurHp) {
+		mCurHp = newCurHp;
+	}
+
+	@Override
+	public void setSpeed(int newSpeed) {
+		mSpeed = newSpeed;
+	}
+
+	@Override
+	public void setAttack(int newAttack) {
+		mAttack = newAttack;
+	}
+
+	@Override
+	public void setDefense(int newDefense) {
+		mDefense = newDefense;
+	}
+
+	@Override
+	public void setHpGain(int newHpGain) {
+		mHpGain = newHpGain;
+	}
+
+	@Override
+	public void setSpeedGain(int newSpeedGain) {
+		mSpeedGain = newSpeedGain;
+	}
+
+	@Override
+	public void setAttackGain(int newAttackGain) {
+		mAttackGain = newAttackGain;
+	}
+
+	@Override
+	public void setDefenceGain(int newDefenceGain) {
+		mDefenseGain = newDefenceGain;
+	}
+
+	@Override
+	public void setEffect(String newEffect) {
+		mEffect = newEffect;
+	}
+
+	@Override
+	public void setExperience(int newExperience) {
+		mExp = newExperience;
+	}
 }

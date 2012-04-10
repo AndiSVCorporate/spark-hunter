@@ -40,6 +40,7 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 		//TODO validate that these create usable tables
+		//TODO make these yank from a remote database to create the initial table
 		arg0.execSQL(PLAYER_TABLE_CREATE);
 		arg0.execSQL(GAME_TABLE_CREATE);
 	}

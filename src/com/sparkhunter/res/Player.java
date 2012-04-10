@@ -10,8 +10,6 @@ public class Player {
 	//critical to make player a singleton, for cross-activity usage
 	private static Player singletonPlayer = new Player();
 	
-	
-	
 	//Im throwing these in here, dont' get mad!
 	//I MAD.
 	public String playerID;
@@ -82,6 +80,7 @@ public class Player {
 					entityToAdd.setId(dataQuery.getInt(i));
 				}
 				
+				//add a quantity field!
 				entityToAdd.setId(dataQuery.getInt(0));
 				entityToAdd.setType(dataQuery.getString(1));
 				entityToAdd.setName(dataQuery.getString(2));

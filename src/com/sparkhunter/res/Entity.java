@@ -24,4 +24,20 @@ public interface Entity {
 	public void setAttackGain(int newAttackGain);
 	public void setDefenseGain(int newDefenseGain);
 	public void setEffect(String newEffect);
+	
+	public int getId();
+	public String getType();
+	public String getName();
+	public int getLevel();
+	public int getExperience();
+	public int getMaxHp();
+	public int getCurHp();
+	public int getSpeed();
+	public int getAttack();
+	public int getDefense();
+	public int getHpGain();
+	public int getSpeedGain();
+	public int getAttackGain();
+	public int getDefenseGain();
+	public String getEffect();
 }

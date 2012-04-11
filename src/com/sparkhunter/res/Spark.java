@@ -3,7 +3,12 @@ package com.sparkhunter.res;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sparkhunter.main.R;
+
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 public class Spark implements Entity{
 	//stats
@@ -70,42 +75,14 @@ public class Spark implements Entity{
 		mAblty.add(new Ability("Herp",20));
 		mAblty.add(new Ability("Derp",50));
 	}
-	//gets
-	public String getName(){
-		return mName;
-	}
-	
-	public int getExp(){
-		return mExp;
-	}
 	
 	public void addExp(int Exp){
-		 getExp();
+		 getExperience();
 		 mExp = mExp + Exp;
 	}
 	
 	public String getDescript(){
 		return mDescription;
-	}
-	
-	public int getHP(){
-		return mMaxHp;
-	}
-	
-	public int getSpeed(){
-		return mSpeed;
-	}
-	
-	public int getAttack(){
-		return mAttack;
-	}
-	
-	public int getDefence(){
-		return mDefense;
-	}
-	
-	public int getLevel(){
-		return mLevel;
 	}
 	
 	public void gainExp(){
@@ -122,16 +99,16 @@ public class Spark implements Entity{
 	public void LevelUp(){
 		getLevel();
 		mLevel = mLevel + 1;
-		getExp();
+		getExperience();
 		mExp = mExp - 100;
-		getHP();
+		getCurHp();
 		mMaxHp = mMaxHp + mHpGain;
 		mCurHp = mMaxHp;
 		getSpeed();
 		mSpeed = mSpeed + mSpeedGain;
 		getAttack();
 		mAttack = mAttack + mAttackGain;
-		getDefence();
+		getDefense();
 		mDefense = mDefense + mDefenseGain;
 		
 		if (mLevel == 16){
@@ -151,7 +128,15 @@ public class Spark implements Entity{
 	@Override
 	public void activate(Context c, int target) {
 		// TODO Auto-generated method stub
-		
+		Log.d("DEBUG", "quack.");
+		Intent itemSoundIntent = new Intent(c, BackgroundMusic.class);
+    	
+    	//KLUDGE-TASTIC, find a better way to package the sound data
+    	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
+    	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
+    	c.startService(itemSoundIntent);
+    	
+    	Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -227,5 +212,80 @@ public class Spark implements Entity{
 	@Override
 	public void setExperience(int newExperience) {
 		mExp = newExperience;
+	}
+	
+	@Override
+	public int getId() {
+		return mId;
+	}
+
+	@Override
+	public String getType() {
+		return mType;
+	}
+
+	@Override
+	public int getLevel() {
+		return mLevel;
+	}
+
+	@Override
+	public int getExperience() {
+		return mExp;
+	}
+
+	@Override
+	public int getMaxHp() {
+		return mMaxHp;
+	}
+
+	@Override
+	public int getCurHp() {
+		return mCurHp;
+	}
+
+	@Override
+	public int getSpeed() {
+		return mSpeed;
+	}
+
+	@Override
+	public int getAttack() {
+		return mAttack;
+	}
+
+	@Override
+	public int getDefense() {
+		return mDefense;
+	}
+
+	@Override
+	public int getHpGain() {
+		return mHpGain;
+	}
+
+	@Override
+	public int getSpeedGain() {
+		return mSpeedGain;
+	}
+
+	@Override
+	public int getAttackGain() {
+		return mAttackGain;
+	}
+
+	@Override
+	public int getDefenseGain() {
+		return mDefenseGain;
+	}
+
+	@Override
+	public String getName() {
+		return mName;
+	}
+
+	@Override
+	public String getEffect() {
+		return mEffect;
 	}
 }

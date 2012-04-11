@@ -10,9 +10,6 @@ public class Item implements Entity {
 	private int identifier; 		//unique identifier for the item
 	private int itemClass; 			//item class, e.g. "01 (potion)"
 	private int target; 			//target of item effect
-	private int magnitude;			//magnitude of item effect (absolute/relative)
-	private String effect;			//item effect
-	private String name;			//name field for the item, e.g. "Potion of Doom"
 	private Integer resourceID; 	//resource tied to item (image, extend to sounds)
 	private int mId;
 	private String mType;
@@ -56,21 +53,13 @@ public class Item implements Entity {
 	public void setTarget(int target) {
 		this.target = target;
 	}
-	
-	public int getMagnitude() {
-		return magnitude;
-	}
-
-	public void setMagnitude(int magnitude) {
-		this.magnitude = magnitude;
-	}
 
 	public String getEffect() {
-		return effect;
+		return mEffect;
 	}
 
 	public String getName() {
-		return name;
+		return mName;
 	}
 	
 	public Integer getResourceID() {
@@ -160,5 +149,70 @@ public class Item implements Entity {
 	@Override
 	public void setExperience(int newExperience) {
 		mExp = newExperience;
+	}
+
+	@Override
+	public int getId() {
+		return mId;
+	}
+
+	@Override
+	public String getType() {
+		return mType;
+	}
+
+	@Override
+	public int getLevel() {
+		return mLevel;
+	}
+
+	@Override
+	public int getExperience() {
+		return mExp;
+	}
+
+	@Override
+	public int getMaxHp() {
+		return mMaxHp;
+	}
+
+	@Override
+	public int getCurHp() {
+		return mCurHp;
+	}
+
+	@Override
+	public int getSpeed() {
+		return mSpeed;
+	}
+
+	@Override
+	public int getAttack() {
+		return mAttack;
+	}
+
+	@Override
+	public int getDefense() {
+		return mDefense;
+	}
+
+	@Override
+	public int getHpGain() {
+		return mHpGain;
+	}
+
+	@Override
+	public int getSpeedGain() {
+		return mSpeedGain;
+	}
+
+	@Override
+	public int getAttackGain() {
+		return mAttackGain;
+	}
+
+	@Override
+	public int getDefenseGain() {
+		return mDefenseGain;
 	}
 }

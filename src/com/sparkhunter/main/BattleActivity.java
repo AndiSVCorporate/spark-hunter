@@ -76,7 +76,7 @@ public class BattleActivity extends Activity{
         temp = (TextView) findViewById(R.id.rightlevel);
         temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
         
-        mLeftBar.setMax(GetSpark.chosenSpark.getHP());
+        mLeftBar.setMax(GetSpark.chosenSpark.getMaxHp());
         mRightBar.setMax(100);
         
         //setup images
@@ -194,7 +194,7 @@ public class BattleActivity extends Activity{
 		if(mBattle.mHisSpark.mCurHp<=0){
 			print(mBattle.setWin());
 			GetSpark.chosenSpark.gainExp();
-			if (GetSpark.chosenSpark.getExp() >= 100){
+			if (GetSpark.chosenSpark.getExperience() >= 100){
 				GetSpark.chosenSpark.LevelUp();
 				Intent i = new Intent(BattleActivity.this, LevelUp.class);
 				startActivity(i);

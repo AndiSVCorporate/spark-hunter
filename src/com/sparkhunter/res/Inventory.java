@@ -4,7 +4,6 @@ import java.util.Vector;
 import android.util.Log;
 
 public class Inventory {
-	//TODO loads/store inventory locally
 	private Vector<Entity> inventoryEntities = new Vector<Entity>(); // actual item list
 	
 	public Inventory(){

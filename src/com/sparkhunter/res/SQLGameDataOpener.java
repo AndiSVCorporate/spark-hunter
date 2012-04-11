@@ -12,7 +12,7 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
     private static final String PLAYER_TABLE_NAME = "player_data";
     private static final String GAME_TABLE_NAME = "game_data";
     private static final String COLUMN_DEFINITIONS = " (" +
-                "id" + " INTEGER, " +
+                "e_id" + " INTEGER, " +
                 "type" + " TEXT, " +
                 "name" + " TEXT, " +
                 "level" + " INTEGER, " +

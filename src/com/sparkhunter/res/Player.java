@@ -26,6 +26,7 @@ public class Player {
 	
 	public void initializeInventory(Context c) {
 		int targetInventory = 0; //default to items
+		int quantity = 0;
 		/*
 		the player only has rubber ducks for now, dealwithit.jpg
 		for(int i = 0; i < 5; i++){
@@ -62,11 +63,11 @@ public class Player {
 				Entity entityToAdd = new Item(); //This is such a fucking kludge, to the point of being painful
 				
 				//first two fields are directly tied to which inventory the entity goes in
-				if(dataQuery.getString(1).equals("ITEM")){
+				if(dataQuery.getString(2).equals("ITEM")){
 					targetInventory = 0;
 				}
 				else{
-					if(dataQuery.getString(1).equals("SPARK")){
+					if(dataQuery.getString(2).equals("SPARK")){
 						targetInventory = 1;
 					}
 					else{
@@ -81,21 +82,33 @@ public class Player {
 				}
 				
 				//add a quantity field!
-				entityToAdd.setId(dataQuery.getInt(0));
-				entityToAdd.setType(dataQuery.getString(1));
-				entityToAdd.setName(dataQuery.getString(2));
-				entityToAdd.setLevel(dataQuery.getInt(3));
-				entityToAdd.setExperience(dataQuery.getInt(4));
-				entityToAdd.setMaxHp(dataQuery.getInt(5));
-				entityToAdd.setCurHp(dataQuery.getInt(6));
-				entityToAdd.setSpeed(dataQuery.getInt(7));
-				entityToAdd.setAttack(dataQuery.getInt(8));
-				entityToAdd.setDefence(dataQuery.getInt(9));
-				entityToAdd.setHpGain(dataQuery.getInt(10));
-				entityToAdd.setSpeedGain(dataQuery.getInt(11));
-				entityToAdd.setAttackGain(dataQuery.getInt(12));
-				entityToAdd.setDefenceGain(dataQuery.getInt(13));
-				entityToAdd.setEffect(dataQuery.getString(14));
+				entityToAdd.setId(dataQuery.getInt(1));
+				entityToAdd.setType(dataQuery.getString(2));
+				entityToAdd.setName(dataQuery.getString(3));
+				entityToAdd.setLevel(dataQuery.getInt(4));
+				entityToAdd.setExperience(dataQuery.getInt(5));
+				entityToAdd.setMaxHp(dataQuery.getInt(6));
+				entityToAdd.setCurHp(dataQuery.getInt(7));
+				entityToAdd.setSpeed(dataQuery.getInt(8));
+				entityToAdd.setAttack(dataQuery.getInt(9));
+				entityToAdd.setDefence(dataQuery.getInt(10));
+				entityToAdd.setHpGain(dataQuery.getInt(11));
+				entityToAdd.setSpeedGain(dataQuery.getInt(12));
+				entityToAdd.setAttackGain(dataQuery.getInt(13));
+				entityToAdd.setDefenceGain(dataQuery.getInt(14));
+				entityToAdd.setEffect(dataQuery.getString(15));
+				
+				quantity = dataQuery.getInt(16);
+				for(int k = 0; k < quantity; k++){
+					//fuck this, let's make a factory-pattern
+					if(targetInventory == 0){
+						itemInventory.addEntity(entityToAdd);
+					}
+					else{
+						//no point in checking, an exception would've been thrown earlier
+						sparkInventory.addEntity(entityToAdd);
+					}
+				}
 				
 				Log.d("SQL", "STRING GOES HERE");
 				dataQuery.moveToNext();

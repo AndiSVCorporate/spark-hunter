@@ -81,9 +81,9 @@ public class BattleActivity extends Activity{
         
         //setup images
         ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
-        temp2.setImageResource(mBattle.mYourSpark.mResId);
+        temp2.setImageResource(mBattle.mYourSpark.getImageResId());
         temp2 = (ImageView) findViewById(R.id.rightImage);
-        temp2.setImageResource(mBattle.mHisSpark.mResId);
+        temp2.setImageResource(mBattle.mHisSpark.getImageResId());
         
         //setup log
         mBattleLog = (TextView) findViewById(R.id.battleLog);

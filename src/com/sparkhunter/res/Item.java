@@ -3,6 +3,8 @@ package com.sparkhunter.res;
 import com.sun.xml.internal.ws.wsdl.parser.MexEntityResolver;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
 
 public class Item implements Entity {
 	//ABC for in-game items
@@ -26,6 +28,15 @@ public class Item implements Entity {
 	private int mDefenseGain;
 	private String mEffect;
 	private int mExp;
+	private int mImageResId;
+	private int mSoundResId;
+	private String mImageResource;
+	private String mSoundResource;
+	
+	//needed to resolve resources
+	private static final String PACKAGE_NAME = "com.sparkhunter.main:";
+	private static final String I_RES_TYPE = "drawable/";
+	private static final String S_RES_TYPE = "raw/";
 	
 	//getters and setters
 	public int getIdentifier() {
@@ -214,5 +225,47 @@ public class Item implements Entity {
 	@Override
 	public int getDefenseGain() {
 		return mDefenseGain;
+	}
+
+	@Override
+	public void setImageResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mImageResource = newResource;
+		mImageResId = c.getResources().getIdentifier(newResource, I_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mImageResId == 0)
+			throw new Resources.NotFoundException(mImageResource);
+	}
+
+	@Override
+	public void setSoundResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mSoundResource = newResource;
+		mSoundResId = c.getResources().getIdentifier(newResource, S_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mSoundResId == 0)
+			throw new Resources.NotFoundException(mSoundResource);
+	}
+
+	@Override
+	public String getImageResource() {
+		return mImageResource;
+	}
+
+	@Override
+	public String getSoundResource() {
+		return mSoundResource;
+	}
+
+	@Override
+	public int getImageResId() {
+		return mImageResId;
+	}
+
+	@Override
+	public int getSoundResId() {
+		return mSoundResId;
 	}
 }

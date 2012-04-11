@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Vector;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.util.Log;
 
@@ -15,23 +17,25 @@ public class EntityCreationManager {
 	//fields to parse from database
 	//TODO find a better way to do this
 	//TODO trim player_data down to reference most of this from game_data
-	private static String _ID = "_id";
-	private static String E_ID = "e_id";
-	private static String TYPE = "type";
-	private static String NAME = "name";
-	private static String LEVEL = "level";
-	private static String EXP = "exp";
-	private static String MAX_HP = "max_hp";
-	private static String CUR_HP = "cur_hp";
-	private static String SPEED = "speed";
-	private static String ATTACK = "attack";
-	private static String DEFENSE = "defense";
-	private static String HP_GAIN = "hp_gain";
-	private static String SPEED_GAIN = "speed_gain";
-	private static String ATTACK_GAIN = "attack_gain";
-	private static String DEFENSE_GAIN = "defense_gain";
-	private static String EFFECT = "effect";
-	private static String QUANTITY = "quantity";
+	private static final String _ID = "_id";
+	private static final String E_ID = "e_id";
+	private static final String TYPE = "type";
+	private static final String NAME = "name";
+	private static final String LEVEL = "level";
+	private static final String EXP = "exp";
+	private static final String MAX_HP = "max_hp";
+	private static final String CUR_HP = "cur_hp";
+	private static final String SPEED = "speed";
+	private static final String ATTACK = "attack";
+	private static final String DEFENSE = "defense";
+	private static final String HP_GAIN = "hp_gain";
+	private static final String SPEED_GAIN = "speed_gain";
+	private static final String ATTACK_GAIN = "attack_gain";
+	private static final String DEFENSE_GAIN = "defense_gain";
+	private static final String EFFECT = "effect";
+	private static final String QUANTITY = "quantity";
+	private static final String IMAGE_RES = "image_res";
+	private static final String SOUND_RES = "sound_res";
 	
 	private EntityCreationManager(){
 		this.addEntityType(new ItemCreator());
@@ -71,7 +75,7 @@ public class EntityCreationManager {
 	
 	//heavy lifter, creates an entity from a query-derived Cursor
 	//NOTE: Assumes Cursor is in the proper location!
-	public Vector<Entity> createEntity(Cursor parameters){
+	public Vector<Entity> createEntity(Cursor parameters, Context c){
 		EntityCreator creator = null;
 		Entity newEntity = null;
 		String typeParam;
@@ -106,6 +110,15 @@ public class EntityCreationManager {
 			newEntity.setAttackGain(parameters.getInt(parameters.getColumnIndex(ATTACK_GAIN)));
 			newEntity.setDefenseGain(parameters.getInt(parameters.getColumnIndex(DEFENSE_GAIN)));
 			newEntity.setEffect(parameters.getString(parameters.getColumnIndex(EFFECT)));
+			
+			//set and resolve resources tied to this Entity
+			try{
+				newEntity.setImageResource(parameters.getString(parameters.getColumnIndex(IMAGE_RES)), c);
+				newEntity.setSoundResource(parameters.getString(parameters.getColumnIndex(SOUND_RES)), c);
+			}
+			catch (Resources.NotFoundException e){
+				Log.d("DEBUG", "ERROR: could not find resource!" + e);
+			}
 			
 			//have this return an array of newEntity objects based on quantity field
 			quantity = parameters.getInt(parameters.getColumnIndex(QUANTITY));

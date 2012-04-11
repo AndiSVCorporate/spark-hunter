@@ -7,6 +7,8 @@ import com.sparkhunter.main.R;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,18 +30,25 @@ public class Spark implements Entity{
 	private String mEffect;
 	private int mId;
 	private String mType;
-	
 	private String mName;
 	private String mDescription;
-	public int mResId;
+	private int mImageResId;
+	private int mSoundResId;
+	private String mImageResource;
+	private String mSoundResource;
 	
 	private List<Ability> mAblty;
+	
+	//needed to resolve resources
+	private static final String PACKAGE_NAME = "com.sparkhunter.main:";
+	private static final String I_RES_TYPE = "drawable/";
+	private static final String S_RES_TYPE = "raw/";
 	
 	public Spark(String name, int resId)
 	{
 		mName = name;
 		mDescription = "";
-		mResId = resId;
+		mImageResId = resId;
 		mAblty = new ArrayList<Ability>();
 		setStats();
 	}
@@ -287,5 +296,47 @@ public class Spark implements Entity{
 	@Override
 	public String getEffect() {
 		return mEffect;
+	}
+	
+	@Override
+	public void setImageResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mImageResource = newResource;
+		mImageResId = c.getResources().getIdentifier(newResource, I_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mImageResId == 0)
+			throw new Resources.NotFoundException(mImageResource);
+	}
+
+	@Override
+	public void setSoundResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mSoundResource = newResource;
+		mSoundResId = c.getResources().getIdentifier(newResource, S_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mSoundResId == 0)
+			throw new Resources.NotFoundException(mSoundResource);
+	}
+
+	@Override
+	public String getImageResource() {
+		return mImageResource;
+	}
+
+	@Override
+	public String getSoundResource() {
+		return mSoundResource;
+	}
+
+	@Override
+	public int getImageResId() {
+		return mImageResId;
+	}
+
+	@Override
+	public int getSoundResId() {
+		return mSoundResId;
 	}
 }

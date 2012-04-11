@@ -60,7 +60,7 @@ public class Player {
 				Vector<Entity> entities = new Vector<Entity>();
 				
 				//grab the entities mapped by this row and cram 'em somewhere
-				entities = EntityCreationManager.getInstance().createEntity(dataQuery);
+				entities = EntityCreationManager.getInstance().createEntity(dataQuery, c);
 				
 				//TODO add all needed getters to Entity interface
 				for(int j = 0; j < entities.size(); j++){

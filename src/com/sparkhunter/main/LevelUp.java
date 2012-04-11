@@ -54,6 +54,6 @@ public class LevelUp extends Activity {
 		});
 		
 	ImageView image = (ImageView) findViewById(R.id.IVdisplay);
-	image.setImageResource(GetSpark.chosenSpark.mResId);
+	image.setImageResource(GetSpark.chosenSpark.getImageResId());
 }
 }

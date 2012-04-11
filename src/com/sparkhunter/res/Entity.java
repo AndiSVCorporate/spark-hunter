@@ -1,6 +1,7 @@
 package com.sparkhunter.res;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 public interface Entity {
 	//abstract class that encompasses items and sparks
@@ -8,7 +9,7 @@ public interface Entity {
 	//corresponds to using an item or selecting a spark
 	public abstract void activate(Context c, int target);
 	
-	//abstract setters, both items and sparks need to implement these
+	//abstract setters/getters, both items and sparks need to implement these
 	public void setId(int newId);
 	public void setType(String newType);
 	public void setName(String newName);
@@ -24,6 +25,8 @@ public interface Entity {
 	public void setAttackGain(int newAttackGain);
 	public void setDefenseGain(int newDefenseGain);
 	public void setEffect(String newEffect);
+	public void setImageResource(String newResource, Context c) throws Resources.NotFoundException;
+	public void setSoundResource(String newResource, Context c) throws Resources.NotFoundException;
 	
 	public int getId();
 	public String getType();
@@ -40,4 +43,8 @@ public interface Entity {
 	public int getAttackGain();
 	public int getDefenseGain();
 	public String getEffect();
+	public String getImageResource();
+	public String getSoundResource();
+	public int getImageResId();
+	public int getSoundResId();
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 
-public class Spark extends Entity{
+public class Spark implements Entity{
 	//stats
 
 	//public? 
@@ -215,7 +215,7 @@ public class Spark extends Entity{
 	}
 
 	@Override
-	public void setDefenceGain(int newDefenceGain) {
+	public void setDefenseGain(int newDefenceGain) {
 		mDefenseGain = newDefenceGain;
 	}
 

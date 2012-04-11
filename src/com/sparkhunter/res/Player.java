@@ -1,5 +1,7 @@
 package com.sparkhunter.res;
 
+import java.util.Vector;
+
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +27,6 @@ public class Player {
 	private Player() {}
 	
 	public void initializeInventory(Context c) {
-		int targetInventory = 0; //default to items
 		int quantity = 0;
 		/*
 		the player only has rubber ducks for now, dealwithit.jpg
@@ -56,61 +57,21 @@ public class Player {
 		//correct inventory
 		try{
 			for(int i = 0; i < dataQuery.getCount(); i++){
-				//entities to add to the inventory
-				//find a way to use Entity type-casts for this
-				Item itemToAdd = new Item();
-				Spark sparkToAdd = new Spark();
-				Entity entityToAdd = new Item(); //This is such a fucking kludge, to the point of being painful
+				Vector<Entity> entities = new Vector<Entity>();
 				
-				//first two fields are directly tied to which inventory the entity goes in
-				if(dataQuery.getString(2).equals("ITEM")){
-					targetInventory = 0;
-				}
-				else{
-					if(dataQuery.getString(2).equals("SPARK")){
-						targetInventory = 1;
+				//grab the entities mapped by this row and cram 'em somewhere
+				entities = EntityCreationManager.getInstance().createEntity(dataQuery);
+				
+				//TODO add all needed getters to Entity interface
+				for(int j = 0; j < entities.size(); j++){
+					if(entities.get(0).getType() == "ITEM"){
+						itemInventory.addEntity(entities.get(j));
 					}
 					else{
-						//something's waaaaaaaay wrong, throw an exception
-						throw new TypeNotPresentException("Not item or spark.", new Throwable());
+						sparkInventory.addEntity(entities.get(j));
 					}
 				}
 				
-				for(int j = 0; j < dataQuery.getColumnCount(); j++){
-					//data += dataQuery.getString(j);
-					entityToAdd.setId(dataQuery.getInt(i));
-				}
-				
-				//add a quantity field!
-				entityToAdd.setId(dataQuery.getInt(1));
-				entityToAdd.setType(dataQuery.getString(2));
-				entityToAdd.setName(dataQuery.getString(3));
-				entityToAdd.setLevel(dataQuery.getInt(4));
-				entityToAdd.setExperience(dataQuery.getInt(5));
-				entityToAdd.setMaxHp(dataQuery.getInt(6));
-				entityToAdd.setCurHp(dataQuery.getInt(7));
-				entityToAdd.setSpeed(dataQuery.getInt(8));
-				entityToAdd.setAttack(dataQuery.getInt(9));
-				entityToAdd.setDefence(dataQuery.getInt(10));
-				entityToAdd.setHpGain(dataQuery.getInt(11));
-				entityToAdd.setSpeedGain(dataQuery.getInt(12));
-				entityToAdd.setAttackGain(dataQuery.getInt(13));
-				entityToAdd.setDefenceGain(dataQuery.getInt(14));
-				entityToAdd.setEffect(dataQuery.getString(15));
-				
-				quantity = dataQuery.getInt(16);
-				for(int k = 0; k < quantity; k++){
-					//fuck this, let's make a factory-pattern
-					if(targetInventory == 0){
-						itemInventory.addEntity(entityToAdd);
-					}
-					else{
-						//no point in checking, an exception would've been thrown earlier
-						sparkInventory.addEntity(entityToAdd);
-					}
-				}
-				
-				Log.d("SQL", "STRING GOES HERE");
 				dataQuery.moveToNext();
 			}
 		}

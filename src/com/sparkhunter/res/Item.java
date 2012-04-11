@@ -4,7 +4,7 @@ import com.sun.xml.internal.ws.wsdl.parser.MexEntityResolver;
 
 import android.content.Context;
 
-public class Item extends Entity {
+public class Item implements Entity {
 	//ABC for in-game items
 	//subclasses exist for potions and what-not
 	private int identifier; 		//unique identifier for the item
@@ -148,7 +148,7 @@ public class Item extends Entity {
 	}
 
 	@Override
-	public void setDefenceGain(int newDefenceGain) {
+	public void setDefenseGain(int newDefenceGain) {
 		mDefenseGain = newDefenceGain;
 	}
 

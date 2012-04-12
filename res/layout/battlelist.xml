@@ -6,15 +6,22 @@
 
     <Button
         android:id="@+id/battleListStartMatch"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Host Match" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop = "10dp"
+        android:text="Host Match"
+        android:background="@drawable/green"
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/battleListGetMatch"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Refresh Match List" />
+        android:layout_marginBottom="20dp"
+        android:text="Refresh Match List"
+        android:background="@drawable/green" 
+        android:layout_gravity="center"/>
 
     <ListView
         android:id="@+id/battleListList"

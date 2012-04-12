@@ -102,6 +102,8 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
 		if(!checkDatabase())
 			initializeFromAssets();
 		
+		//network update logic should go in this vicinity
+		
 		database = SQLiteDatabase.openDatabase(DATABASE_PATH+DATABASE_NAME, 
 				null, SQLiteDatabase.OPEN_READWRITE);
 		return database;

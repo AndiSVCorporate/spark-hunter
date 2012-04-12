@@ -29,19 +29,6 @@ public class Player {
 	
 	public void initializeInventory(Context c) {
 		int quantity = 0;
-		/*
-		the player only has rubber ducks for now, dealwithit.jpg
-		for(int i = 0; i < 5; i++){
-			itemInventory.addEntity(new RubberDuck());
-		}
-		
-		the player only has Dingus(es) for now, dealwithit.jpg
-		for(int i = 0; i < 3; i++){
-			sparkInventory.addEntity(new DummySpark());
-		}*/
-		
-		//bullshit to test resource resolver
-		Log.d("DEBUG", c.getResources().getResourceName(com.sparkhunter.main.R.drawable.item_circle));
 		
 		//create a database opener, and use it get a handle on the player database 
 		SQLGameDataOpener openHelper = new SQLGameDataOpener(c);
@@ -74,7 +61,6 @@ public class Player {
 						itemInventory.addEntity(entities.get(j));
 					}
 					else{
-						//something's off with this logic, everything ends up here!
 						sparkInventory.addEntity(entities.get(j));
 					}
 				}

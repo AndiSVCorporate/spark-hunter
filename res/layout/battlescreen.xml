@@ -3,7 +3,7 @@
     android:id="@+id/AbsoluteLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#272c33" >
+    android:background="@drawable/battle1" >
 
     <ProgressBar
         android:id="@+id/leftHP"
@@ -69,27 +69,37 @@
  
     <Button
         android:id="@+id/battleRun"
-        android:layout_width="321dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/battleRun" />
+        android:text="@string/battleRun" 
+        android:background="@drawable/gray"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/battleInventory"
-        android:layout_width="321dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/battleRun"
         android:layout_alignParentLeft="true"
-        android:text="Inventory" />
+        android:text="Inventory"
+        android:background="@drawable/gray"
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/battlehistory"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/battleInventory"
         android:layout_alignParentLeft="true"
-        android:text="Battle History" />
+        android:text="Battle History"
+        android:background="@drawable/gray"
+        android:layout_gravity="center"
+         />
 
     <Spinner
         android:id="@+id/battleAttack"
@@ -99,7 +109,8 @@
         android:layout_alignParentLeft="true"
         android:padding="5dip"
         android:paddingLeft="10dip"
-        android:prompt="@string/battleAttack" />
+        android:prompt="@string/battleAttack"
+         />
 
     <ScrollView
         android:id="@+id/battleLogScroll"

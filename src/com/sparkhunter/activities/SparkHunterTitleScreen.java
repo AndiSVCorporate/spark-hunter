@@ -15,8 +15,10 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class SparkHunterTitleScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      
         setContentView(R.layout.main);
         
         /* Background Service*/
@@ -71,7 +74,7 @@ public class SparkHunterTitleScreen extends Activity {
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					Intent i = new Intent(SparkHunterTitleScreen.this, MultiplayerListActivity.class);
+					Intent i = new Intent(SparkHunterTitleScreen.this, Multiplayer.class);
 					bgm.stop();
 			    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 			    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);

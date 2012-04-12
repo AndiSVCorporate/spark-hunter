@@ -48,5 +48,6 @@
         <activity android:name="com.sparkhunter.activities.ItemInventoryActivity"></activity>
         <activity android:name="com.sparkhunter.activities.SparkInventoryActivity"></activity>
         <activity android:name="com.sparkhunter.activities.MultiplayerListActivity"></activity>
+        <activity android:name="com.sparkhunter.activities.ItemDescriptionActivity"></activity>
     </application>
 </manifest>

@@ -268,4 +268,34 @@ public class Item implements Entity {
 	public int getSoundResId() {
 		return mSoundResId;
 	}
+	
+	@Override
+	public String toString(){
+		String information;
+		information = mName + ":\n" + mEffect + "\n\n";
+		
+		//check field values, and state them if relevant (not -1)
+		if(mSpeed != -1)
+			information += "Speed changes by " + mSpeed + "\n";
+		if(mMaxHp != -1)
+			information += "Max HP changes by " + mMaxHp + "\n";
+		if(mCurHp != -1)
+			information += "Current HP changes by " + mCurHp + "\n";
+		if(mAttack != -1)
+			information += "Attack changes by " + mAttack + "\n";
+		if(mDefense != -1)
+			information += "Defense changes by " + mDefense + "\n";
+		if(mSpeedGain != -1)
+			information += "Speed Gain changes by " + mSpeedGain + "\n";
+		if(mHpGain != -1)
+			information += "HP Gain changes by " + mHpGain + "\n";
+		if(mAttackGain != -1)
+			information += "Attack Gain changes by " + mAttackGain + "\n";
+		if(mDefenseGain != -1)
+			information += "Defense Gain changes by " + mDefenseGain + "\n";
+		if(mExp != -1)
+			information += "Experience changes by " + mExp + "\n";
+		
+		return information;
+	}
 }

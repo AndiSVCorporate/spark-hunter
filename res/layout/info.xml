@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/green"
         android:text="Choose a different Spark" />
 
     <Button
@@ -15,6 +16,7 @@
         android:layout_width="172dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/green"
         android:text="I choose you!" />
 
 </LinearLayout>

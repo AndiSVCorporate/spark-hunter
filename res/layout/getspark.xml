@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000030"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
   <ImageView
@@ -67,6 +67,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="0.0"
       android:layout_gravity="center"
+      android:background="@drawable/green"
       android:text="Choose Spark" />
 
 </LinearLayout>

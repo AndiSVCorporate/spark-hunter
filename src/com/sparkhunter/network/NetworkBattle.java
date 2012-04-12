@@ -83,7 +83,7 @@ public class NetworkBattle extends Battle {
 	       }, 60, SECONDS);
 	}
 	
-    private class RecvTurnTask extends MultiplayerTask {
+    private class RecvTurnTask extends PHPTask {
 
 		@Override
 		protected String ServerCommand(String[] args) {
@@ -99,7 +99,7 @@ public class NetworkBattle extends Battle {
         	}
         }
     }
-    private class SendTurnTask extends MultiplayerTask {
+    private class SendTurnTask extends PHPTask {
 		@Override
 		protected String ServerCommand(String[] args){
 				return ServerInterface.sendStats(args);
@@ -110,7 +110,7 @@ public class NetworkBattle extends Battle {
 				Toast.makeText(mActivity.getApplicationContext(), mResponses[0], Toast.LENGTH_SHORT).show();
 		}
     }
-    private class DeleteTurnTask extends MultiplayerTask {
+    private class DeleteTurnTask extends PHPTask {
 		@Override
 		protected String ServerCommand(String[] args){
 				return ServerInterface.deleteMove(args);

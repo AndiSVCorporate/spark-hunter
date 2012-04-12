@@ -19,7 +19,7 @@ import com.sparkhunter.main.R;
 import com.sparkhunter.main.Waiting;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
-import com.sparkhunter.network.MultiplayerTask;
+import com.sparkhunter.network.PHPTask;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
@@ -89,8 +89,11 @@ public class MultiplayerListActivity extends Activity {
 		      
 			}
 		});
-        
-        if (FacebookUtils.isSessionValid()) {
+        mID = Player.getInstance().playerID;
+        mName = Player.getInstance().playerName;
+
+        if ((mID == null || mName == null) && FacebookUtils.isSessionValid()) {
+        	Toast.makeText(getApplicationContext(), "Getting ID from Facebook", Toast.LENGTH_SHORT).show();
         	FacebookUtils.getMe(new FBListener());
         }
         
@@ -246,7 +249,7 @@ public class MultiplayerListActivity extends Activity {
 	       }, 60, SECONDS);
 	}
 	
-    private class GetListTask extends MultiplayerTask {
+    private class GetListTask extends PHPTask {
 
 		@Override
 		protected String ServerCommand(String[] args) {
@@ -263,7 +266,7 @@ public class MultiplayerListActivity extends Activity {
     }
     
     //Use to spawn thread
-    private class AddBattleTask extends MultiplayerTask {
+    private class AddBattleTask extends PHPTask {
 
 		@Override
 		protected String ServerCommand(String[] args) {
@@ -276,7 +279,7 @@ public class MultiplayerListActivity extends Activity {
 		}
 
     }
-    private class JoinBattleTask extends MultiplayerTask {
+    private class JoinBattleTask extends PHPTask {
 
         protected void onPostExecute(String objResult) {
                 if(objResult != null && objResult instanceof String) {                          
@@ -301,7 +304,7 @@ public class MultiplayerListActivity extends Activity {
 
     }
     //Handshaking, Host is looking for players
-    private class PollPlayerTask extends MultiplayerTask {
+    private class PollPlayerTask extends PHPTask {
 
 		@Override
 		protected String ServerCommand(String[] args) {
@@ -319,7 +322,7 @@ public class MultiplayerListActivity extends Activity {
         }
     }
     //Handshaking, Player is waiting for the host to say the battle is ready
-	public class PollHostTask extends MultiplayerTask {
+	public class PollHostTask extends PHPTask {
 		@Override
 		protected String ServerCommand(String[] args) {
 			return ServerInterface.checkBattle(args[0]);
@@ -334,7 +337,7 @@ public class MultiplayerListActivity extends Activity {
         	Toast.makeText(getApplicationContext(), mResponses[0], Toast.LENGTH_SHORT).show();
         }
 	}
-    private class DeleteBattleTask extends MultiplayerTask {
+    private class DeleteBattleTask extends PHPTask {
 		@Override
 		protected String ServerCommand(String[] args){
 				return ServerInterface.deleteBattle(args[0]);
@@ -343,7 +346,7 @@ public class MultiplayerListActivity extends Activity {
     
     //Handshaking, Host is telling player that battle is starting
     
-    private class StartBattleTask extends MultiplayerTask {
+    private class StartBattleTask extends PHPTask {
 		@Override
 		protected String ServerCommand(String[] args) {
 			return ServerInterface.startBattle(args[0]);

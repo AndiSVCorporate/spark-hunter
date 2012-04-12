@@ -15,7 +15,9 @@ public class Player {
 	
 	//Im throwing these in here, dont' get mad!
 	//I MAD.
+	//I'm platinum mad.
 	public String playerID;
+	public String playerName;
 	public String enemyID;
 	
 	private SQLiteDatabase gameData;

@@ -1,14 +1,29 @@
 package com.sparkhunter.activities;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.facebook.android.FacebookError;
+import com.facebook.android.Util;
+import com.facebook.android.AsyncFacebookRunner.RequestListener;
+import com.sparkhunter.activities.FbfriendsActivity.FriendListener;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
 import com.sparkhunter.main.R.raw;
 import com.sparkhunter.main.R.string;
 import com.sparkhunter.mapping.Map;
+import com.sparkhunter.network.PHPTask;
+import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.AdventureService;
 import com.sparkhunter.res.BackgroundMusic;
+import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
 
 import android.app.Activity;
@@ -43,6 +58,10 @@ public class SparkHunterTitleScreen extends Activity {
         //Initial player state settings go here
         Player.getInstance().initializeInventory(SparkHunterTitleScreen.this);
         
+        
+        FacebookUtils.getMe(new MeListener());
+        
+        
         Button b = (Button)findViewById(R.id.Battle);
         b.setOnClickListener(new View.OnClickListener(){
 
@@ -57,6 +76,8 @@ public class SparkHunterTitleScreen extends Activity {
 			}
         	
         });
+        
+        
         b = (Button)findViewById(R.id.button1);
         //menu music starts
     	//menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
@@ -131,5 +152,39 @@ public class SparkHunterTitleScreen extends Activity {
 		});
     
       }
-    
+    private class MeListener implements RequestListener {
+
+ 		@Override
+ 		public void onComplete(final String response, final Object state) {
+ 				//parse the friend data
+ 				try {
+ 					JSONObject json = Util.parseJson(response);
+ 					Player.getInstance().playerName = (String) json.get("name");
+ 					Player.getInstance().playerID = (String) json.get("id");
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (FacebookError e) {
+					e.printStackTrace();
+				}
+ 		}
+ 		
+		@Override
+		public void onIOException(IOException e, Object state) {
+		}
+
+		@Override
+		public void onFileNotFoundException(FileNotFoundException e,
+				Object state) {
+		}
+
+		@Override
+		public void onMalformedURLException(MalformedURLException e,
+				Object state) {
+		}
+
+		@Override
+		public void onFacebookError(FacebookError e, Object state) {
+		}
+    }
 }

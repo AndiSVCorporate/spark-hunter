@@ -49,6 +49,7 @@ public class ServerInterface {
         // Declared Constants
         public static final String SERVER_URL_LIST = "http://www.sparkhunter.hostzi.com/battle_list.php";
         public static final String SERVER_URL_BATTLE = "http://www.sparkhunter.hostzi.com/battle.php";
+        public static final String SERVER_URL_USERS = "http://www.sparkhunter.hostzi.com/users.php";
 
         public static String getList(){
                 String data = null;
@@ -163,6 +164,30 @@ public class ServerInterface {
 			}
 
             return executeHttpRequest(data, SERVER_URL_BATTLE);
+		}
+		public static String addUser(String ... args){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("add","UTF-8");
+	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            return executeHttpRequest(data, SERVER_URL_USERS);
+		}
+		public static String findUser(String ... args){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("find","UTF-8");
+	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            return executeHttpRequest(data, SERVER_URL_USERS);
 		}
         /**
          * Helper function used to communicate with the server by sending/receiving

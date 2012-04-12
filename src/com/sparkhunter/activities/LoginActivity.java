@@ -3,6 +3,7 @@ package com.sparkhunter.activities;
 import com.facebook.android.DialogError;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Facebook.DialogListener;
+import com.sparkhunter.activities.FbfriendsActivity.FriendListener;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
@@ -95,4 +96,5 @@ public class LoginActivity extends Activity{
         	Toast.makeText(mActivity, "cancel", Toast.LENGTH_SHORT).show();
         }
     }
+    
 }

@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class MultiplayerTask extends AsyncTask<String,String,String>{
+public class PHPTask extends AsyncTask<String,String,String>{
 	
 	protected String[] mResponses;
 	

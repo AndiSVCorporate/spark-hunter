@@ -74,7 +74,7 @@ public class SparkHunterTitleScreen extends Activity {
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					Intent i = new Intent(SparkHunterTitleScreen.this, MultiplayerListActivity.class);
+					Intent i = new Intent(SparkHunterTitleScreen.this, Multiplayer.class);
 					bgm.stop();
 			    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 			    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);

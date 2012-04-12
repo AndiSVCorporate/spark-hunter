@@ -1,4 +1,4 @@
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +15,10 @@ import org.json.JSONObject;
 import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.Waiting;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;

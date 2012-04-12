@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +45,8 @@ import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
 import com.sparkhunter.res.FacebookUtils;
 
 

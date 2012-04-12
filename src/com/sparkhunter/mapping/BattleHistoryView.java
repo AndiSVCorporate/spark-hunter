@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sparkhunter.res;
+package com.sparkhunter.mapping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,9 +18,8 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.sparkhunter.main.BattleField;
-import com.sparkhunter.main.HistoryReader;
-import com.sparkhunter.main.MapItemizedoverlay;
 import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.drawable;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
 

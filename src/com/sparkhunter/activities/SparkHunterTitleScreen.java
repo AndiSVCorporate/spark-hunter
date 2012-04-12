@@ -1,9 +1,14 @@
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
 
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
+import com.sparkhunter.main.R.raw;
+import com.sparkhunter.main.R.string;
+import com.sparkhunter.mapping.Map;
+import com.sparkhunter.res.AdventureService;
 import com.sparkhunter.res.BackgroundMusic;
-import com.sparkhunter.res.BattleHistoryView;
-import com.sparkhunter.res.Map;
 import com.sparkhunter.res.Player;
 
 import android.app.Activity;

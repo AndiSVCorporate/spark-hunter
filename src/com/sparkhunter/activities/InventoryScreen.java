@@ -1,9 +1,18 @@
-package com.sparkhunter.main;
-
+package com.sparkhunter.activities;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
+import com.sparkhunter.res.Entity;
+import com.sparkhunter.res.Inventory;
+import com.sparkhunter.res.Item;
+import com.sparkhunter.res.Player;
+
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.TabHost;
 

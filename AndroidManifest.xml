@@ -12,40 +12,40 @@
     <application
         android:icon="@drawable/icon_dagger"
         android:label="@string/app_name" >
-        <service android:enabled = "true" android:name=".AdventureService"/>
-        <activity android:name="LoginActivity">
+        <service android:enabled = "true" android:name="com.sparkhunter.res.AdventureService"/>
+        <activity android:name="com.sparkhunter.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity><activity
-            android:name=".SparkHunterTitleScreen"
+            android:name="com.sparkhunter.activities.SparkHunterTitleScreen"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name=".InventoryScreen"></activity>
-        <activity android:name=".FbfriendsActivity"></activity>
-        <activity android:name="com.sparkhunter.res.Map"></activity>
+        <activity android:name="com.sparkhunter.activities.InventoryScreen"></activity>
+        <activity android:name="com.sparkhunter.activities.FbfriendsActivity"></activity>
+        <activity android:name="com.sparkhunter.mapping.Map"></activity>
         <uses-library android:name="com.google.android.maps"/>
         <service android:label="BackgroundMusic" android:name="com.sparkhunter.res.BackgroundMusic"></service>
-        <activity android:name=".GetSpark"></activity>
-        <activity android:name="com.sparkhunter.res.BattleHistoryView"></activity>
-        <activity android:name=".BattleActivity"></activity>
-        <activity android:name=".Info"
+        <activity android:name="com.sparkhunter.activities.GetSpark"></activity>
+        <activity android:name="com.sparkhunter.mapping.BattleHistoryView"></activity>
+        <activity android:name="com.sparkhunter.activities.BattleActivity"></activity>
+        <activity android:name="com.sparkhunter.activities.Info"
             	  android:theme="@android:style/Theme.Dialog">                 
         </activity>
-        <activity android:name=".AdventureTime"
+        <activity android:name="com.sparkhunter.activities.AdventureTime"
 				  android:theme="@android:style/Theme.Dialog">
                   </activity>
-        <activity android:name=".Catch"
+        <activity android:name="com.sparkhunter.activities.Catch"
             	  android:theme="@android:style/Theme.Dialog">
         </activity>
-        <activity android:name=".LevelUp"></activity>
+        <activity android:name="com.sparkhunter.activities.LevelUp"></activity>
         <activity android:name=".Waiting"
             	  android:theme="@android:style/Theme.Dialog"></activity>
 
         <activity android:name=".NetworkBattleActivity"></activity>
         <activity android:name="ItemInventoryActivity"></activity>
         <activity android:name="SparkInventoryActivity"></activity>
-        <activity android:name=".MultiplayerListActivity"></activity>
+        <activity android:name="com.sparkhunter.activities.MultiplayerListActivity"></activity>
     </application>
 </manifest>

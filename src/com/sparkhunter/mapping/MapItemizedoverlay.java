@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sparkhunter.main;
+package com.sparkhunter.mapping;
 
 import java.util.ArrayList;
 

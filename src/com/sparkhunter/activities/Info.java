@@ -1,5 +1,8 @@
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;

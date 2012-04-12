@@ -1,10 +1,13 @@
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import java.util.Random;
+
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.layout;
 
 public class AdventureTime extends Activity {
 	private Activity mActivity=this;

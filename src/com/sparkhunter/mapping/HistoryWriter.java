@@ -1,11 +1,13 @@
 /**
  * 
  */
-package com.sparkhunter.main;
+package com.sparkhunter.mapping;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import com.sparkhunter.main.BattleField;
 
 import android.content.Context;
 

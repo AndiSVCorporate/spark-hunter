@@ -15,8 +15,10 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class SparkHunterTitleScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      
         setContentView(R.layout.main);
         
         /* Background Service*/

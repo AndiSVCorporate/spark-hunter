@@ -49,41 +49,80 @@ public class ServerInterface {
         // Declared Constants
         public static final String SERVER_URL = "http://www.sparkhunter.hostzi.com/battle_list.php";
 
-        public static String getList() throws UnsupportedEncodingException {
-                String data = "command=" + URLEncoder.encode("getBattles","UTF-8");
+        public static String getList(){
+                String data = null;
+				try {
+					data = "command=" + URLEncoder.encode("getBattles","UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 return executeHttpRequest(data);
         }
 
-		public static String addBattle(String id, String desc) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("addBattle","UTF-8");
-            data += "&id=" + URLEncoder.encode(id,"UTF-8");
-            data += "&desc=" + URLEncoder.encode(desc,"UTF-8");
+		public static String addBattle(String id, String desc){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("addBattle","UTF-8");
+	            data += "&id=" + URLEncoder.encode(id,"UTF-8");
+	            data += "&desc=" + URLEncoder.encode(desc,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
-		public static String joinBattle(String id, String id2) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("acceptBattle","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
-            data += "&id2=" + URLEncoder.encode(id2,"UTF-8");
+		public static String joinBattle(String id, String id2){
+            String data = null;
+            try {
+            	data = "command=" + URLEncoder.encode("acceptBattle","UTF-8");
+				data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+				data += "&id2=" + URLEncoder.encode(id2,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
-		public static String pollPlayers(String id) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("checkforplayer","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+		public static String pollPlayers(String id){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("checkforplayer","UTF-8");
+				data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
-		public static String deleteBattle(String id) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("deletebattle","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+		public static String deleteBattle(String id){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("deletebattle","UTF-8");
+				data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
-		public static String startBattle(String id) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("startbattle","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+		public static String startBattle(String id){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("startbattle","UTF-8");
+	            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
-		public static String checkBattle(String id) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("checkbattle","UTF-8");
-            data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+		public static String checkBattle(String id){
+            String data = null;
+            try {
+            	data = "command=" + URLEncoder.encode("checkbattle","UTF-8");
+				data += "&id1=" + URLEncoder.encode(id,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             return executeHttpRequest(data);
 		}
 		public static String sendStats(String ... args) throws UnsupportedEncodingException{

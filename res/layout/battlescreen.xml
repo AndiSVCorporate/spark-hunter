@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_x="1dp"
         android:layout_y="27dp" />
-    A	<ProgressBar
+	<ProgressBar
         android:id="@+id/rightHP"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="82dp"

@@ -45,7 +45,7 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
     		"CREATE TABLE " + PLAYER_TABLE_NAME + COLUMN_DEFINITIONS;
     private static final String DATABASE_NAME = "spark_hunter.db";
     private static final String[] DATABASE_RES = {"spark_hunter", "/raw", "com.sparkhunter.main:"};
-    private static final String DATABASE_PATH = "/data/data/com.sparkhunter.main/databases/";
+    private static final String DATABASE_PATH = "/data/data/com.sparkhunter.main/";
     
     private Context openerContext;
     private SQLiteDatabase database;

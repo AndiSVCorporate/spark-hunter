@@ -3,9 +3,16 @@ package com.sparkhunter.res;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
+import com.sparkhunter.main.R;
 
-public class Spark extends Entity{
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
+import android.util.Log;
+import android.widget.Toast;
+
+public class Spark implements Entity{
 	//stats
 
 	//public? 
@@ -23,18 +30,25 @@ public class Spark extends Entity{
 	private String mEffect;
 	private int mId;
 	private String mType;
-	
 	private String mName;
 	private String mDescription;
-	public int mResId;
+	private int mImageResId;
+	private int mSoundResId;
+	private String mImageResource;
+	private String mSoundResource;
 	
 	private List<Ability> mAblty;
+	
+	//needed to resolve resources
+	private static final String PACKAGE_NAME = "com.sparkhunter.main:";
+	private static final String I_RES_TYPE = "drawable/";
+	private static final String S_RES_TYPE = "raw/";
 	
 	public Spark(String name, int resId)
 	{
 		mName = name;
 		mDescription = "";
-		mResId = resId;
+		mImageResId = resId;
 		mAblty = new ArrayList<Ability>();
 		setStats();
 	}
@@ -70,42 +84,14 @@ public class Spark extends Entity{
 		mAblty.add(new Ability("Herp",20));
 		mAblty.add(new Ability("Derp",50));
 	}
-	//gets
-	public String getName(){
-		return mName;
-	}
-	
-	public int getExp(){
-		return mExp;
-	}
 	
 	public void addExp(int Exp){
-		 getExp();
+		 getExperience();
 		 mExp = mExp + Exp;
 	}
 	
 	public String getDescript(){
 		return mDescription;
-	}
-	
-	public int getHP(){
-		return mMaxHp;
-	}
-	
-	public int getSpeed(){
-		return mSpeed;
-	}
-	
-	public int getAttack(){
-		return mAttack;
-	}
-	
-	public int getDefence(){
-		return mDefense;
-	}
-	
-	public int getLevel(){
-		return mLevel;
 	}
 	
 	public void gainExp(){
@@ -122,16 +108,16 @@ public class Spark extends Entity{
 	public void LevelUp(){
 		getLevel();
 		mLevel = mLevel + 1;
-		getExp();
+		getExperience();
 		mExp = mExp - 100;
-		getHP();
+		getCurHp();
 		mMaxHp = mMaxHp + mHpGain;
 		mCurHp = mMaxHp;
 		getSpeed();
 		mSpeed = mSpeed + mSpeedGain;
 		getAttack();
 		mAttack = mAttack + mAttackGain;
-		getDefence();
+		getDefense();
 		mDefense = mDefense + mDefenseGain;
 		
 		if (mLevel == 16){
@@ -151,7 +137,15 @@ public class Spark extends Entity{
 	@Override
 	public void activate(Context c, int target) {
 		// TODO Auto-generated method stub
-		
+		Log.d("DEBUG", "quack.");
+		Intent itemSoundIntent = new Intent(c, BackgroundMusic.class);
+    	
+    	//KLUDGE-TASTIC, find a better way to package the sound data
+    	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
+    	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
+    	c.startService(itemSoundIntent);
+    	
+    	Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -215,7 +209,7 @@ public class Spark extends Entity{
 	}
 
 	@Override
-	public void setDefenceGain(int newDefenceGain) {
+	public void setDefenseGain(int newDefenceGain) {
 		mDefenseGain = newDefenceGain;
 	}
 
@@ -227,5 +221,122 @@ public class Spark extends Entity{
 	@Override
 	public void setExperience(int newExperience) {
 		mExp = newExperience;
+	}
+	
+	@Override
+	public int getId() {
+		return mId;
+	}
+
+	@Override
+	public String getType() {
+		return mType;
+	}
+
+	@Override
+	public int getLevel() {
+		return mLevel;
+	}
+
+	@Override
+	public int getExperience() {
+		return mExp;
+	}
+
+	@Override
+	public int getMaxHp() {
+		return mMaxHp;
+	}
+
+	@Override
+	public int getCurHp() {
+		return mCurHp;
+	}
+
+	@Override
+	public int getSpeed() {
+		return mSpeed;
+	}
+
+	@Override
+	public int getAttack() {
+		return mAttack;
+	}
+
+	@Override
+	public int getDefense() {
+		return mDefense;
+	}
+
+	@Override
+	public int getHpGain() {
+		return mHpGain;
+	}
+
+	@Override
+	public int getSpeedGain() {
+		return mSpeedGain;
+	}
+
+	@Override
+	public int getAttackGain() {
+		return mAttackGain;
+	}
+
+	@Override
+	public int getDefenseGain() {
+		return mDefenseGain;
+	}
+
+	@Override
+	public String getName() {
+		return mName;
+	}
+
+	@Override
+	public String getEffect() {
+		return mEffect;
+	}
+	
+	@Override
+	public void setImageResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mImageResource = newResource;
+		mImageResId = c.getResources().getIdentifier(newResource, I_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mImageResId == 0)
+			throw new Resources.NotFoundException(mImageResource);
+	}
+
+	@Override
+	public void setSoundResource(String newResource, Context c) throws NotFoundException {
+		//store the name, and resolve into an actual identifier
+		mSoundResource = newResource;
+		mSoundResId = c.getResources().getIdentifier(newResource, S_RES_TYPE, PACKAGE_NAME);
+		
+		//throw a fit if it's not found
+		if(mSoundResId == 0)
+			throw new Resources.NotFoundException(mSoundResource);
+	}
+
+	@Override
+	public String getImageResource() {
+		return mImageResource;
+	}
+
+	@Override
+	public String getSoundResource() {
+		return mSoundResource;
+	}
+
+	@Override
+	public int getImageResId() {
+		return mImageResId;
+	}
+
+	@Override
+	public int getSoundResId() {
+		return mSoundResId;
 	}
 }

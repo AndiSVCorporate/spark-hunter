@@ -32,19 +32,19 @@ public class LevelUp extends Activity {
 		level.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getLevel()));
 		
 		TextView exp = (TextView)findViewById(R.id.exp);
-		exp.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getExp()));
+		exp.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getExperience()));
 		
 		TextView attack = (TextView)findViewById(R.id.attack);
 		attack.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getAttack()));
 		
 		TextView defence = (TextView)findViewById(R.id.defence);
-		defence.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getDefence()));
+		defence.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getDefense()));
 		
 		TextView speed = (TextView)findViewById(R.id.speed);
 		speed.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getSpeed()));
 		
 		TextView HP = (TextView)findViewById(R.id.hp);
-		HP.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getHP()));
+		HP.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getCurHp()));
 		
 		Button b = (Button)findViewById(R.id.button1);
         b.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +57,6 @@ public class LevelUp extends Activity {
 		});
 		
 	ImageView image = (ImageView) findViewById(R.id.IVdisplay);
-	image.setImageResource(GetSpark.chosenSpark.mResId);
+	image.setImageResource(GetSpark.chosenSpark.getImageResId());
 }
 }

@@ -12,12 +12,12 @@ import android.widget.ImageView;
 
 public class EntityAdapter extends BaseAdapter {
 	//essentially reads the inventory and displays it.
-    private Context itemContext;
+    private Context entityContext;
     private Integer[] thumbIds;
     private Inventory dispInventory;
 
     public EntityAdapter(Context c, Inventory inv) {
-        itemContext = c;
+        entityContext = c;
         dispInventory = inv;
         
         Vector<Entity> itemList = dispInventory.getItemList();
@@ -25,7 +25,7 @@ public class EntityAdapter extends BaseAdapter {
 
         //read in the inventory
         for(int i = 0; i < itemList.size(); i++){
-        	thumbIds[i] = ((Item) itemList.elementAt(i)).getResourceID();
+        	thumbIds[i] = itemList.elementAt(i).getImageResId();
         }
     }
 
@@ -33,8 +33,8 @@ public class EntityAdapter extends BaseAdapter {
         return thumbIds.length;
     }
 
-    public Item getItem(int position) {
-        return (Item) dispInventory.getItemList().elementAt(position);
+    public Entity getItem(int position) {
+        return dispInventory.getItemList().elementAt(position);
     }
 
     public long getItemId(int position) {
@@ -45,7 +45,7 @@ public class EntityAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(itemContext);
+            imageView = new ImageView(entityContext);
             imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(10, 10, 10, 10);

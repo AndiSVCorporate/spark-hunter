@@ -1,5 +1,8 @@
 package com.sparkhunter.res;
 
+import java.util.Vector;
+
+import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,21 +28,11 @@ public class Player {
 	private Player() {}
 	
 	public void initializeInventory(Context c) {
-		int targetInventory = 0; //default to items
-		/*
-		the player only has rubber ducks for now, dealwithit.jpg
-		for(int i = 0; i < 5; i++){
-			itemInventory.addEntity(new RubberDuck());
-		}
-		
-		the player only has Dingus(es) for now, dealwithit.jpg
-		for(int i = 0; i < 3; i++){
-			sparkInventory.addEntity(new DummySpark());
-		}*/
+		int quantity = 0;
 		
 		//create a database opener, and use it get a handle on the player database 
 		SQLGameDataOpener openHelper = new SQLGameDataOpener(c);
-		gameData = openHelper.getReadableDatabase();
+		gameData = openHelper.open();
 		
 		//read in the data for the Player's item and spark inventories
 		//be greedy and select all columns
@@ -55,49 +48,23 @@ public class Player {
 		//correct inventory
 		try{
 			for(int i = 0; i < dataQuery.getCount(); i++){
-				//entities to add to the inventory
-				//find a way to use Entity type-casts for this
-				Item itemToAdd = new Item();
-				Spark sparkToAdd = new Spark();
-				Entity entityToAdd = new Item(); //This is such a fucking kludge, to the point of being painful
+				Vector<Entity> entities = new Vector<Entity>();
 				
-				//first two fields are directly tied to which inventory the entity goes in
-				if(dataQuery.getString(1).equals("ITEM")){
-					targetInventory = 0;
-				}
-				else{
-					if(dataQuery.getString(1).equals("SPARK")){
-						targetInventory = 1;
+				//grab the entities mapped by this row and cram 'em somewhere
+				entities = EntityCreationManager.getInstance().createEntity(dataQuery, c);
+				
+				//TODO add all needed getters to Entity interface
+				for(int j = 0; j < entities.size(); j++){
+					Log.d("DEBUG", "entity is " + entities.get(0).getType());
+					
+					if(entities.get(0).getType().equals("ITEM")){
+						itemInventory.addEntity(entities.get(j));
 					}
 					else{
-						//something's waaaaaaaay wrong, throw an exception
-						throw new TypeNotPresentException("Not item or spark.", new Throwable());
+						sparkInventory.addEntity(entities.get(j));
 					}
 				}
 				
-				for(int j = 0; j < dataQuery.getColumnCount(); j++){
-					//data += dataQuery.getString(j);
-					entityToAdd.setId(dataQuery.getInt(i));
-				}
-				
-				//add a quantity field!
-				entityToAdd.setId(dataQuery.getInt(0));
-				entityToAdd.setType(dataQuery.getString(1));
-				entityToAdd.setName(dataQuery.getString(2));
-				entityToAdd.setLevel(dataQuery.getInt(3));
-				entityToAdd.setExperience(dataQuery.getInt(4));
-				entityToAdd.setMaxHp(dataQuery.getInt(5));
-				entityToAdd.setCurHp(dataQuery.getInt(6));
-				entityToAdd.setSpeed(dataQuery.getInt(7));
-				entityToAdd.setAttack(dataQuery.getInt(8));
-				entityToAdd.setDefence(dataQuery.getInt(9));
-				entityToAdd.setHpGain(dataQuery.getInt(10));
-				entityToAdd.setSpeedGain(dataQuery.getInt(11));
-				entityToAdd.setAttackGain(dataQuery.getInt(12));
-				entityToAdd.setDefenceGain(dataQuery.getInt(13));
-				entityToAdd.setEffect(dataQuery.getString(14));
-				
-				Log.d("SQL", "STRING GOES HERE");
 				dataQuery.moveToNext();
 			}
 		}

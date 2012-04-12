@@ -2,6 +2,7 @@ package com.sparkhunter.res;
 
 import java.util.Vector;
 
+import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -39,9 +40,12 @@ public class Player {
 			sparkInventory.addEntity(new DummySpark());
 		}*/
 		
+		//bullshit to test resource resolver
+		Log.d("DEBUG", c.getResources().getResourceName(com.sparkhunter.main.R.drawable.item_circle));
+		
 		//create a database opener, and use it get a handle on the player database 
 		SQLGameDataOpener openHelper = new SQLGameDataOpener(c);
-		gameData = openHelper.getReadableDatabase();
+		gameData = openHelper.open();
 		
 		//read in the data for the Player's item and spark inventories
 		//be greedy and select all columns
@@ -68,6 +72,7 @@ public class Player {
 						itemInventory.addEntity(entities.get(j));
 					}
 					else{
+						//something's off with this logic, everything ends up here!
 						sparkInventory.addEntity(entities.get(j));
 					}
 				}

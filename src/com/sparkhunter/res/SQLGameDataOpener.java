@@ -6,13 +6,14 @@ import java.io.OutputStream;
 import com.sparkhunter.main.R;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
-//algorithms for initializeFromAssets() and checkDatabase() courtesy of
-//ReignDesign's Juan-Manuel Fluxa
+//algorithms for initializeFromAssets(), checkDatabase(),
+//openDatabase(), and close() courtesy of ReignDesign's Juan-Manuel Fluxa
 
 public class SQLGameDataOpener extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
@@ -47,6 +48,7 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
     private static final String DATABASE_PATH = "/data/data/com.sparkhunter.main/databases/";
     
     private Context openerContext;
+    private SQLiteDatabase database;
     
 	public SQLGameDataOpener(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -55,12 +57,16 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
 	
 	public boolean checkDatabase(){
 		//check to see if the database exists in the default path
+		SQLiteDatabase db;
+		
 		try{
-			SQLiteDatabase.openDatabase(DATABASE_PATH+DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+			db = SQLiteDatabase.openDatabase(DATABASE_PATH+DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 		}
 		catch (SQLiteException e){
+			//not gone well
 			return false;
 		}
+		db.close();
 		
 		return true;
 	}
@@ -89,6 +95,26 @@ public class SQLGameDataOpener extends SQLiteOpenHelper {
 			//catch either an IOException or a FileNotFoundException
 			e.printStackTrace();
 		}
+	}
+	
+	public SQLiteDatabase open() throws SQLException{
+		//open the database, or flip out trying
+		if(!checkDatabase())
+			initializeFromAssets();
+		
+		database = SQLiteDatabase.openDatabase(DATABASE_PATH+DATABASE_NAME, 
+				null, SQLiteDatabase.OPEN_READWRITE);
+		return database;
+	}
+	
+	@Override
+	public synchronized void close(){
+		//god help you if you're trying to actually use this stuff multi-threaded
+		if(database != null){
+			database.close();
+		}
+		
+		super.close();
 	}
 
 	@Override

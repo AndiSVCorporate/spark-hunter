@@ -50,12 +50,7 @@ class Handshake {
             if(args != null && args[0] instanceof String) {
                     String id = (String) args[0];
                     String id2 = (String) args[1];
-                    try {
-						return ServerInterface.joinBattle(id,id2);
-					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+                    return ServerInterface.joinBattle(id,id2);
             	}
             return null;
     	}

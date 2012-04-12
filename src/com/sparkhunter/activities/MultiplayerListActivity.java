@@ -19,6 +19,7 @@ import com.sparkhunter.main.R;
 import com.sparkhunter.main.Waiting;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
+import com.sparkhunter.network.MultiplayerTask;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
@@ -29,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -83,7 +85,7 @@ public class MultiplayerListActivity extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-		        (new GetListTask()).execute((Object)null);
+		        (new GetListTask()).execute();
 			}
 		});
         
@@ -191,6 +193,19 @@ public class MultiplayerListActivity extends Activity {
 	       }, 60, SECONDS);
 	}*/
 	
+	
+	
+	private class BattleClickListener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int pos,
+			long id) {
+			//When clicked, try to join the battle
+			(new JoinBattleTask()).execute(((TextView) view).getText().toString(),mID);
+		
+		}
+	
+	}
 	//Copy pasted code, threads were giving issues
 	private void PollHost(){
 		Runnable pollRun = new Runnable(){
@@ -230,106 +245,39 @@ public class MultiplayerListActivity extends Activity {
 	       }, 60, SECONDS);
 	}
 	
-    @SuppressWarnings("unchecked")
-    private class GetListTask extends AsyncTask {
-
-            protected String doInBackground(Object... args) {                       
-                    try {
-						return ServerInterface.getList();
-					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                    return null;
-            }
-
-
-            protected void onPostExecute(Object objResult) {
-                	if(objResult != null && objResult instanceof String) {
-                		String result = (String) objResult;
-                    	String[] responseList;
-                    	StringTokenizer tk = new StringTokenizer(result, ",");
-                    	responseList = new String[tk.countTokens()];
-         
-                    	// let's build the string array
-                    	int i = 0;
-                    	while(tk.hasMoreTokens()) {
-                    		responseList[i++] = tk.nextToken();
-                    	}
-                      	ArrayAdapter<String> newAdapter = new ArrayAdapter<String>(mActivity,android.R.layout.simple_list_item_1, responseList);
-                    	mBattleList.setAdapter(newAdapter);
-                    	mBattleList.setOnItemClickListener(new BattleClickListener());
-                	}
-
-            }
-    }
-    
-
-    	
-    private class BattleClickListener implements OnItemClickListener{
+    private class GetListTask extends MultiplayerTask {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int pos,
-				long id) {
-			//When clicked, try to join the battle
-			(new JoinBattleTask()).execute(((TextView) view).getText(),mID);
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.getList();
+		}
+
+		@Override
+        protected void PostExecute() {
+            ArrayAdapter<String> newAdapter = new ArrayAdapter<String>(mActivity,android.R.layout.simple_list_item_1, mResponses);
+            mBattleList.setAdapter(newAdapter);
+            mBattleList.setOnItemClickListener(new BattleClickListener());
+		}
+
+    }
+    
+    //Use to spawn thread
+    private class AddBattleTask extends MultiplayerTask {
+
+		@Override
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.addBattle(args[0],args[1]);
+		}
+
+		@Override
+		protected void PostExecute(){
 			
 		}
-    	
-    }
-    //Use to spawn thread
-    @SuppressWarnings("unchecked")
-    private class AddBattleTask extends AsyncTask {
-
-            /**
-             * Let's make the http request and return the result as a String.
-             */
-            protected String doInBackground(Object... args) {
-                    if(args != null && args[0] instanceof String) {
-                            String id = (String) args[0];
-                            String desc = (String) args[1];
-                            try {
-								return ServerInterface.addBattle(id,desc);
-							} catch (UnsupportedEncodingException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                    }
-					return null;
-            }
-
-            /**
-             * Display the result as a Toast.
-             */
-            protected void onPostExecute(Object objResult) {
-                    // check to make sure we're dealing with a string
-                    if(objResult != null && objResult instanceof String) {                          
-                            String result = (String) objResult;
-                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                    }
-            }
 
     }
-    private class JoinBattleTask extends AsyncTask {
+    private class JoinBattleTask extends MultiplayerTask {
 
-        /**
-         * Let's make the http request and return the result as a String.
-         */
-        protected String doInBackground(Object... args) {
-                if(args != null && args[0] instanceof String) {
-                        String id = (String) args[0];
-                        String id2 = (String) args[1];
-                        try {
-							return ServerInterface.joinBattle(id,id2);
-						} catch (UnsupportedEncodingException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-                }
-				return null;
-        }
-
-        protected void onPostExecute(Object objResult) {
+        protected void onPostExecute(String objResult) {
                 if(objResult != null && objResult instanceof String) {                          
                         String result = (String) objResult;
                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -345,108 +293,59 @@ public class MultiplayerListActivity extends Activity {
                 }
         }
 
+		@Override
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.joinBattle(args[0],args[1]);
+		}
+
     }
     //Handshaking, Host is looking for players
-    private class PollPlayerTask extends AsyncTask {
+    private class PollPlayerTask extends MultiplayerTask {
 
 		@Override
-		protected Object doInBackground(Object... args) {
-            if(args != null && args[0] instanceof String) {
-                String id = (String) args[0];
-                try {
-					return ServerInterface.pollPlayers(id);
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-            }
-            return null;
-		} 
-
-        protected void onPostExecute(Object objResult) {
-            if(objResult != null && objResult instanceof String) {
-            	String result = (String) objResult;
-                String[] responseList;
-                StringTokenizer tk = new StringTokenizer(result, ",");
-                responseList = new String[tk.countTokens()];
-                int i = 0;
-               
-                while(tk.hasMoreTokens()) {
-                	responseList[i++] = tk.nextToken();
-                }
-                if(i>1){
-                	//player has been found, start the battle and tell him about it
-        			//(new StartBattleTask()).execute(mID);
-                	mIDenemy = responseList[1];
-                	mWait.dismiss();
-                	battleFound = true;
-            	}
-            }
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.pollPlayers(args[0]);
+		}
+		
+        @Override
+        protected void PostExecute(){
+        	if(mResponses.length>1)
+        	{
+           		mIDenemy = mResponses[1];
+           		mWait.dismiss();
+           		battleFound = true;
+        	}
         }
     }
     //Handshaking, Player is waiting for the host to say the battle is ready
-	public class PollHostTask extends AsyncTask {
-
+	public class PollHostTask extends MultiplayerTask {
 		@Override
-		protected Object doInBackground(Object... args) {
-            String id = (String) args[0];
-			try {
-				return ServerInterface.checkBattle(id);
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.checkBattle(args[0]);
 		}
 
-		protected void onPostExecute(Object objResult) {
-            if(objResult != null && objResult instanceof String) {
-            	String result = (String) objResult;
-                String[] responseList;
-                StringTokenizer tk = new StringTokenizer(result, ",");
-                responseList = new String[tk.countTokens()];
-                int i = 0;
-               
-                while(tk.hasMoreTokens()) {
-                	responseList[i++] = tk.nextToken();
-                }
-                //if(if>1){
-                	//mWait.dismiss();
-                	//battleFound = true;
-            	//}
-               Toast.makeText(getApplicationContext(), responseList[0], Toast.LENGTH_SHORT).show();
-                
-            }
+        @Override
+        protected void PostExecute(){
+            //if(mResponses.length>1){
+        		//mWait.dismiss();
+        		//battleFound = true;
+        	//}
+        	Toast.makeText(getApplicationContext(), mResponses[0], Toast.LENGTH_SHORT).show();
         }
 	}
-    private class DeleteBattleTask extends AsyncTask {
+    private class DeleteBattleTask extends MultiplayerTask {
 		@Override
-		protected Object doInBackground(Object... args) {
-            if(args != null && args[0] instanceof String) {
-                String id = (String) args[0];
-                try {
-					return ServerInterface.deleteBattle(id);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            return null;
+		protected String ServerCommand(String[] args){
+				return ServerInterface.deleteBattle(args[0]);
 		}
     }
+    
     //Handshaking, Host is telling player that battle is starting
-    private class StartBattleTask extends AsyncTask {
+    
+    private class StartBattleTask extends MultiplayerTask {
 		@Override
-		protected Object doInBackground(Object... args) {
-            if(args != null && args[0] instanceof String) {
-                String id = (String) args[0];
-                try {
-					return ServerInterface.startBattle(id);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            return null;
+		protected String ServerCommand(String[] args) {
+			return ServerInterface.startBattle(args[0]);
 		}
     }
 }

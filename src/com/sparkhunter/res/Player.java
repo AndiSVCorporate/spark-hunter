@@ -68,7 +68,9 @@ public class Player {
 				
 				//TODO add all needed getters to Entity interface
 				for(int j = 0; j < entities.size(); j++){
-					if(entities.get(0).getType() == "ITEM"){
+					Log.d("DEBUG", "entity is " + entities.get(0).getType());
+					
+					if(entities.get(0).getType().equals("ITEM")){
 						itemInventory.addEntity(entities.get(j));
 					}
 					else{

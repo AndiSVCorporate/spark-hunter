@@ -44,8 +44,8 @@
             	  android:theme="@android:style/Theme.Dialog"></activity>
 
         <activity android:name=".NetworkBattleActivity"></activity>
-        <activity android:name="ItemInventoryActivity"></activity>
-        <activity android:name="SparkInventoryActivity"></activity>
+        <activity android:name="com.sparkhunter.activities.ItemInventoryActivity"></activity>
+        <activity android:name="com.sparkhunter.activities.SparkInventoryActivity"></activity>
         <activity android:name="com.sparkhunter.activities.MultiplayerListActivity"></activity>
     </application>
 </manifest>

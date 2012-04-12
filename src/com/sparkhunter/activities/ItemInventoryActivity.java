@@ -1,5 +1,8 @@
-package com.sparkhunter.main;
+package com.sparkhunter.activities;
 
+import com.sparkhunter.main.R;
+import com.sparkhunter.main.R.id;
+import com.sparkhunter.main.R.layout;
 import com.sparkhunter.res.EntityAdapter;
 import com.sparkhunter.res.Inventory;
 import com.sparkhunter.res.Player;

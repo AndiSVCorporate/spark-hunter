@@ -3,6 +3,7 @@ package com.sparkhunter.res;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sparkhunter.activities.Info;
 import com.sparkhunter.main.R;
 
 import android.content.Context;
@@ -53,6 +54,23 @@ public class Spark implements Entity{
 		setStats();
 	}
 	
+	//TODO: hardcoded lookup by name until sql works fully
+	public Spark(String name)
+	{
+		mName = name;
+		mDescription = "";
+		if(mName.equals("Dingus")){
+			mImageResId = R.drawable.duckedit;
+		}
+		else if(mName.equals("Biggy")){
+			mImageResId = R.drawable.androidmarker;
+		}
+		else if(mName.equals("SquarePants")){
+			mImageResId = R.drawable.item_square;
+		}
+		mAblty = new ArrayList<Ability>();
+		setStats();
+	}
 	public Spark() {
 		// TODO Auto-generated constructor stub
 	}

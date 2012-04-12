@@ -47,7 +47,8 @@ import android.widget.Toast;
 public class ServerInterface {
 
         // Declared Constants
-        public static final String SERVER_URL = "http://www.sparkhunter.hostzi.com/battle_list.php";
+        public static final String SERVER_URL_LIST = "http://www.sparkhunter.hostzi.com/battle_list.php";
+        public static final String SERVER_URL_BATTLE = "http://www.sparkhunter.hostzi.com/battle.php";
 
         public static String getList(){
                 String data = null;
@@ -57,7 +58,7 @@ public class ServerInterface {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                return executeHttpRequest(data);
+                return executeHttpRequest(data, SERVER_URL_LIST);
         }
 
 		public static String addBattle(String id, String desc){
@@ -69,7 +70,7 @@ public class ServerInterface {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
 		public static String joinBattle(String id, String id2){
             String data = null;
@@ -80,7 +81,7 @@ public class ServerInterface {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
 		public static String pollPlayers(String id){
             String data = null;
@@ -91,7 +92,7 @@ public class ServerInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
 		public static String deleteBattle(String id){
             String data = null;
@@ -101,7 +102,7 @@ public class ServerInterface {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
 		public static String startBattle(String id){
             String data = null;
@@ -112,7 +113,7 @@ public class ServerInterface {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
 		public static String checkBattle(String id){
             String data = null;
@@ -123,21 +124,45 @@ public class ServerInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            return executeHttpRequest(data);
+            return executeHttpRequest(data, SERVER_URL_LIST);
 		}
-		public static String sendStats(String ... args) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("sendstats","UTF-8");
-            data += "&id1=" + URLEncoder.encode(args[0],"UTF-8");
-            data += "&name=" + URLEncoder.encode(args[1],"UTF-8");
-            data += "&sparkid=" + URLEncoder.encode(args[2],"UTF-8");
-            return executeHttpRequest(data);
+		public static String sendStats(String ... args){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("setstats","UTF-8");
+	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
+	            data += "&spark=" + URLEncoder.encode(args[1],"UTF-8");
+	            data += "&hp=" + URLEncoder.encode(args[2],"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            return executeHttpRequest(data, SERVER_URL_BATTLE);
 		}
-		public static String getStats(String ... args) throws UnsupportedEncodingException{
-            String data = "command=" + URLEncoder.encode("getstats","UTF-8");
-            data += "&id1=" + URLEncoder.encode(args[0],"UTF-8");
-            data += "&name=" + URLEncoder.encode(args[1],"UTF-8");
-            data += "&sparkid=" + URLEncoder.encode(args[2],"UTF-8");
-            return executeHttpRequest(data);
+		public static String getStats(String ... args){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("getstats","UTF-8");
+	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            return executeHttpRequest(data, SERVER_URL_BATTLE);
+		}
+		public static String deleteMove(String ... args){
+            String data = null;
+			try {
+				data = "command=" + URLEncoder.encode("deleteturn","UTF-8");
+	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            return executeHttpRequest(data, SERVER_URL_BATTLE);
 		}
         /**
          * Helper function used to communicate with the server by sending/receiving
@@ -145,10 +170,10 @@ public class ServerInterface {
          * @param data String representing the command and (possibly) arguments.
          * @return String response from the server.
          */
-        private static String executeHttpRequest(String data) {
+        private static String executeHttpRequest(String data, String u) {
                 String result = "";
                 try {
-                        URL url = new URL(SERVER_URL);
+                        URL url = new URL(u);
                         URLConnection connection = url.openConnection();
                         
                         /*

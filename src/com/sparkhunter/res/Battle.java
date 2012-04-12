@@ -1,5 +1,7 @@
 package com.sparkhunter.res;
 
+import com.sparkhunter.main.R;
+
 
 
 public class Battle {
@@ -13,7 +15,12 @@ public class Battle {
 		mVictory = false;
 		mLose = false;
 		mYourSpark = your;
-		mHisSpark = his;
+		if(mHisSpark == null){
+			mHisSpark = new Spark("Placeholder",R.drawable.item_diamond);
+		}
+		else{
+			mHisSpark = his;
+		}
 		
 	}
 	public String attack(String sName, Spark attacker, Spark defender, boolean counter)

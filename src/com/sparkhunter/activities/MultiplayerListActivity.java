@@ -86,6 +86,7 @@ public class MultiplayerListActivity extends Activity {
 			
 			public void onClick(View v) {
 		        (new GetListTask()).execute();
+		      
 			}
 		});
         
@@ -94,7 +95,7 @@ public class MultiplayerListActivity extends Activity {
         }
         
 	}
-	
+
 	
 	private void StartBattle(){
 		//get rid of the battle on the list
@@ -108,6 +109,7 @@ public class MultiplayerListActivity extends Activity {
 		battleFound = false;
 		
 		Intent i = new Intent(mActivity, BattleActivity.class);
+		i.putExtra("MP", true);
 		startActivity(i);
 	}
 	
@@ -128,7 +130,6 @@ public class MultiplayerListActivity extends Activity {
 			(new DeleteBattleTask()).execute(mID);
 			if(battleFound){
 				StartBattle();
-				
 			}
 		}
 		
@@ -181,7 +182,6 @@ public class MultiplayerListActivity extends Activity {
 		}
 		
 	}
-	
 	//
 	private void Poll(AsyncTask task, String id){
 		Runnable pollRun = new PollRunImpl(task,id);
@@ -201,7 +201,8 @@ public class MultiplayerListActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int pos,
 			long id) {
 			//When clicked, try to join the battle
-			(new JoinBattleTask()).execute(((TextView) view).getText().toString(),mID);
+			mIDenemy = ((TextView) view).getText().toString();
+			(new JoinBattleTask()).execute(mIDenemy,mID);
 		
 		}
 	
@@ -282,7 +283,7 @@ public class MultiplayerListActivity extends Activity {
                         String result = (String) objResult;
                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                         //Get the hosts ID
-                        mIDenemy=result;
+                        //mIDenemy=result;
                         //And poll him to make sure he is ready
         				//PollHost();
         				//mWait = new Waiting(mActivity);

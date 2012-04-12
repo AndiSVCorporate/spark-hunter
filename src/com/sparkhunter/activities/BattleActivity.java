@@ -11,6 +11,7 @@ import com.sparkhunter.main.R.layout;
 import com.sparkhunter.main.R.raw;
 import com.sparkhunter.mapping.BattleHistoryView;
 import com.sparkhunter.mapping.HistoryWriter;
+import com.sparkhunter.network.NetworkBattle;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
@@ -39,7 +40,7 @@ import android.location.LocationListener;
 
 
 public class BattleActivity extends Activity{
-	private Activity mActivity;
+	private BattleActivity mActivity;
 	private Battle mBattle;
 	ProgressBar mLeftBar;
     ProgressBar mRightBar;
@@ -54,6 +55,8 @@ public class BattleActivity extends Activity{
     HistoryWriter hw;
  	@Override
 	public void onCreate(Bundle savedInstanceState){
+ 		
+ 		
 		 hw = new HistoryWriter(this);
 		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     	mActivity = this;
@@ -71,26 +74,15 @@ public class BattleActivity extends Activity{
         bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
         bgm.start();
         
-        mBattle = new Battle(GetSpark.chosenSpark,new Spark("Poke-man",R.drawable.item_diamond));
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null)
+        {
+        	if(extras.getBoolean("MP")==true)
+        		mBattle = new NetworkBattle(mActivity,GetSpark.chosenSpark);
+        }
+        else
+        	mBattle = new Battle(GetSpark.chosenSpark,new Spark("Poke-man",R.drawable.item_diamond));
         
-        //setup names
-        TextView temp = (TextView) findViewById(R.id.leftName);
-        temp.setText(mBattle.mYourSpark.getName());
-        temp = (TextView) findViewById(R.id.leftlevel);
-        temp.setText(Integer.toString(mBattle.mYourSpark.getLevel()));
-        temp = (TextView) findViewById(R.id.rightName);
-        temp.setText(mBattle.mHisSpark.getName());
-        temp = (TextView) findViewById(R.id.rightlevel);
-        temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
-        
-        mLeftBar.setMax(GetSpark.chosenSpark.getMaxHp());
-        mRightBar.setMax(100);
-        
-        //setup images
-        ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
-        temp2.setImageResource(mBattle.mYourSpark.getImageResId());
-        temp2 = (ImageView) findViewById(R.id.rightImage);
-        temp2.setImageResource(mBattle.mHisSpark.getImageResId());
         
         //setup log
         mBattleLog = (TextView) findViewById(R.id.battleLog);
@@ -196,6 +188,24 @@ public class BattleActivity extends Activity{
 		   return;
 	}
 	public void refresh(){
+        //setup names
+        TextView temp = (TextView) findViewById(R.id.leftName);
+        temp.setText(mBattle.mYourSpark.getName());
+        temp = (TextView) findViewById(R.id.leftlevel);
+        temp.setText(Integer.toString(mBattle.mYourSpark.getLevel()));
+        temp = (TextView) findViewById(R.id.rightName);
+        temp.setText(mBattle.mHisSpark.getName());
+        temp = (TextView) findViewById(R.id.rightlevel);
+        temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
+        
+        mLeftBar.setMax(GetSpark.chosenSpark.getMaxHp());
+        mRightBar.setMax(100);
+        
+        ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
+        temp2.setImageResource(mBattle.mYourSpark.getImageResId());
+        temp2 = (ImageView) findViewById(R.id.rightImage);
+        temp2.setImageResource(mBattle.mHisSpark.getImageResId());
+        
 		mLeftBar.setProgress(mBattle.mYourSpark.mCurHp);
 		mRightBar.setProgress(mBattle.mHisSpark.mCurHp);
 		if(mBattle.mHisSpark.mCurHp<=0){
@@ -272,35 +282,4 @@ public class BattleActivity extends Activity{
 
 	}
 	
-	//these shall go somewhere else soon
-    private class SendStatsTask extends AsyncTask {
-		@Override
-		protected Object doInBackground(Object... args) {
-            if(args != null && args[0] instanceof String) {
-                String id = (String) args[0];
-                try {
-					return ServerInterface.sendStats(id);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            return null;
-		}
-    }
-    private class GetStatsTask extends AsyncTask {
-		@Override
-		protected Object doInBackground(Object... args) {
-            if(args != null && args[0] instanceof String) {
-                String id = (String) args[0];
-                try {
-					return ServerInterface.getStats();
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-            return null;
-		}
-    }
 }

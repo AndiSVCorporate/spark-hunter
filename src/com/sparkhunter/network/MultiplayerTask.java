@@ -22,7 +22,8 @@ public class MultiplayerTask extends AsyncTask<String,String,String>{
              while(tk.hasMoreTokens()) 
             	 mResponses[i++] = tk.nextToken();
          
-             PostExecute();
+             if(mResponses.length>0)
+            	 PostExecute();
 	 }
 	
 	protected void PostExecute(){

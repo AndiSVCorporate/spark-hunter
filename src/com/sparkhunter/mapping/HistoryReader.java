@@ -14,6 +14,7 @@ import java.util.List;
 import com.sparkhunter.main.BattleField;
 
 import android.content.Context;
+import android.widget.Toast;
 
 /**
  * A class that reads battle Locations from a file to recreate on a map.
@@ -54,13 +55,15 @@ public class HistoryReader {
 		
 		//Reading data from file and creating the list
 		String str = br.readLine();
+		
 		while (str != null) {
 			//using ":" as a delimiter to separate name, latitude and longitude
 			String[] elements = str.split(":");
 			String name = elements[0];
 			double latitude = Double.parseDouble(elements[1].trim());
 			double longitude = Double.parseDouble(elements[2].trim());
-			bf.add(new BattleField(name, latitude, longitude));
+			String city = elements[3];
+			bf.add(new BattleField(name, latitude, longitude,city));
 			str = br.readLine();
 		}
 		fis.close();

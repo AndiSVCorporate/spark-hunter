@@ -46,7 +46,7 @@ public class HistoryWriter {
 	 */
 	public void write(BattleField bf) throws FileNotFoundException, IOException {
 		fos = battleContext.openFileOutput(FILE_NAME, Context.MODE_APPEND);
-		String battledetail = bf.getBattle_Name()+":"+bf.getBattle_Lat()+":"+bf.getBattle_Lon()+"\n";
+		String battledetail = bf.getBattle_Name()+":"+bf.getBattle_Lat()+":"+bf.getBattle_Lon()+":"+bf.getCity()+"\n";
 		fos.write(battledetail.getBytes());
 		fos.close();
 	}

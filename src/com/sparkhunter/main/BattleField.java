@@ -10,6 +10,7 @@ public class BattleField {
 	String battle_Name;
 	double battle_Lat;
 	double battle_Lon;
+	String battle_city;
 
 	/**
 	 * A Constructor to initialize the BattleField objects.
@@ -21,10 +22,11 @@ public class BattleField {
 	 * @param lon
 	 *            The Longitude of the battle.
 	 */
-	public BattleField(String battle, double lat, double lon) {
+	public BattleField(String battle, double lat, double lon, String city) {
 		battle_Name = battle;
 		battle_Lon = lon;
 		battle_Lat = lat;
+		battle_city=city;
 	}
 
 	/**
@@ -52,6 +54,10 @@ public class BattleField {
 	 */
 	public double getBattle_Lon() {
 		return battle_Lon;
+	}
+	
+	public String getCity(){
+		return battle_city;
 	}
 
 }

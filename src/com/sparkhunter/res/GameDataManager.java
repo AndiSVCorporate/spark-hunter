@@ -29,28 +29,40 @@ public class GameDataManager {
 	
 	//split off some helper methods from this
 	public Inventory getAllPlayerItems(){
-		Cursor query = generateQuery(PLAYER_TABLE, "TYPE == ITEM");
+		Cursor query = generateQuery(PLAYER_TABLE, "type == 'ITEM'");
 		
 		return readInventory(query);
 	}
 	
 	public Inventory getAllPlayerSparks(){
-		Cursor query = generateQuery(PLAYER_TABLE, "TYPE == SPARK");
+		Cursor query = generateQuery(PLAYER_TABLE, "type == 'SPARK'");
 		
 		return readInventory(query);
+	}
+	
+	public void close(){
+		database.close();
+		databaseOpener.close();
 	}
 	
 	private Cursor generateQuery(String table, String where){
 		//read in the data for the Player's item and spark inventories
 		//be greedy and select all columns
 		//add a WHERE for this
-		Cursor databaseQuery = database.query(table, null, where, null, null, null, null);
+		Cursor databaseQuery = null;
+		
+		try{
+			databaseQuery = database.query(table, null, where, null, null, null, null);
 				
-		Log.d("SQL", "Game data cursor is " + Integer.toString(databaseQuery.getCount()) + " by "
+			Log.d("SQL", "Game data cursor is " + Integer.toString(databaseQuery.getCount()) + " by "
 				+ Integer.toString(databaseQuery.getColumnCount()));
 				
-		//probably not needed
-		databaseQuery.moveToFirst();
+			//probably not needed
+			databaseQuery.moveToFirst();
+		}
+		catch(SQLiteException e){
+			Log.d("DEBUG", "ERROR: SQL query failed.\n" + e.getMessage());
+		}
 		
 		return databaseQuery;
 	}

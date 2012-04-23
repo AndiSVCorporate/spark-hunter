@@ -24,6 +24,8 @@ public class Player {
 		
 		itemInventory = manager.getAllPlayerItems();
 		sparkInventory = manager.getAllPlayerSparks();
+		
+		manager.close();
 	}
 	
 	public static Player getInstance() {

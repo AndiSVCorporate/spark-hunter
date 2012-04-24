@@ -44,22 +44,26 @@ public class GameDataManager {
 	public void saveInventory(Inventory inv){
 		ContentValues entityValues = new ContentValues();
 		Vector<Entity> entities = inv.getEntityList();
+		Vector<Entity> mutableEntities = (Vector<Entity>) entities.clone();
 		Entity entity; //entity used in building a given insert
 		int quantity = 1;
 		boolean insert = false;
+		Integer currentEID;
 		
 		//drop the current player data table
 		database.delete(PLAYER_TABLE, null, null);
 		
 		//iterate through the inventory, collapsing duplicate
 		//entries into singular inserts
-		//this is going to assume the elements are already ordered
-		//if not, it's going to break in some major way
-		//DO NOT TEMPT FATE.
+		//iterate over the entities list, but scan the mutable list to see if 
+		//the given entity is in there
 		for(int i = 0; i < entities.size(); i++){
 			entity = entities.get(i);
 			
-		
+			//scan mutable list to see what's what
+			for(int j = 0; j < mutableEntities.size(); j++){
+				if(mutableEntities.get(j).getId())
+			}
 		}
 		
 		

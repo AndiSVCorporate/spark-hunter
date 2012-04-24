@@ -357,4 +357,25 @@ public class Spark implements Entity{
 	public int getSoundResId() {
 		return mSoundResId;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		boolean retValue = false;
+		
+		//verify it's actually an Item
+		if(o.getClass() != Spark.class){
+			retValue = false;
+		}
+		else{
+			//IDs are unique to each spark
+			if(((Spark)o).getId() == this.getId()){
+				retValue = true;
+			}
+			else{
+				retValue = false;
+			}
+		}
+		
+		return retValue;
+	}
 }

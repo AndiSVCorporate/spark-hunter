@@ -20,7 +20,7 @@ public class EntityAdapter extends BaseAdapter {
         entityContext = c;
         dispInventory = inv;
         
-        Vector<Entity> itemList = dispInventory.getItemList();
+        Vector<Entity> itemList = dispInventory.getEntityList();
         thumbIds = new Integer[itemList.size()];
 
         //read in the inventory
@@ -34,7 +34,7 @@ public class EntityAdapter extends BaseAdapter {
     }
 
     public Entity getItem(int position) {
-        return dispInventory.getItemList().elementAt(position);
+        return dispInventory.getEntityList().elementAt(position);
     }
 
     public long getItemId(int position) {

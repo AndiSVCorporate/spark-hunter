@@ -2,6 +2,7 @@ package com.sparkhunter.res;
 
 import java.util.Vector;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,6 +39,31 @@ public class GameDataManager {
 		Cursor query = generateQuery(PLAYER_TABLE, "type == 'SPARK'");
 		
 		return readInventory(query);
+	}
+	
+	public void saveInventory(Inventory inv){
+		ContentValues entityValues = new ContentValues();
+		Vector<Entity> entities = inv.getEntityList();
+		Entity entity; //entity used in building a given insert
+		int quantity = 1;
+		boolean insert = false;
+		
+		//drop the current player data table
+		database.delete(PLAYER_TABLE, null, null);
+		
+		//iterate through the inventory, collapsing duplicate
+		//entries into singular inserts
+		//this is going to assume the elements are already ordered
+		//if not, it's going to break in some major way
+		//DO NOT TEMPT FATE.
+		for(int i = 0; i < entities.size(); i++){
+			entity = entities.get(i);
+			
+		
+		}
+		
+		
+		
 	}
 	
 	public void close(){

@@ -31,7 +31,7 @@ public class SparkInventoryActivity extends Activity {
 		    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		    	
 		    	//do something with the spark
-		    	sparks.getItemList().elementAt(position).activate(SparkInventoryActivity.this, 0);
+		    	sparks.getEntityList().elementAt(position).activate(SparkInventoryActivity.this, 0);
 		    }
 		});
     }

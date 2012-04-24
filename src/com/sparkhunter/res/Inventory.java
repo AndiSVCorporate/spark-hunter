@@ -9,7 +9,7 @@ public class Inventory {
 	public Inventory(){
 	}
 	
-	public Vector<Entity> getItemList(){
+	public Vector<Entity> getEntityList(){
 		return inventoryEntities;
 	}
 	

@@ -28,6 +28,11 @@ public class Player {
 		manager.close();
 	}
 	
+	public void saveInventory(Context c){
+		GameDataManager manager = new GameDataManager(c);
+		
+	}
+	
 	public static Player getInstance() {
 		return singletonPlayer;
 	}

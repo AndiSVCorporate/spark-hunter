@@ -1,23 +1,31 @@
 package com.sparkhunter.res;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.Log;
 
 //because I'm catastrophically sick of fucking with the Service class
-public class AudioManager {
-	private static AudioManager instance = new AudioManager();
+public class GameAudioManager {
+	private static GameAudioManager instance = new GameAudioManager();
 	private MediaPlayer bgm = null;
-	private SoundPool effect = null;
+	private SoundPool effects = null;
+	private int bgmResource;
+	private static final int MAX_SOUND_EFFECTS = 100;
 	
-	private AudioManager(){}
+	private GameAudioManager(){
+		//create the sound effects pool
+		effects = new SoundPool(MAX_SOUND_EFFECTS, AudioManager.STREAM_MUSIC, 0);
+	}
 	
-	public static AudioManager getInstance(){
+	public static GameAudioManager getInstance(){
 		return instance;
 	}
 	
-	public void setBackground(Context c, int resId) throws IllegalStateException{
+	public void setBackground(Context c, int resId){
+		bgmResource = resId;
+		
 		//check if bgm exists at the moment
 		if(bgm == null){
 			//start a MediaPlayer with the specified music
@@ -46,6 +54,31 @@ public class AudioManager {
 				Log.d("DEBUG", "Error: Failed to change bgm.\n" + e.getMessage());
 			}
 		}
+	}
+	
+	public void pauseBackground(){
+		//pauses background music
+		try{
+			bgm.pause();
+		}
+		catch(IllegalStateException e){
+			Log.d("DEBUG", "Error: Unable to pause bgm.");
+		}
+	}
+	
+	public void playBackground(){
+		//starts/resumes background music
+		try{
+			bgm.start();
+		}
+		catch(IllegalStateException e){
+			Log.d("DEBUG", "Error: unable to start/resume bgm.");
+		}
+	}
+	
+	public int getBgmResource(){
+		//return resId of music currently playing
+		return bgmResource;
 	}
 	
 	private MediaPlayer createPlayer(Context c, int resId){

@@ -22,7 +22,7 @@ import com.sparkhunter.mapping.Map;
 import com.sparkhunter.network.PHPTask;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.AdventureService;
-import com.sparkhunter.res.AudioManager;
+import com.sparkhunter.res.GameAudioManager;
 import com.sparkhunter.res.BackgroundMusic;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
@@ -87,7 +87,7 @@ public class SparkHunterTitleScreen extends Activity {
         //bgm = MediaPlayer.create(SparkHunterTitleScreen.this, R.raw.mlp_pinkiepie);
         //bgm.start();
         
-        AudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_pinkiepie);
+        GameAudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_pinkiepie);
         menuSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
         
         b = (Button)findViewById(R.id.button1);
@@ -155,6 +155,17 @@ public class SparkHunterTitleScreen extends Activity {
 		});
     
       }
+    
+    //called when this activity is navigated back to
+    public void onRestart(){
+    	super.onResume();
+    	
+    	GameAudioManager am = GameAudioManager.getInstance();
+    	
+    	//start the background music again if it changed
+    	if(am.getBgmResource() != R.raw.mlp_pinkiepie)
+    		am.setBackground(getApplicationContext(), R.raw.mlp_pinkiepie);
+    }
     private class MeListener implements RequestListener {
 
  		@Override

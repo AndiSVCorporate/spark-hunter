@@ -3,6 +3,7 @@ package com.sparkhunter.res;
 import com.sparkhunter.main.R;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import android.media.MediaPlayer;
@@ -10,7 +11,9 @@ import android.media.MediaPlayer;
 public class BackgroundMusic extends Service implements MediaPlayer.OnPreparedListener {
 	//TODO figure out how to make this asynchronous (but hopefully not multithreaded)
 	//prepareAsync() with MediaPlayer ought to do the trick
-	public MediaPlayer bgMusic;
+	
+	//This is only for background music, a sound pool manager will be used for sound effects
+	private MediaPlayer bgMusic;
 
 	public BackgroundMusic() {
 		super();
@@ -24,14 +27,15 @@ public class BackgroundMusic extends Service implements MediaPlayer.OnPreparedLi
 	
 	@Override
 	public void onCreate() {
-		Log.d("DEBUG", "onCreate called");
+		Log.d("DEBUG", "BackgroundMusic onCreate() called");
 	}
 	
 	@Override
 	public int onStartCommand(Intent bgmSelector, int flags, int startID) {
-		//magic things go here
-		//yank selection out of intent, then prep a synchronous mediaplayer
-		//needs to be asynchronous, in a big way...
+		//state logic needs to go here!
+		//check if a mediaplayer is actually playing
+		//stop if so, and play new thing
+		//stuff should loop at end!
 		int songId = bgmSelector.getIntExtra(Integer.toString(R.string.music_id), 0);
 		
 		if(songId == R.raw.squee)
@@ -45,8 +49,6 @@ public class BackgroundMusic extends Service implements MediaPlayer.OnPreparedLi
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

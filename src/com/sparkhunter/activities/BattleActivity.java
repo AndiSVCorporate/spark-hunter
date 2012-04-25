@@ -14,6 +14,7 @@ import com.sparkhunter.mapping.HistoryWriter;
 import com.sparkhunter.network.NetworkBattle;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
+import com.sparkhunter.res.AudioManager;
 import com.sparkhunter.res.Battle;
 import com.sparkhunter.res.Spark;
 
@@ -71,8 +72,10 @@ public class BattleActivity extends Activity{
         //sparklocman.removeUpdates(sparkloclistener);
         
         //BATTLE MOOSIC
-        bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
-        bgm.start();
+        //bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
+        //bgm.start();
+        
+        AudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_rainbowdash);
         
         Bundle extras = getIntent().getExtras();
         if(extras!=null)

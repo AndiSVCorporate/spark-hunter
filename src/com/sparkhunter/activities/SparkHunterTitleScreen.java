@@ -22,6 +22,7 @@ import com.sparkhunter.mapping.Map;
 import com.sparkhunter.network.PHPTask;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.AdventureService;
+import com.sparkhunter.res.AudioManager;
 import com.sparkhunter.res.BackgroundMusic;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
@@ -83,8 +84,10 @@ public class SparkHunterTitleScreen extends Activity {
     	//menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
     	//menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.mlp_pinkiepie);
     	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-        bgm = MediaPlayer.create(SparkHunterTitleScreen.this, R.raw.mlp_pinkiepie);
-        bgm.start();
+        //bgm = MediaPlayer.create(SparkHunterTitleScreen.this, R.raw.mlp_pinkiepie);
+        //bgm.start();
+        
+        AudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_pinkiepie);
         menuSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
         
         b = (Button)findViewById(R.id.button1);
@@ -96,10 +99,10 @@ public class SparkHunterTitleScreen extends Activity {
 				}
 				else {
 					Intent i = new Intent(SparkHunterTitleScreen.this, Multiplayer.class);
-					bgm.stop();
+					//bgm.stop();
 			    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 			    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-			    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
+			    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
 					
 					startActivity(i);
 				}
@@ -113,11 +116,11 @@ public class SparkHunterTitleScreen extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(SparkHunterTitleScreen.this, InventoryScreen.class);
 				
-				bgm.stop();
+				//bgm.stop();
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
-		    	getApplicationContext();
+		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
+		    	//getApplicationContext();
 				startActivity(i);
 			}
 		});
@@ -128,10 +131,10 @@ public class SparkHunterTitleScreen extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(SparkHunterTitleScreen.this, Map.class);
 				
-				bgm.stop();
+				//bgm.stop();
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
+		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
 				
 				startActivity(i);
 			}
@@ -142,10 +145,10 @@ public class SparkHunterTitleScreen extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(SparkHunterTitleScreen.this, GetSpark.class);
 				
-				bgm.stop();
+				//bgm.stop();
 				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
 		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	SparkHunterTitleScreen.this.startService(menuSoundIntent);
+		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
 		    	//mActivity.finish();
 				startActivity(i);
 			}

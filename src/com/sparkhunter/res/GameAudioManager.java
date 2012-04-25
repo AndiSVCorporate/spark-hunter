@@ -1,5 +1,10 @@
 package com.sparkhunter.res;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.sparkhunter.main.R;
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -10,18 +15,18 @@ import android.util.Log;
 public class GameAudioManager {
 	private static GameAudioManager instance = new GameAudioManager();
 	private MediaPlayer bgm = null;
-	private SoundPool effects = null;
+	private SoundPool effects = new SoundPool(MAX_SOUND_EFFECTS, AudioManager.STREAM_MUSIC, 0);
 	private int bgmResource;
-	private static final int MAX_SOUND_EFFECTS = 100;
+	private Map<String, Integer> effectsMap = new HashMap<String, Integer>(); //maps effect names to sound IDs
+	private static final int MAX_SOUND_EFFECTS = 100; //completely arbitrary
 	
-	private GameAudioManager(){
-		//create the sound effects pool
-		effects = new SoundPool(MAX_SOUND_EFFECTS, AudioManager.STREAM_MUSIC, 0);
-	}
+	private GameAudioManager(){}
 	
 	public static GameAudioManager getInstance(){
 		return instance;
 	}
+	
+	//Background music related methods
 	
 	public void setBackground(Context c, int resId){
 		bgmResource = resId;
@@ -80,6 +85,38 @@ public class GameAudioManager {
 		//return resId of music currently playing
 		return bgmResource;
 	}
+	
+	//Sound effect related methods
+	
+	public void registerEffect(Context c, String name, int resId){
+		//register a new sound effect and store the name and sound ID (which is not the resId!)
+		int soundId = effects.load(c, resId, 1);
+		
+		effectsMap.put(name, new Integer(soundId));
+	}
+	
+	
+	public void registerDefaultEffects(Context c){
+		//registers default sound effects, should be called at least once!
+		registerEffect(c, "click", R.raw.click);
+		registerEffect(c, "quack", R.raw.squee);
+	}
+	
+	public void playEffect(String name){
+		int soundId;
+		
+		try{
+			soundId = effectsMap.get(name).intValue();
+			
+			//play specified effect at full volume and normal speed once
+			effects.play(soundId, (float)1.0, (float)1.0, 1, 0, (float)1.0);
+		}
+		catch(NullPointerException e){
+			Log.d("DEBUG", "Error: " + name + " does not map to a valid sound effect.");
+		}
+	}
+	
+	//Internal helper methods
 	
 	private MediaPlayer createPlayer(Context c, int resId){
 		Log.d("DEBUG", "Creating new MediaPlayer.");

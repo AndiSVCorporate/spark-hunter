@@ -59,14 +59,19 @@ public class SparkHunterTitleScreen extends Activity {
         //Initial player state settings go here
         Player.getInstance().initializeInventory(SparkHunterTitleScreen.this);
         
+        //Load default sound effects
+        GameAudioManager.getInstance().registerDefaultEffects(getApplicationContext());
         
         FacebookUtils.getMe(new MeListener());
         
+        //if all the button instances are named 'b', how the hell does this actually work?
         
         Button b = (Button)findViewById(R.id.Battle);
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				if(GetSpark.chosenSpark==null){
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
@@ -79,31 +84,19 @@ public class SparkHunterTitleScreen extends Activity {
         });
         
         
-        b = (Button)findViewById(R.id.button1);
-        //menu music starts
-    	//menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-    	//menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.mlp_pinkiepie);
-    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-        //bgm = MediaPlayer.create(SparkHunterTitleScreen.this, R.raw.mlp_pinkiepie);
-        //bgm.start();
-        
         GameAudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_pinkiepie);
-        menuSoundIntent = new Intent(getApplicationContext(), BackgroundMusic.class);
         
         b = (Button)findViewById(R.id.button1);
         b.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				if(GetSpark.chosenSpark==null){
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
 				else {
 					Intent i = new Intent(SparkHunterTitleScreen.this, Multiplayer.class);
-					//bgm.stop();
-			    	menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-			    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-			    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-					
 					startActivity(i);
 				}
 			}
@@ -114,13 +107,9 @@ public class SparkHunterTitleScreen extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, InventoryScreen.class);
+				GameAudioManager.getInstance().playEffect("click");
 				
-				//bgm.stop();
-				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-		    	//getApplicationContext();
+				Intent i = new Intent(SparkHunterTitleScreen.this, InventoryScreen.class);
 				startActivity(i);
 			}
 		});
@@ -129,34 +118,27 @@ public class SparkHunterTitleScreen extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				Intent i = new Intent(SparkHunterTitleScreen.this, Map.class);
-				
-				//bgm.stop();
-				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-				
 				startActivity(i);
 			}
 		});
+        
         b = (Button)findViewById(R.id.button4);
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Intent i = new Intent(SparkHunterTitleScreen.this, GetSpark.class);
+				GameAudioManager.getInstance().playEffect("click");
 				
-				//bgm.stop();
-				menuSoundIntent.setAction(Integer.toString(R.string.music_intent));
-		    	menuSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.click);
-		    	//SparkHunterTitleScreen.this.startService(menuSoundIntent);
-		    	//mActivity.finish();
+				Intent i = new Intent(SparkHunterTitleScreen.this, GetSpark.class);
 				startActivity(i);
 			}
 		});
-    
       }
     
     //called when this activity is navigated back to
+    @Override
     public void onRestart(){
     	super.onResume();
     	

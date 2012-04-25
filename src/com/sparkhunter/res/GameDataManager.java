@@ -62,7 +62,7 @@ public class GameDataManager {
 			
 			//scan mutable list to see what's what
 			for(int j = 0; j < mutableEntities.size(); j++){
-				if(mutableEntities.get(j).getId())
+				//if(mutableEntities.get(j).getId())
 			}
 		}
 		

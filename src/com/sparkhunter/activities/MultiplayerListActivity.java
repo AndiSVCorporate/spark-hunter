@@ -72,7 +72,7 @@ public class MultiplayerListActivity extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
 		
 			public void onClick(View v) {
-
+				Player.getInstance().setHost(true);
 				(new AddBattleTask()).execute(mID,mName);
 				PollPlayer();
 				mWait = new Waiting(mActivity);
@@ -89,8 +89,8 @@ public class MultiplayerListActivity extends Activity {
 		      
 			}
 		});
-        mID = Player.getInstance().playerID;
-        mName = Player.getInstance().playerName;
+        mID = Player.getInstance().getPlayerID();
+        mName = Player.getInstance().getPlayerName();
 
         if ((mID == null || mName == null) && FacebookUtils.isSessionValid()) {
         	Toast.makeText(getApplicationContext(), "Getting ID from Facebook", Toast.LENGTH_SHORT).show();
@@ -105,8 +105,8 @@ public class MultiplayerListActivity extends Activity {
 		
 		//we need this for passing battle data back and forth
 		Player ash = Player.getInstance();
-		ash.playerID =mID;
-		ash.enemyID = mIDenemy;
+		ash.setPlayerID(mID);
+		ash.setEnemyID(mIDenemy);
 		
 		(new DeleteBattleTask()).execute(mID);
 		battleFound = false;
@@ -133,6 +133,9 @@ public class MultiplayerListActivity extends Activity {
 			(new DeleteBattleTask()).execute(mID);
 			if(battleFound){
 				StartBattle();
+			}
+			else{
+				Player.getInstance().setHost(false);
 			}
 		}
 		
@@ -171,31 +174,6 @@ public class MultiplayerListActivity extends Activity {
 		}
 		
 	}
-	/*
-	public class PollRunImpl implements Runnable{
-		AsyncTask task;
-		String id;
-		public PollRunImpl(AsyncTask task, String id){
-			this.task=task;
-			this.id = id;
-		}
-		@Override
-		public void run() {
-			task.execute(id);
-		}
-		
-	}
-	//
-	private void Poll(AsyncTask task, String id){
-		Runnable pollRun = new PollRunImpl(task,id);
-		
-		pollSched = scheduler.scheduleAtFixedRate(pollRun, 5 , 5, SECONDS);
-	    //kills it after x amount of time
-		scheduler.schedule(new Runnable() {
-	         public void run() { pollSched.cancel(true); }
-	       }, 60, SECONDS);
-	}*/
-	
 	
 	
 	private class BattleClickListener implements OnItemClickListener{

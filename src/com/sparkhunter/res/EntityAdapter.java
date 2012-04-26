@@ -20,7 +20,7 @@ public class EntityAdapter extends BaseAdapter {
         entityContext = c;
         dispInventory = inv;
         
-        Vector<Entity> itemList = dispInventory.getItemList();
+        Vector<Entity> itemList = dispInventory.getEntityList();
         thumbIds = new Integer[itemList.size()];
 
         //read in the inventory
@@ -34,7 +34,7 @@ public class EntityAdapter extends BaseAdapter {
     }
 
     public Entity getItem(int position) {
-        return dispInventory.getItemList().elementAt(position);
+        return dispInventory.getEntityList().elementAt(position);
     }
 
     public long getItemId(int position) {
@@ -47,7 +47,7 @@ public class EntityAdapter extends BaseAdapter {
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             imageView = new ImageView(entityContext);
             imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setPadding(10, 10, 10, 10);
         } else {
             imageView = (ImageView) convertView;

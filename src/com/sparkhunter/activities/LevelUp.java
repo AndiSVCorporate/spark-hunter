@@ -3,6 +3,7 @@ package com.sparkhunter.activities;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
+import com.sparkhunter.res.Player;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -23,28 +24,36 @@ public class LevelUp extends Activity {
 		setContentView(R.layout.levelup);
 		
 		TextView name = (TextView)findViewById(R.id.name);
-		name.setText((CharSequence) GetSpark.chosenSpark.getName());
+		name.setText((CharSequence) 
+				Player.getInstance().getActiveSpark().getName());
 		
 		TextView info = (TextView)findViewById(R.id.info);
-		info.setText((CharSequence) GetSpark.chosenSpark.getDescript());
+		info.setText((CharSequence) 
+				Player.getInstance().getActiveSpark().getDescript());
 		
 		TextView level = (TextView)findViewById(R.id.level);
-		level.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getLevel()));
+		level.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getLevel()));
 		
 		TextView exp = (TextView)findViewById(R.id.exp);
-		exp.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getExperience()));
+		exp.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getExperience()));
 		
 		TextView attack = (TextView)findViewById(R.id.attack);
-		attack.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getAttack()));
+		attack.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getAttack()));
 		
 		TextView defence = (TextView)findViewById(R.id.defence);
-		defence.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getDefense()));
+		defence.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getDefense()));
 		
 		TextView speed = (TextView)findViewById(R.id.speed);
-		speed.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getSpeed()));
+		speed.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getSpeed()));
 		
 		TextView HP = (TextView)findViewById(R.id.hp);
-		HP.setText((CharSequence) Integer.toString(GetSpark.chosenSpark.getCurHp()));
+		HP.setText((CharSequence) Integer.toString(
+				Player.getInstance().getActiveSpark().getCurHp()));
 		
 		Button b = (Button)findViewById(R.id.button1);
         b.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +66,6 @@ public class LevelUp extends Activity {
 		});
 		
 	ImageView image = (ImageView) findViewById(R.id.IVdisplay);
-	image.setImageResource(GetSpark.chosenSpark.getImageResId());
+	image.setImageResource(Player.getInstance().getActiveSpark().getImageResId());
 }
 }

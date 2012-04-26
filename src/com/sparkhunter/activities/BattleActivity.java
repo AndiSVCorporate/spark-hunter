@@ -11,6 +11,8 @@ import com.sparkhunter.mapping.HistoryWriter;
 import com.sparkhunter.network.NetworkBattle;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.Battle;
+import com.sparkhunter.res.GameAudioManager;
+import com.sparkhunter.res.Player;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -42,7 +44,6 @@ public class BattleActivity extends Activity {
 	ProgressBar mRightBar;
 
 	private boolean mEnd = false;
-	static MediaPlayer bgm;
 	static TextView mBattleLog;
 
 	// members for location functionality
@@ -53,8 +54,11 @@ public class BattleActivity extends Activity {
 	private String current_city="";
 	private double latitude, longitude;
 
+	private Spark playerSpark;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		mActivity = this;
 
 		// For location updates
@@ -62,76 +66,79 @@ public class BattleActivity extends Activity {
 		sparklocman = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		// getReverseGeocode();
 
-		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.battlescreen);
-		View battle = findViewById(R.id.AbsoluteLayout1);
-		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-		if (hour >= 6 && hour <= 18){
-			battle.setBackgroundResource(R.drawable.battle1);
-		}
-		else {
-			battle.setBackgroundResource(R.drawable.battle0);
-		}
 		mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
 		mRightBar = (ProgressBar) findViewById(R.id.rightHP);
+		
+		playerSpark = Player.getInstance().getActiveSpark();
 
 		// Adding Battle Location to Overlays
 		sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
 				0, sparkloclistener);
 		// sparklocman.removeUpdates(sparkloclistener);
 
-		// BATTLE MOOSIC
-		bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
-		bgm.start();
+		//BATTLE MOOSIC
+        GameAudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_rainbowdash);
 
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			if (extras.getBoolean("MP") == true)
-				mBattle = new NetworkBattle(mActivity, GetSpark.chosenSpark);
-		} else
-			mBattle = new Battle(GetSpark.chosenSpark, new Spark("Poke-man",
-					R.drawable.item_diamond));
+        //Player's chosen Spark is grabbed here.
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null)
+        {
+                if(extras.getBoolean("MP")==true)
+                        mBattle = new NetworkBattle(mActivity, playerSpark);
+        }
+        else{
+                //TODO random spark generation should occur here
+                mBattle = new Battle(playerSpark, new Spark("Poke-man",R.drawable.item_diamond));
+        }
+
+		initializePlayerData();
 
 		// setup log
 		mBattleLog = (TextView) findViewById(R.id.battleLog);
 		print("BATTLE START");
 
 		initializeAttackMenu();
+		
 		Button b = (Button) findViewById(R.id.battleInventory);
-
 		b.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				bgm.stop();
+				GameAudioManager.getInstance().playEffect("click");
+                
 				Intent i = new Intent(mActivity, InventoryScreen.class);
 				startActivity(i);
 			}
 		});
+		
 		b = (Button) findViewById(R.id.battleRun);
 		b.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				if (mBattle.run()) {
 					print("Got away succesfully.");
 					endBattle();
 				} else {
 					print("Run failed.");
-					print(mBattle.attack("Poke", mBattle.mHisSpark,
-							mBattle.mYourSpark, false));
+
+					print(mBattle.attack("Poke", mBattle.getmHisSpark(),
+							"Run", mBattle.getmYourSpark()));
 					endBattle();
 				}
 			}
 
 		});
 		
-
 		// Option to see the battle history
 		b = (Button) findViewById(R.id.battlehistory);
 		b.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				bgm.stop();
+				GameAudioManager.getInstance().playEffect("click");
+
 				Intent i = new Intent(mActivity, BattleHistoryView.class);
 				startActivity(i);
 			}
@@ -147,21 +154,30 @@ public class BattleActivity extends Activity {
 		refresh();
 
 	}
-
+	private void initializePlayerData(){
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			if (extras.getBoolean("MP") == true)
+				mBattle = new NetworkBattle(mActivity, mBattle.getmYourSpark());
+		} else
+			mBattle = new Battle(mBattle.getmYourSpark(), new Spark("Poke-man",
+					R.drawable.item_diamond));
+	}
 	private void initializeAttackMenu() {
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		ArrayAdapter<CharSequence> adapter;
 		adapter = new ArrayAdapter<CharSequence>(this,
 				android.R.layout.simple_spinner_item,
-				Ability.extractChar(mBattle.mYourSpark.getAbilities()));
+				Ability.extractChar(mBattle.getmYourSpark().getAbilities()));
 		s.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View v,
 					int pos, long id) {
 				if (parentView.getSelectedItemPosition() > 0) {
-					print(mBattle.attack(((TextView) v).getText().toString(),
-							mBattle.mYourSpark, mBattle.mHisSpark, true));
+					GameAudioManager.getInstance().playEffect("click");
+					
+					print(mBattle.attack(((TextView) v).getText().toString(),mBattle.getmYourSpark(),"Poke",mBattle.getmHisSpark()));
 					refresh();
 					parentView.setSelection(0);
 				}
@@ -179,24 +195,31 @@ public class BattleActivity extends Activity {
 	public void print(String text) {
 		mBattleLog.append(text + "\n");
 	}
+	
 
 	@Override
 	public void onPause() {
-		// bgm.prepare();
-		// bgm.pause();
 		super.onPause();
 	}
 
 	@Override
 	public void onStop() {
-		// bgm.release();
 		super.onStop();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		// bgm.start();
+		
+		playerSpark = Player.getInstance().getActiveSpark();
+		mBattle.setmYourSpark(playerSpark);
+		
+		refresh();
+	}
+	
+	@Override
+	public void onRestart(){
+		super.onRestart();
 	}
 
 	@Override
@@ -207,34 +230,34 @@ public class BattleActivity extends Activity {
 	public void refresh() {
 		// setup names
 		TextView temp = (TextView) findViewById(R.id.leftName);
-		temp.setText(mBattle.mYourSpark.getName());
+		temp.setText(mBattle.getmYourSpark().getName());
 		temp = (TextView) findViewById(R.id.leftlevel);
-		temp.setText(Integer.toString(mBattle.mYourSpark.getLevel()));
+		temp.setText(Integer.toString(mBattle.getmYourSpark().getLevel()));
 		temp = (TextView) findViewById(R.id.rightName);
-		temp.setText(mBattle.mHisSpark.getName());
+		temp.setText(mBattle.getmHisSpark().getName());
 		temp = (TextView) findViewById(R.id.rightlevel);
-		temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
+		temp.setText(Integer.toString(mBattle.getmHisSpark().getLevel()));
 
-		mLeftBar.setMax(GetSpark.chosenSpark.getMaxHp());
+		mLeftBar.setMax(playerSpark.getMaxHp());
 		mRightBar.setMax(100);
 
 		ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
-		temp2.setImageResource(mBattle.mYourSpark.getImageResId());
+		temp2.setImageResource(mBattle.getmYourSpark().getImageResId());
 		temp2 = (ImageView) findViewById(R.id.rightImage);
-		temp2.setImageResource(mBattle.mHisSpark.getImageResId());
+		temp2.setImageResource(mBattle.getmHisSpark().getImageResId());
 
-		mLeftBar.setProgress(mBattle.mYourSpark.mCurHp);
-		mRightBar.setProgress(mBattle.mHisSpark.mCurHp);
-		if (mBattle.mHisSpark.mCurHp <= 0) {
+		mLeftBar.setProgress(mBattle.getmYourSpark().mCurHp);
+		mRightBar.setProgress(mBattle.getmHisSpark().mCurHp);
+		if (mBattle.getmHisSpark().mCurHp <= 0) {
 			print(mBattle.setWin());
-			GetSpark.chosenSpark.gainExp();
-			if (GetSpark.chosenSpark.getExperience() >= 100) {
-				GetSpark.chosenSpark.LevelUp();
+			playerSpark.gainExp();
+			if (playerSpark.getExperience() >= 100) {
+				playerSpark.LevelUp();
 				Intent i = new Intent(BattleActivity.this, LevelUp.class);
 				startActivity(i);
 			}
 			endBattle();
-		} else if (mBattle.mYourSpark.mCurHp <= 0) {
+		} else if (mBattle.getmYourSpark().mCurHp <= 0) {
 			print(mBattle.setLose());
 			endBattle();
 		}
@@ -268,8 +291,8 @@ public class BattleActivity extends Activity {
 		//	}
 			//Toast toast =Toast.makeText(mActivity, current_city, Toast.LENGTH_LONG);
 			//toast.show();
-			String battle = "Battled " + mBattle.mHisSpark.getName() + " with "
-					+ mBattle.mYourSpark.getName();
+			String battle = "Battled " + mBattle.getmHisSpark().getName() + " with "
+					+ mBattle.getmYourSpark().getName();
 /*			
 			BattleField bf = new BattleField(battle, latitude, longitude, current_city);
 		
@@ -336,8 +359,8 @@ public class BattleActivity extends Activity {
 			/*Toast toast = Toast.makeText(applicationContext, "Locality: "
 					+ result, Toast.LENGTH_SHORT);
 			toast.show();
-			*/String battle = "Battled " + mBattle.mHisSpark.getName() + " with "
-					+ mBattle.mYourSpark.getName();
+			*/String battle = "Battled " + mBattle.getmHisSpark().getName() + " with "
+					+ mBattle.getmYourSpark().getName();
 			BattleField bf = new BattleField(battle, latitude, longitude, current_city);
 			
 			// Writing to a file using the HistoryWriter class.
@@ -346,8 +369,6 @@ public class BattleActivity extends Activity {
 			} catch (IOException except) {
 				except.printStackTrace();
 			}
-
-			
 			
 			//current_city = result;
 		}
@@ -355,6 +376,9 @@ public class BattleActivity extends Activity {
 	}
 
 	public void endBattle() {
+		
+		Player.getInstance().setHost(false);
+		
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
 

@@ -23,7 +23,6 @@ public class ItemDescriptionActivity extends Activity {
 		//need some textviews here
 		
 		
-		
 		Button b = (Button)findViewById(R.id.okbutton);
         b.setOnClickListener(new View.OnClickListener() {
 			

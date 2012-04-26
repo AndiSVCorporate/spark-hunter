@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class GetSpark extends Activity implements OnClickListener {
 
-	ImageView display;
-	static Spark chosenSpark;
+	private ImageView display;
+	private Spark chosenSpark;
 	public static Spark target;
 	
 	@Override
@@ -47,27 +47,30 @@ public class GetSpark extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
-		 String sname;
-		 String sdescription;
+		String sname;
+		String sdescription;
 		switch (v.getId()){
 		case R.id.IVimage1:
-			display.setImageResource(R.drawable.duckedit);
-			chosenSpark = new Spark("Dingus",R.drawable.duckedit);
-			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
+			display.setImageResource(R.drawable.grass);
+			chosenSpark = new Spark("Puranto",R.drawable.grass);
+			chosenSpark.setDescript("A plant.");
+			chosenSpark.setAbilities("Grow","0","Chomp","25");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
 		case R.id.IVimage2:
-			display.setImageResource(R.drawable.androidmarker);
-			chosenSpark = new Spark("Biggy",R.drawable.androidmarker);
-			chosenSpark.setDescript("Starting fire type Spark, Carefull for his hidden gun!");
+			display.setImageResource(R.drawable.water);
+			chosenSpark = new Spark("Mizu",R.drawable.water);
+			chosenSpark.setDescript("A derpy mad water drop.");
+			chosenSpark.setAbilities("Drop","3","Rainman","10");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
 		case R.id.IVimage3:
-			display.setImageResource(R.drawable.item_square);
-			chosenSpark = new Spark("SquarePants",R.drawable.item_square);
-			chosenSpark.setDescript("Starting grass type Spark, Makes a mean burger!");
+			display.setImageResource(R.drawable.fire);
+			chosenSpark = new Spark("Atsui",R.drawable.fire);
+			chosenSpark.setDescript("This is a fire, jellyfish, thing.");
+			chosenSpark.setAbilities("Fire?","1","Hadouken","20");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;

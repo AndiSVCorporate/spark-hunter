@@ -1,80 +1,46 @@
 package com.sparkhunter.res;
 
-import java.util.Vector;
+import java.util.NoSuchElementException;
 
-import android.R;
-import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class Player {
 	//critical to make player a singleton, for cross-activity usage
 	private static Player singletonPlayer = new Player();
 	
-	//Im throwing these in here, dont' get mad!
-	//I MAD.
-	//I'm platinum mad.
-	public String playerID;
-	public String playerName;
-	public String enemyID;
+	private String playerID;
+	private String playerName;
+	private String enemyID;
 	
-	private SQLiteDatabase gameData;
-	private Cursor dataQuery;
 	private Inventory itemInventory = new Inventory();
 	private Inventory sparkInventory = new Inventory();
+	private Spark activeSpark; //Spark participating in battle
 	
-	private static final String ITEM_TABLE = "player_data"; //TODO make this a R.strings reference
-	
+	private boolean isHost = false;
 	private Player() {}
 	
+	//So much cleaner now that that damn SQL's abstracted away
 	public void initializeInventory(Context c) {
-		int quantity = 0;
+		GameDataManager manager = new GameDataManager(c);
 		
-		//create a database opener, and use it get a handle on the player database 
-		SQLGameDataOpener openHelper = new SQLGameDataOpener(c);
-		gameData = openHelper.open();
+		itemInventory = manager.getAllPlayerItems();
+		sparkInventory = manager.getAllPlayerSparks();
 		
-		//read in the data for the Player's item and spark inventories
-		//be greedy and select all columns
-		dataQuery = gameData.query(ITEM_TABLE, null, null, null, null, null, null);
+		manager.close();
 		
-		Log.d("SQL", "Game data cursor is " + Integer.toString(dataQuery.getCount()) + " by "
-				+ Integer.toString(dataQuery.getColumnCount()));
-		
-		//probably not needed
-		dataQuery.moveToFirst();
-		
-		//need to figure out what's a spark, and what's an item, and add it to the 
-		//correct inventory
 		try{
-			for(int i = 0; i < dataQuery.getCount(); i++){
-				Vector<Entity> entities = new Vector<Entity>();
-				
-				//grab the entities mapped by this row and cram 'em somewhere
-				entities = EntityCreationManager.getInstance().createEntity(dataQuery, c);
-				
-				//TODO add all needed getters to Entity interface
-				for(int j = 0; j < entities.size(); j++){
-					Log.d("DEBUG", "entity is " + entities.get(0).getType());
-					
-					if(entities.get(0).getType().equals("ITEM")){
-						itemInventory.addEntity(entities.get(j));
-					}
-					else{
-						sparkInventory.addEntity(entities.get(j));
-					}
-				}
-				
-				dataQuery.moveToNext();
-			}
+			setActiveSpark((Spark) sparkInventory.getEntityList().firstElement());
 		}
-		catch(TypeNotPresentException e){
-			Log.d("DEBUG", "Error, entity is not a spark or item");
-			//do something with the game state, since the player's inventory is clearly in
-			//an inconsistent state!
+		catch(NoSuchElementException e){
+			//spark inventory's empty, user needs to get a starter
+			Log.d("DEBUG", "Player has no Sparks at the moment.");
 		}
+	}
+	
+	public void saveInventory(Context c){
+		GameDataManager manager = new GameDataManager(c);
+		
 	}
 	
 	public static Player getInstance() {
@@ -87,5 +53,45 @@ public class Player {
 	
 	public Inventory getSparkInventory() {
 		return sparkInventory;
+	}
+
+	public String getPlayerID() {
+		return playerID;
+	}
+
+	public void setPlayerID(String playerID) {
+		this.playerID = playerID;
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public String getEnemyID() {
+		return enemyID;
+	}
+
+	public void setEnemyID(String enemyID) {
+		this.enemyID = enemyID;
+	}
+
+	public Spark getActiveSpark() {
+		return activeSpark;
+	}
+
+	public void setActiveSpark(Spark activeSpark) {
+		this.activeSpark = activeSpark;
+	}
+	
+	public boolean isHost(){
+		return this.isHost;
+	}
+	
+	public void setHost(boolean host){
+		this.isHost = host;
 	}
 }

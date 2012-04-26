@@ -17,12 +17,15 @@ import android.os.Bundle;
 import android.widget.TabHost;
 
 public class InventoryScreen extends TabActivity {
+	private Intent parentIntent; //used when updating screen due to inventory state changes
 
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {		
 		//initialize screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inventory);
+        
+        setParentIntent(getIntent());
         
         Resources res = getResources(); // Resource object to get Drawables
         TabHost tabHost = getTabHost();  // The activity TabHost
@@ -45,7 +48,16 @@ public class InventoryScreen extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(1);
+        //start on item tab
+        tabHost.setCurrentTab(0);
+	}
+
+	public Intent getParentIntent() {
+		return parentIntent;
+	}
+
+	public void setParentIntent(Intent parentIntent) {
+		this.parentIntent = parentIntent;
 	}
 }
 

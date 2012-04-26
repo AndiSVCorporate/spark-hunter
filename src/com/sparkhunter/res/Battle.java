@@ -5,11 +5,11 @@ import com.sparkhunter.main.R;
 
 
 public class Battle {
-	public Spark mYourSpark;
-	public Spark mHisSpark;
-	public boolean mVictory;
-	public boolean mLose;
-	static public boolean ah;
+	protected Spark mYourSpark;
+	protected Spark mHisSpark;
+	protected boolean mVictory;
+	protected boolean mLose;
+	
 	public Battle(Spark your, Spark his)
 	{
 		mVictory = false;
@@ -23,33 +23,76 @@ public class Battle {
 		}
 		
 	}
-	public String attack(String sName, Spark attacker, Spark defender, boolean counter)
+	public String attack(String yAttack, Spark yours, String hAttack, Spark his)
 	{
 		String retVal = null;
-		//TODO: this is hardcoded until there is a lookup table for abilites
-		int dmg = 0;
-		if(sName == "Herp")
-			dmg = 20;
-		else if(sName == "Derp")
-			dmg = 5;
-		else if(sName == "Poke")
-			dmg = 7;
-			
-		retVal = attacker.getName() +" uses " + sName +" and does " + dmg +" damage!";
-		//TODO: Future complicated battle calculations go here
-		defender.mCurHp-=dmg;
-		if(defender.mCurHp>0){
-			if(counter==true) //stops infinite loop of counters
-				retVal = retVal + "\n" + attack("Poke",defender,attacker,false); // TODO:
+		Spark first;
+		Spark second;
+		String fAttack;
+		String sAttack;
+		if(goesFirst(yours,his)){
+			first = yours;
+			fAttack = yAttack;
+			second = his;
+			sAttack = hAttack;
+		}else{
+			first = his;
+			fAttack = hAttack;
+			second = yours;
+			sAttack = yAttack;
+		}
+		retVal = getAttackString(first.getName(),fAttack,damageCalc(fAttack, first));
+		second.mCurHp -= damageCalc(fAttack, first);
+		if(second.mCurHp>0){
+				retVal = retVal + "\n" + getAttackString(second.getName(),sAttack,damageCalc(sAttack, second)); // TODO:
+				first.mCurHp -= damageCalc(sAttack, second);
 		}
 		else
-			retVal = retVal + "\n" + defender.getName() +" dies a tragic death.";
-		
+			retVal = retVal + "\n" + second.getName() +" dies a tragic death.";
 		
 		return retVal;
 		
 	}
+	
+	private String getAttackString(String name, String attack, int dmg){
+		return 	name +" uses " + attack +" and does " + dmg +" damage!";
 
+	}
+	//really hacky, but sense the database doesn't work, whattyagoingtodo
+	private int damageCalc(String attack, Spark spark){
+		int dmg = 0;
+		if(attack.equals("Herp"))
+			dmg = 20;
+		else if(attack.equals("Derp"))
+			dmg = 5;
+		else if(attack.equals("Poke"))
+			dmg = 7;
+		else if(attack.equals("Grow"))
+			dmg = 0;
+		else if(attack.equals("Chomp"))
+			dmg = 25;
+		else if(attack.equals("Drop"))
+			dmg = 3;
+		else if(attack.equals("Rainman"))
+			dmg = 10;
+		else if(attack.equals("Fire?"))
+			dmg = 1;
+		else if(attack.equals("Hadouken"))
+			dmg = 20;
+		return dmg;
+	}
+	private boolean goesFirst(Spark y, Spark h){
+		if(y.getSpeed()==h.getSpeed()){
+			return Player.getInstance().isHost(); //host auto wins ties until synced random is implemented
+		}
+		else if(y.getSpeed()>h.getSpeed())
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public boolean run(){
 		boolean retVal = true;
 		
@@ -65,6 +108,34 @@ public class Battle {
 	public String setLose(){
 		mVictory = true;
 		return "You fail!";
+	}
+	
+	public Spark getmYourSpark() {
+		return mYourSpark;
+	}
+	public void setmYourSpark(Spark mYourSpark) {
+		this.mYourSpark = mYourSpark;
+	}
+	public Spark getmHisSpark() {
+		return mHisSpark;
+	}
+	public void setmHisSpark(Spark mHisSpark) {
+		this.mHisSpark = mHisSpark;
+	}
+	public boolean ismVictory() {
+		return mVictory;
+	}
+	public void setmVictory(boolean mVictory) {
+		this.mVictory = mVictory;
+	}
+	public boolean ismLose() {
+		return mLose;
+	}
+	public void setmLose(boolean mLose) {
+		this.mLose = mLose;
+	}
+	public void initializePlayerData() {
+		// TODO Auto-generated method stub
 		
 	}
 }

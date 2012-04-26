@@ -48,7 +48,6 @@ public class SparkHunterTitleScreen extends Activity {
         /* Background Service*/
         Intent  i = new Intent(getApplicationContext(), AdventureService.class);
         startService(i);
-        Log.v("Service_CLASS", "CALLING SERVICE");
 
         //Initial player state settings go here
         Player.getInstance().initializeInventory(SparkHunterTitleScreen.this);
@@ -66,7 +65,7 @@ public class SparkHunterTitleScreen extends Activity {
 			public void onClick(View v) {
 				GameAudioManager.getInstance().playEffect("click");
 				
-				if(GetSpark.chosenSpark==null){
+				if(Player.getInstance().getActiveSpark() == null){
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
 				else {
@@ -86,7 +85,7 @@ public class SparkHunterTitleScreen extends Activity {
 			public void onClick(View v) {
 				GameAudioManager.getInstance().playEffect("click");
 				
-				if(GetSpark.chosenSpark==null){
+				if(Player.getInstance().getActiveSpark() == null){
 					Toast.makeText(SparkHunterTitleScreen.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 				}
 				else {
@@ -149,8 +148,8 @@ public class SparkHunterTitleScreen extends Activity {
  				//parse the friend data
  				try {
  					JSONObject json = Util.parseJson(response);
- 					Player.getInstance().playerName = (String) json.get("name");
- 					Player.getInstance().playerID = (String) json.get("id");
+ 					Player.getInstance().setPlayerName((String) json.get("name"));
+ 					Player.getInstance().setPlayerID((String) json.get("id"));
 
 				} catch (JSONException e) {
 					e.printStackTrace();

@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class GetSpark extends Activity implements OnClickListener {
 
-	ImageView display;
-	static Spark chosenSpark;
+	private ImageView display;
+	private Spark chosenSpark;
 	public static Spark target;
 	
 	@Override
@@ -47,8 +47,8 @@ public class GetSpark extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
-		 String sname;
-		 String sdescription;
+		String sname;
+		String sdescription;
 		switch (v.getId()){
 		case R.id.IVimage1:
 			display.setImageResource(R.drawable.duckedit);
@@ -60,7 +60,7 @@ public class GetSpark extends Activity implements OnClickListener {
 		case R.id.IVimage2:
 			display.setImageResource(R.drawable.androidmarker);
 			chosenSpark = new Spark("Biggy",R.drawable.androidmarker);
-			chosenSpark.setDescript("Starting fire type Spark, Carefull for his hidden gun!");
+			chosenSpark.setDescript("Starting fire type Spark, Careful for his hidden gun!");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;

@@ -16,6 +16,7 @@ import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.Ability;
 import com.sparkhunter.res.GameAudioManager;
 import com.sparkhunter.res.Battle;
+import com.sparkhunter.res.Player;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -25,6 +26,7 @@ import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -43,15 +45,17 @@ import android.location.LocationListener;
 public class BattleActivity extends Activity{
 	private BattleActivity mActivity;
 	private Battle mBattle;
-	ProgressBar mLeftBar;
-    ProgressBar mRightBar;
+	private ProgressBar mLeftBar;
+    private ProgressBar mRightBar;
     
     private boolean mEnd = false;
-    static TextView mBattleLog;
+    public static TextView mBattleLog;
     
-    LocationManager sparklocman; 
-    LocationListener sparkloclistener = new SparkLocationListener();
-    HistoryWriter hw;
+    private LocationManager sparklocman; 
+    private LocationListener sparkloclistener = new SparkLocationListener();
+    private HistoryWriter hw;
+    
+    private Spark playerSpark;
     
  	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -66,6 +70,11 @@ public class BattleActivity extends Activity{
         mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
         mRightBar = (ProgressBar) findViewById(R.id.rightHP);
         
+        playerSpark = Player.getInstance().getActiveSpark();
+        
+        if(playerSpark.getAbilities() == null)
+        	Log.d("DEBUG", "Active Spark's abilities are null.");
+        
         // Adding Battle Location to Overlays
         sparklocman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,sparkloclistener);
         //sparklocman.removeUpdates(sparkloclistener);
@@ -73,15 +82,16 @@ public class BattleActivity extends Activity{
         //BATTLE MOOSIC
         GameAudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_rainbowdash);
         
+        //Player's chosen Spark is grabbed here.
         Bundle extras = getIntent().getExtras();
         if(extras!=null)
         {
         	if(extras.getBoolean("MP")==true)
-        		mBattle = new NetworkBattle(mActivity,GetSpark.chosenSpark);
+        		mBattle = new NetworkBattle(mActivity, playerSpark);
         }
         else{
         	//random spark generation should occur here
-        	mBattle = new Battle(GetSpark.chosenSpark,new Spark("Poke-man",R.drawable.item_diamond));
+        	mBattle = new Battle(playerSpark, new Spark("Poke-man",R.drawable.item_diamond));
         }
         
         //setup log
@@ -140,7 +150,7 @@ public class BattleActivity extends Activity{
         Spinner s = (Spinner) findViewById(R.id.battleAttack);
         ArrayAdapter<CharSequence> adapter;
         adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, Ability.extractChar(mBattle.mYourSpark.getAbilities()));
-       s.setOnItemSelectedListener(new OnItemSelectedListener() {
+        s.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parentView, View v, int pos,
@@ -169,20 +179,16 @@ public class BattleActivity extends Activity{
 
 	@Override
 	public void onPause(){
-		//bgm.prepare();
-		//bgm.pause();
 		super.onPause();
 	}
 	
 	@Override
 	public void onStop(){
-		//bgm.release();
 		super.onStop();
 	}
 	@Override	
 	public void onResume(){
 		super.onResume();
-		//bgm.start();
 	}
 	@Override
 	public void onBackPressed() {
@@ -199,7 +205,7 @@ public class BattleActivity extends Activity{
         temp = (TextView) findViewById(R.id.rightlevel);
         temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
         
-        mLeftBar.setMax(GetSpark.chosenSpark.getMaxHp());
+        mLeftBar.setMax(playerSpark.getMaxHp());
         mRightBar.setMax(100);
         
         ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
@@ -211,9 +217,9 @@ public class BattleActivity extends Activity{
 		mRightBar.setProgress(mBattle.mHisSpark.mCurHp);
 		if(mBattle.mHisSpark.mCurHp<=0){
 			print(mBattle.setWin());
-			GetSpark.chosenSpark.gainExp();
-			if (GetSpark.chosenSpark.getExperience() >= 100){
-				GetSpark.chosenSpark.LevelUp();
+			playerSpark.gainExp();
+			if (playerSpark.getExperience() >= 100){
+				playerSpark.LevelUp();
 				Intent i = new Intent(BattleActivity.this, LevelUp.class);
 				startActivity(i);
 			}

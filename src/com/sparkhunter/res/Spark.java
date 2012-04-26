@@ -72,7 +72,7 @@ public class Spark implements Entity{
 		setStats();
 	}
 	public Spark() {
-		// TODO Auto-generated constructor stub
+		mAblty = new ArrayList<Ability>();
 	}
 
 	//sets

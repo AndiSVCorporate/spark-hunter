@@ -125,7 +125,7 @@ public class BattleActivity extends Activity {
 					print("Run failed.");
 
 					print(mBattle.attack("Poke", mBattle.getmHisSpark(),
-							"Run", mBattle.getmYourSpark(), false));
+							"Run", mBattle.getmYourSpark()));
 					endBattle();
 				}
 			}
@@ -177,7 +177,7 @@ public class BattleActivity extends Activity {
 				if (parentView.getSelectedItemPosition() > 0) {
 					GameAudioManager.getInstance().playEffect("click");
 					
-					print(mBattle.attack(((TextView) v).getText().toString(),mBattle.getmYourSpark(),"Poke",mBattle.getmHisSpark(), true));
+					print(mBattle.attack(((TextView) v).getText().toString(),mBattle.getmYourSpark(),"Poke",mBattle.getmHisSpark()));
 					refresh();
 					parentView.setSelection(0);
 				}
@@ -376,6 +376,9 @@ public class BattleActivity extends Activity {
 	}
 
 	public void endBattle() {
+		
+		Player.getInstance().setHost(false);
+		
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
 

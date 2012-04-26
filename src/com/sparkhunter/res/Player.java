@@ -17,6 +17,7 @@ public class Player {
 	private Inventory sparkInventory = new Inventory();
 	private Spark activeSpark; //Spark participating in battle
 	
+	private boolean isHost = false;
 	private Player() {}
 	
 	//So much cleaner now that that damn SQL's abstracted away
@@ -84,5 +85,13 @@ public class Player {
 
 	public void setActiveSpark(Spark activeSpark) {
 		this.activeSpark = activeSpark;
+	}
+	
+	public boolean isHost(){
+		return this.isHost;
+	}
+	
+	public void setHost(boolean host){
+		this.isHost = host;
 	}
 }

@@ -64,10 +64,10 @@ public class NetworkBattle extends Battle {
 	}
 
 	@Override
-	public String attack(String aAttack, Spark attacker, String dAttack ,Spark defender, boolean counter){
+	public String attack(String aAttack, Spark attacker, String dAttack ,Spark defender){
 		String retVal = "";
 		if(mTurnComplete){
-			retVal = super.attack(aAttack, attacker, dAttack, defender, counter);
+			retVal = super.attack(aAttack, attacker, dAttack, defender);
 			mTurnComplete = false;
 		}
 		else{
@@ -82,7 +82,7 @@ public class NetworkBattle extends Battle {
 	}
 	public void finishAttack(String hisAttack){
 		mTurnComplete = true;
-		mActivity.print(attack(mAttackUsed,mYourSpark,hisAttack,mHisSpark,true));
+		mActivity.print(attack(mAttackUsed,mYourSpark,hisAttack,mHisSpark));
 	}
 	private String[] PackageStats(String ... args){
 	

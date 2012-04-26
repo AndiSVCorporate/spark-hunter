@@ -46,24 +46,23 @@ public class BattleActivity extends Activity{
 	ProgressBar mLeftBar;
     ProgressBar mRightBar;
     
-    
     private boolean mEnd = false;
-    static MediaPlayer bgm;
     static TextView mBattleLog;
     
     LocationManager sparklocman; 
     LocationListener sparkloclistener = new SparkLocationListener();
     HistoryWriter hw;
+    
  	@Override
 	public void onCreate(Bundle savedInstanceState){
- 		
- 		
-		 hw = new HistoryWriter(this);
-		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+ 		super.onCreate(savedInstanceState);
+		hw = new HistoryWriter(this);
+		sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     	mActivity = this;
-        super.onCreate(savedInstanceState);
+    	
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.battlescreen);
+        
         mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
         mRightBar = (ProgressBar) findViewById(R.id.rightHP);
         
@@ -72,9 +71,6 @@ public class BattleActivity extends Activity{
         //sparklocman.removeUpdates(sparkloclistener);
         
         //BATTLE MOOSIC
-        //bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
-        //bgm.start();
-        
         GameAudioManager.getInstance().setBackground(getApplicationContext(), R.raw.mlp_rainbowdash);
         
         Bundle extras = getIntent().getExtras();
@@ -83,34 +79,34 @@ public class BattleActivity extends Activity{
         	if(extras.getBoolean("MP")==true)
         		mBattle = new NetworkBattle(mActivity,GetSpark.chosenSpark);
         }
-        else
+        else{
+        	//random spark generation should occur here
         	mBattle = new Battle(GetSpark.chosenSpark,new Spark("Poke-man",R.drawable.item_diamond));
-        
+        }
         
         //setup log
         mBattleLog = (TextView) findViewById(R.id.battleLog);
         print("BATTLE START");
         
         initializeAttackMenu();
+        
         Button b = (Button)findViewById(R.id.battleInventory);
-        
-        
-        
-        
-        
-        
         b.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				bgm.stop();
+				GameAudioManager.getInstance().playEffect("click");
+				
 				Intent i = new Intent(mActivity, InventoryScreen.class);
 				startActivity(i);
 			}
 		});
+        
         b = (Button)findViewById(R.id.battleRun);
         b.setOnClickListener(new View.OnClickListener() {
         	
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				if(mBattle.run()){
 					print("Got away succesfully.");
 					endBattle();
@@ -128,7 +124,8 @@ public class BattleActivity extends Activity{
         b.setOnClickListener(new View.OnClickListener() {
         	
         	public void onClick(View v) {
-				bgm.stop();
+        		GameAudioManager.getInstance().playEffect("click");
+        		
 				Intent i = new Intent(mActivity, BattleHistoryView.class);
 				startActivity(i);
 			}
@@ -138,7 +135,6 @@ public class BattleActivity extends Activity{
         
        
 	}
-    
     
 	private void initializeAttackMenu(){
         Spinner s = (Spinner) findViewById(R.id.battleAttack);
@@ -151,6 +147,8 @@ public class BattleActivity extends Activity{
 				long id) {
 			if(parentView.getSelectedItemPosition()>0)
 			{
+				GameAudioManager.getInstance().playEffect("click");
+				
 				print(mBattle.attack(((TextView) v).getText().toString(),mBattle.mYourSpark,mBattle.mHisSpark, true));
 				refresh();
 				parentView.setSelection(0);
@@ -269,6 +267,7 @@ public class BattleActivity extends Activity{
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	}	
+	
 	public void endBattle(){
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		s.setClickable(false);
@@ -278,6 +277,8 @@ public class BattleActivity extends Activity{
         b.setOnClickListener(new View.OnClickListener() {
         	
 			public void onClick(View v) {
+				GameAudioManager.getInstance().playEffect("click");
+				
 				mActivity.finish();
 			}
 			

@@ -154,14 +154,9 @@ public class Spark implements Entity{
 
 	@Override
 	public void activate(Context c, int target) {
-		// TODO Auto-generated method stub
+		// TODO tie this to individual spark sound effects
 		Log.d("DEBUG", "quack.");
-		Intent itemSoundIntent = new Intent(c, BackgroundMusic.class);
-    	
-    	//KLUDGE-TASTIC, find a better way to package the sound data
-    	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
-    	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
-    	c.startService(itemSoundIntent);
+		GameAudioManager.getInstance().playEffect("quack");
     	
     	Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
 	}

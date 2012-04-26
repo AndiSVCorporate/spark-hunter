@@ -23,12 +23,10 @@ import com.sparkhunter.network.PHPTask;
 import com.sparkhunter.network.ServerInterface;
 import com.sparkhunter.res.AdventureService;
 import com.sparkhunter.res.GameAudioManager;
-import com.sparkhunter.res.BackgroundMusic;
 import com.sparkhunter.res.FacebookUtils;
 import com.sparkhunter.res.Player;
 
 import android.app.Activity;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -39,11 +37,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class SparkHunterTitleScreen extends Activity {
-	private Intent menuSoundIntent = null;
-	private MediaPlayer bgm = null;
-	private Activity mActivity = this;
-	
+public class SparkHunterTitleScreen extends Activity {	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

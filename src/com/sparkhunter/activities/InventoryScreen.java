@@ -45,7 +45,8 @@ public class InventoryScreen extends TabActivity {
                       .setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(1);
+        //start on item tab
+        tabHost.setCurrentTab(0);
 	}
 }
 

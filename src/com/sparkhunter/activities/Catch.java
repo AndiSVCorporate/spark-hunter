@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.Random;
-import com.sparkhunter.res.BackgroundMusic;
 
 import android.media.MediaPlayer;
 import android.util.Log;

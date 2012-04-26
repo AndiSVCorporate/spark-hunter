@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -75,7 +76,13 @@ public class BattleHistoryView extends MapActivity {
 			myOverlay.addOverlay(oi);
 		}
 		mapOverlays.add(myOverlay);
-		mapController.animateTo(gp);
+		
+		try{
+			mapController.animateTo(gp);
+		}
+		catch(NullPointerException e){
+			Log.d("DEBUG", "Error: GeoPoint is null.");
+		}
 	}
 
 	@Override

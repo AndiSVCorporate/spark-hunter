@@ -14,9 +14,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Toast;
 
 public class ItemInventoryActivity extends Activity {
@@ -42,20 +44,28 @@ public class ItemInventoryActivity extends Activity {
         
         itemGridView.setAdapter(new EntityAdapter(this, items));
         
+        //a short click activates the item
         itemGridView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	Item selected = (Item)items.getEntityList().elementAt(position);
-            	String itemInformation = selected.toString();
             	//activate the items
             	selected.activate(ItemInventoryActivity.this, 0);
-            	//showDialog() goes here (eventually move to OnItemLongClick thingy)
-            	//showDialog(DESCRIPTION_DIALOG);
+            }
+        });
+        
+        //a long click displays the item properties
+        itemGridView.setOnItemLongClickListener(new OnItemLongClickListener() {
+        	public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id){
+            	Item selected = (Item)items.getEntityList().elementAt(position);
+            	String itemInformation = selected.toString();
             	
             	//make a long toast with relevant info
             	Toast infoPopup = Toast.makeText(ItemInventoryActivity.this, itemInformation, Toast.LENGTH_LONG);
             	infoPopup.show();
-            }
-        });
+
+            	return true;
+        	}
+		});
     }
     
     /*

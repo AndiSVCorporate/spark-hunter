@@ -84,7 +84,22 @@ public class Item implements Entity {
 	//need to setup some sort of game state interface for this stuff
 	//all effect resolution logic should go in here
 	public void activate(Context c, int target){
+		//modify active spark's properties based on item
+    	//this needs to be generalized to arbitrary targets
+		Spark targetSpark = Player.getInstance().getActiveSpark();
 		
+		//item effects should always be differential quantities
+		targetSpark.setAttack(targetSpark.getAttack() + mAttack);
+		targetSpark.setAttackGain(targetSpark.getAttackGain() + mAttackGain);
+		targetSpark.setLevel(targetSpark.getLevel() + mLevel);
+		targetSpark.setMaxHp(targetSpark.getMaxHp() + mMaxHp);
+		targetSpark.setSpeed(targetSpark.getSpeed() + mSpeed);
+		targetSpark.setCurHp(targetSpark.getCurHp() + mCurHp);
+		targetSpark.setDefense(targetSpark.getDefense() + mDefense);
+		targetSpark.setSpeedGain(targetSpark.getSpeedGain() + mSpeedGain);
+		targetSpark.setHpGain(targetSpark.getHpGain() + mHpGain);
+		targetSpark.setDefenseGain(targetSpark.getDefenseGain() + mDefenseGain);
+		targetSpark.setExperience(targetSpark.getExperience() + mExp);
 	}
 
 	@Override
@@ -274,26 +289,26 @@ public class Item implements Entity {
 		String information;
 		information = mName + ":\n" + mEffect + "\n\n";
 		
-		//check field values, and state them if relevant (not -1)
-		if(mSpeed != -1)
+		//check field values, and state them if relevant (not 0)
+		if(mSpeed != 0)
 			information += "Speed changes by " + mSpeed + "\n";
-		if(mMaxHp != -1)
+		if(mMaxHp != 0)
 			information += "Max HP changes by " + mMaxHp + "\n";
-		if(mCurHp != -1)
+		if(mCurHp != 0)
 			information += "Current HP changes by " + mCurHp + "\n";
-		if(mAttack != -1)
+		if(mAttack != 0)
 			information += "Attack changes by " + mAttack + "\n";
-		if(mDefense != -1)
+		if(mDefense != 0)
 			information += "Defense changes by " + mDefense + "\n";
-		if(mSpeedGain != -1)
+		if(mSpeedGain != 0)
 			information += "Speed Gain changes by " + mSpeedGain + "\n";
-		if(mHpGain != -1)
+		if(mHpGain != 0)
 			information += "HP Gain changes by " + mHpGain + "\n";
-		if(mAttackGain != -1)
+		if(mAttackGain != 0)
 			information += "Attack Gain changes by " + mAttackGain + "\n";
-		if(mDefenseGain != -1)
+		if(mDefenseGain != 0)
 			information += "Defense Gain changes by " + mDefenseGain + "\n";
-		if(mExp != -1)
+		if(mExp != 0)
 			information += "Experience changes by " + mExp + "\n";
 		
 		return information;

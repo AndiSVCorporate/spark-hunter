@@ -1,6 +1,7 @@
 package com.sparkhunter.activities;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import com.sparkhunter.main.BattleField;
 import com.sparkhunter.main.R;
@@ -64,6 +65,14 @@ public class BattleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.battlescreen);
+		View battle = findViewById(R.id.AbsoluteLayout1);
+		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		if (hour >= 6 && hour <= 18){
+			battle.setBackgroundResource(R.drawable.battle1);
+		}
+		else {
+			battle.setBackgroundResource(R.drawable.battle0);
+		}
 		mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
 		mRightBar = (ProgressBar) findViewById(R.id.rightHP);
 

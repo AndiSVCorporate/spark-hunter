@@ -51,23 +51,23 @@ public class GetSpark extends Activity implements OnClickListener {
 		String sdescription;
 		switch (v.getId()){
 		case R.id.IVimage1:
-			display.setImageResource(R.drawable.duckedit);
-			chosenSpark = new Spark("Dingus",R.drawable.duckedit);
-			chosenSpark.setDescript("Starting water type Spark, Don't Duck With em!");
+			display.setImageResource(R.drawable.grass);
+			chosenSpark = new Spark("Puranto",R.drawable.grass);
+			chosenSpark.setDescript("A plant.");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
 		case R.id.IVimage2:
-			display.setImageResource(R.drawable.androidmarker);
-			chosenSpark = new Spark("Biggy",R.drawable.androidmarker);
-			chosenSpark.setDescript("Starting fire type Spark, Careful for his hidden gun!");
+			display.setImageResource(R.drawable.water);
+			chosenSpark = new Spark("Mizu",R.drawable.water);
+			chosenSpark.setDescript("A derpy mad water drop.");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
 		case R.id.IVimage3:
-			display.setImageResource(R.drawable.item_square);
-			chosenSpark = new Spark("SquarePants",R.drawable.item_square);
-			chosenSpark.setDescript("Starting grass type Spark, Makes a mean burger!");
+			display.setImageResource(R.drawable.fire);
+			chosenSpark = new Spark("Atsui",R.drawable.fire);
+			chosenSpark.setDescript("This is a fire, jellyfish, thing.");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;

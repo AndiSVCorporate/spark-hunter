@@ -136,7 +136,6 @@ public class NetworkBattle extends Battle {
         		mHisSpark.setCurHp(Integer.parseInt(mResponses[1]));
         		mWait.dismiss();
         		if(mResponses.length>3 && mResponses[2].contains("ATTACK")){
-        			Toast.makeText(mActivity.getApplicationContext(), mResponses[2], Toast.LENGTH_SHORT).show();
         			 finishAttack(mResponses[3]);
         		}
         	}
@@ -150,7 +149,7 @@ public class NetworkBattle extends Battle {
 		@Override
 		protected void PostExecute(){
 			if(mResponses[0] != null)
-				Toast.makeText(mActivity.getApplicationContext(), mResponses[0], Toast.LENGTH_SHORT).show();
+			{}
 		}
     }
     private class DeleteTurnTask extends PHPTask {

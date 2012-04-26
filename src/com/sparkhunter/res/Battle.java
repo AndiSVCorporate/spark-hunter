@@ -69,7 +69,10 @@ public class Battle {
 		return dmg;
 	}
 	private boolean goesFirst(Spark y, Spark h){
-		if(y.getSpeed()>h.getSpeed())
+		if(y.getSpeed()==h.getSpeed()){
+			return Player.getInstance().isHost(); //host auto wins ties until synced random is implemented
+		}
+		else if(y.getSpeed()>h.getSpeed())
 		{
 			return true;
 		}

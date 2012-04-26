@@ -89,7 +89,7 @@ public class BattleActivity extends Activity {
                         mBattle = new NetworkBattle(mActivity, playerSpark);
         }
         else{
-                //random spark generation should occur here
+                //TODO random spark generation should occur here
                 mBattle = new Battle(playerSpark, new Spark("Poke-man",R.drawable.item_diamond));
         }
 

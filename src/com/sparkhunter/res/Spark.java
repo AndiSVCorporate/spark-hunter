@@ -161,9 +161,9 @@ public class Spark implements Entity{
 	public void activate(Context c, int target) {
 		// TODO tie this to individual spark sound effects
 		Log.d("DEBUG", "quack.");
-		GameAudioManager.getInstance().playEffect("quack");
+		//GameAudioManager.getInstance().playEffect("quack");
     	
-    	Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

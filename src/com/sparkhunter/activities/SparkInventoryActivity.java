@@ -6,6 +6,7 @@ import com.sparkhunter.main.R.layout;
 import com.sparkhunter.res.EntityAdapter;
 import com.sparkhunter.res.Inventory;
 import com.sparkhunter.res.Player;
+import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class SparkInventoryActivity extends Activity {
 		    	
 		    	//do something with the spark
 		    	sparks.getEntityList().elementAt(position).activate(SparkInventoryActivity.this, 0);
+		    	Player.getInstance().setActiveSpark(
+		    			(Spark) sparks.getEntityList().elementAt(position));
 		    }
 		});
     }

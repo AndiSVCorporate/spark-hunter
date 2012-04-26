@@ -57,6 +57,9 @@ public class Info extends Activity {
 				
 				//add spark to player's inventory
 				Player.getInstance().getSparkInventory().addEntity(target);
+				
+				//and set it as the active spark
+				Player.getInstance().setActiveSpark(target);
 			}
 		});
 		

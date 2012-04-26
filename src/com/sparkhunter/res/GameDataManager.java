@@ -13,9 +13,6 @@ public class GameDataManager {
 	private Context currentContext;
 	private SQLiteDatabase database;
 	private SQLGameDataOpener databaseOpener;
-    private static final String DATABASE_NAME = "spark_hunter.db";
-    private static final String[] DATABASE_RES = {"spark_hunter", "/raw", "com.sparkhunter.main:"};
-    private static final String DATABASE_PATH = "/data/data/com.sparkhunter.main/databases/";
 	private static final String PLAYER_TABLE = "player_data";
 	
 	public GameDataManager(Context c){
@@ -27,8 +24,6 @@ public class GameDataManager {
 	}
 	
 	//returns player's item inventory
-	
-	//split off some helper methods from this
 	public Inventory getAllPlayerItems(){
 		Cursor query = generateQuery(PLAYER_TABLE, "type == 'ITEM'");
 		
@@ -41,6 +36,10 @@ public class GameDataManager {
 		return readInventory(query);
 	}
 	
+	//INSERT construction is kinda broken at the moment
+	//the issue is duplicate items needing to be compressed 
+	//into a single SQL statement
+	//bottom line, don't call this.
 	public void saveInventory(Inventory inv){
 		ContentValues entityValues = new ContentValues();
 		Vector<Entity> entities = inv.getEntityList();

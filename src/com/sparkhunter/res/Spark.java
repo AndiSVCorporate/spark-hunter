@@ -359,6 +359,36 @@ public class Spark implements Entity{
 	}
 	
 	@Override
+	public String toString(){
+		String information;
+		information = mName + ":\n";
+		
+		//check field values, and state them if relevant (not -1)
+		if(mSpeed != 0)
+			information += "Speed: " + mSpeed + "\n";
+		if(mMaxHp != 0)
+			information += "Max HP: " + mMaxHp + "\n";
+		if(mCurHp != 0)
+			information += "Current HP: " + mCurHp + "\n";
+		if(mAttack != 0)
+			information += "Attack: " + mAttack + "\n";
+		if(mDefense != 0)
+			information += "Defense: " + mDefense + "\n";
+		if(mSpeedGain != 0)
+			information += "Speed Gain: " + mSpeedGain + "\n";
+		if(mHpGain != 0)
+			information += "HP Gain: " + mHpGain + "\n";
+		if(mAttackGain != 0)
+			information += "Attack Gain: " + mAttackGain + "\n";
+		if(mDefenseGain != 0)
+			information += "Defense Gain: " + mDefenseGain + "\n";
+		if(mExp != 0)
+			information += "Experience: " + mExp + "\n";
+		
+		return information;
+	}
+	
+	@Override
 	public boolean equals(Object o){
 		boolean retValue = false;
 		

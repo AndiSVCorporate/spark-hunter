@@ -73,6 +73,11 @@ public class Spark implements Entity{
 	}
 	public Spark() {
 		mAblty = new ArrayList<Ability>();
+		
+		//default abilities for everyone!
+		mAblty.add(new Ability("Choose an Attack",0)); //TODO: Spinner-work around
+		mAblty.add(new Ability("Herp",20));
+		mAblty.add(new Ability("Derp",50));
 	}
 
 	//sets

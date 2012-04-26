@@ -11,6 +11,7 @@ import com.sparkhunter.res.Player;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,14 @@ public class ItemInventoryActivity extends Activity {
             	Item selected = (Item)items.getEntityList().elementAt(position);
             	//activate the items
             	selected.activate(ItemInventoryActivity.this, 0);
+            	
+            	//remove item from inventory
+            	//this is gonna break
+            	items.removeEntity(selected.getIdentifier());
+            	
+            	//activity-ception right here
+            	startActivity(((InventoryScreen)getParent()).getParentIntent());
+            	finish();
             }
         });
         

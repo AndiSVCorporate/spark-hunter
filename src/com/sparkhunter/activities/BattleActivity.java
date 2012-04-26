@@ -1,6 +1,7 @@
 package com.sparkhunter.activities;
 
 import java.io.IOException;
+import java.util.Random;
 
 import com.sparkhunter.main.BattleField;
 import com.sparkhunter.main.R;
@@ -89,8 +90,8 @@ public class BattleActivity extends Activity {
                         mBattle = new NetworkBattle(mActivity, playerSpark);
         }
         else{
-                //TODO random spark generation should occur here
-                mBattle = new Battle(playerSpark, new Spark("Poke-man",R.drawable.item_diamond));
+                //Random battle generation occurs here
+                mBattle = new Battle(playerSpark, getRandomSpark());
         }
 
 		initializePlayerData();
@@ -160,8 +161,7 @@ public class BattleActivity extends Activity {
 			if (extras.getBoolean("MP") == true)
 				mBattle = new NetworkBattle(mActivity, mBattle.getmYourSpark());
 		} else
-			mBattle = new Battle(mBattle.getmYourSpark(), new Spark("Poke-man",
-					R.drawable.item_diamond));
+			mBattle = new Battle(mBattle.getmYourSpark(), getRandomSpark());
 	}
 	private void initializeAttackMenu() {
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
@@ -190,6 +190,29 @@ public class BattleActivity extends Activity {
 		});
 
 		s.setAdapter(adapter);
+	}
+	
+	//returns a random spark chosen from the set of starters
+	public Spark getRandomSpark(){
+		Random numberGen = new Random();
+		Spark spark;
+		
+		switch(numberGen.nextInt(2)){
+		default:
+		case 0:
+			spark = new Spark("Puranto", R.drawable.grass);
+			break;
+			
+		case 1:
+			spark = new Spark("Mizu", R.drawable.water);
+			break;
+			
+		case 2:
+			spark = new Spark("Atsui", R.drawable.fire);
+			break;
+		}
+		
+		return spark;
 	}
 
 	public void print(String text) {

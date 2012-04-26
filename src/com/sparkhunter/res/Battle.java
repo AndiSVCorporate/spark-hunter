@@ -1,5 +1,7 @@
 package com.sparkhunter.res;
 
+import java.util.Random;
+
 import com.sparkhunter.main.R;
 
 
@@ -15,7 +17,7 @@ public class Battle {
 		mVictory = false;
 		mLose = false;
 		mYourSpark = your;
-		if(mHisSpark == null){
+		if(his == null){
 			mHisSpark = new Spark("Placeholder",R.drawable.item_diamond);
 		}
 		else{
@@ -58,16 +60,23 @@ public class Battle {
 		return 	name +" uses " + attack +" and does " + dmg +" damage!";
 
 	}
+	
 	private int damageCalc(String attack, Spark spark){
+		Random dmgRandomizer = new Random();
 		int dmg = 0;
+		
 		if(attack.equals("Herp"))
 			dmg = 20;
 		else if(attack.equals("Derp"))
 			dmg = 5;
 		else if(attack.equals("Poke"))
 			dmg = 7;
-		return dmg;
+		
+		//a random amount of additional damage occurs
+		//TODO parameterize this
+		return dmg + dmgRandomizer.nextInt(8);
 	}
+	
 	private boolean goesFirst(Spark y, Spark h){
 		if(y.getSpeed()==h.getSpeed()){
 			return Player.getInstance().isHost(); //host auto wins ties until synced random is implemented
@@ -80,6 +89,7 @@ public class Battle {
 			return false;
 		}
 	}
+	
 	public boolean run(){
 		boolean retVal = true;
 		

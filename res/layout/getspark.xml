@@ -10,7 +10,7 @@
       android:layout_width="180dp"
       android:layout_height="180dp"
       android:layout_gravity="center"
-      android:src="@drawable/duckedit" />
+      android:src="@drawable/grass" />
   
   <TextView
         android:id="@+id/textView1"
@@ -49,12 +49,12 @@
               android:layout_width="150dp"
               android:layout_height="125dp"
               android:padding="15dp"
-              android:src="@drawable/duckedit" />
+              android:src="@drawable/grass" />
 
 /
- 	 <ImageView android:src ="@drawable/androidmarker" android:id="@+id/IVimage2" android:layout_height="125dp"
+ 	 <ImageView android:src ="@drawable/water" android:id="@+id/IVimage2" android:layout_height="125dp"
 		android:layout_width="150dp" android:layout_gravity="center" android:padding="15dp"/>
- 	 <ImageView android:src ="@drawable/item_square" android:id="@+id/IVimage3" android:layout_height="125dp"
+ 	 <ImageView android:src ="@drawable/fire" android:id="@+id/IVimage3" android:layout_height="125dp"
 		android:layout_width="150dp" android:layout_gravity="center" android:padding="15dp"/>
  	 
      

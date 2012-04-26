@@ -20,9 +20,6 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.sparkhunter.main.BattleField;
 import com.sparkhunter.main.R;
-import com.sparkhunter.main.R.drawable;
-import com.sparkhunter.main.R.id;
-import com.sparkhunter.main.R.layout;
 
 /**
  * @author Divyang
@@ -72,7 +69,7 @@ public class BattleHistoryView extends MapActivity {
 			lat = (int)(battle.getBattle_Lat()*SCALE_FACTOR);
 			lon = (int)(battle.getBattle_Lon()*SCALE_FACTOR);
 			gp = new GeoPoint(lat,lon);
-			oi=new OverlayItem(gp,"Battle", battle.getBattle_Name()+" Latitude:" + battle.getBattle_Lat()+ " Longitude:"+ battle.getBattle_Lon());
+			oi=new OverlayItem(gp,"Battle", battle.getBattle_Name()+ "\nLocation: "+battle.getCity());
 			myOverlay.addOverlay(oi);
 		}
 		mapOverlays.add(myOverlay);

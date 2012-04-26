@@ -23,33 +23,60 @@ public class Battle {
 		}
 		
 	}
-	public String attack(String aAttackName, Spark attacker, String dAttackName, Spark defender, boolean counter)
+	public String attack(String yAttack, Spark yours, String hAttack, Spark his)
 	{
 		String retVal = null;
-		//TODO: this is hardcoded until there is a lookup table for abilites
-		int dmg = 0;
-		if(aAttackName.equals("Herp"))
-			dmg = 20;
-		else if(aAttackName.equals("Derp"))
-			dmg = 5;
-		else if(aAttackName.equals("Poke"))
-			dmg = 7;
-			
-		retVal = attacker.getName() +" uses " + aAttackName +" and does " + dmg +" damage!";
-		//TODO: Future complicated battle calculations go here
-		defender.mCurHp-=dmg;
-		if(defender.mCurHp>0){
-			if(counter==true) //stops infinite loop of counters
-				retVal = retVal + "\n" + this.attack(dAttackName,defender,aAttackName,attacker,false); // TODO:
+		Spark first;
+		Spark second;
+		String fAttack;
+		String sAttack;
+		if(goesFirst(yours,his)){
+			first = yours;
+			fAttack = yAttack;
+			second = his;
+			sAttack = hAttack;
+		}else{
+			first = his;
+			fAttack = hAttack;
+			second = yours;
+			sAttack = yAttack;
+		}
+		retVal = getAttackString(first.getName(),fAttack,damageCalc(fAttack, first));
+		second.mCurHp -= damageCalc(fAttack, first);
+		if(second.mCurHp>0){
+				retVal = retVal + "\n" + getAttackString(second.getName(),sAttack,damageCalc(sAttack, second)); // TODO:
+				first.mCurHp -= damageCalc(sAttack, second);
 		}
 		else
-			retVal = retVal + "\n" + defender.getName() +" dies a tragic death.";
-		
+			retVal = retVal + "\n" + second.getName() +" dies a tragic death.";
 		
 		return retVal;
 		
 	}
 	
+	private String getAttackString(String name, String attack, int dmg){
+		return 	name +" uses " + attack +" and does " + dmg +" damage!";
+
+	}
+	private int damageCalc(String attack, Spark spark){
+		int dmg = 0;
+		if(attack.equals("Herp"))
+			dmg = 20;
+		else if(attack.equals("Derp"))
+			dmg = 5;
+		else if(attack.equals("Poke"))
+			dmg = 7;
+		return dmg;
+	}
+	private boolean goesFirst(Spark y, Spark h){
+		if(y.getSpeed()>h.getSpeed())
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public boolean run(){
 		boolean retVal = true;
 		

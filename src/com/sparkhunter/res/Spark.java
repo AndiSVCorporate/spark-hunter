@@ -71,6 +71,7 @@ public class Spark implements Entity{
 		mAblty = new ArrayList<Ability>();
 		setStats();
 	}
+	
 	public Spark() {
 		mAblty = new ArrayList<Ability>();
 		
@@ -79,7 +80,16 @@ public class Spark implements Entity{
 		mAblty.add(new Ability("Herp",20));
 		mAblty.add(new Ability("Derp",50));
 	}
-
+	
+	public void setAbilities(String ... args){
+		mAblty = new ArrayList<Ability>();
+		mAblty.add(new Ability("Choose an Attack",0)); //TODO: Spinner-work around
+		int i = 0;
+		while(i<args.length){
+			mAblty.add(new Ability(args[i],Integer.parseInt(args[i+1])));
+			i+=2;
+		}
+	}
 	//sets
 	public void setDescript(String descript){
 		mDescription = descript;

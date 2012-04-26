@@ -58,6 +58,7 @@ public class Battle {
 		return 	name +" uses " + attack +" and does " + dmg +" damage!";
 
 	}
+	//really hacky, but sense the database doesn't work, whattyagoingtodo
 	private int damageCalc(String attack, Spark spark){
 		int dmg = 0;
 		if(attack.equals("Herp"))
@@ -66,6 +67,18 @@ public class Battle {
 			dmg = 5;
 		else if(attack.equals("Poke"))
 			dmg = 7;
+		else if(attack.equals("Grow"))
+			dmg = 0;
+		else if(attack.equals("Chomp"))
+			dmg = 25;
+		else if(attack.equals("Drop"))
+			dmg = 3;
+		else if(attack.equals("Rainman"))
+			dmg = 10;
+		else if(attack.equals("Fire?"))
+			dmg = 1;
+		else if(attack.equals("Hadouken"))
+			dmg = 20;
 		return dmg;
 	}
 	private boolean goesFirst(Spark y, Spark h){

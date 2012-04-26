@@ -3,6 +3,7 @@ package com.sparkhunter.activities;
 import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
+import com.sparkhunter.res.Player;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -13,11 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Info extends Activity {
+	//what is it with you clowns and static member variables?
 	public static Spark target;
 	public static Activity getSparkActivity = new Activity();
 	private String sname;
 	private String sdescription;
-	private Activity mActivity=this;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class Info extends Activity {
 			
 			public void onClick(View v) {
 				Intent i = new Intent(Info.this, GetSpark.class);
-				mActivity.finish();
+				Info.this.finish();
 				//startActivity(i);
 			}
 		});
@@ -50,9 +51,15 @@ public class Info extends Activity {
 			
 			public void onClick(View v) {
 				Intent i = new Intent(Info.this, SparkHunterTitleScreen.class);
-				mActivity.finish();
+				Info.this.finish();
 				getSparkActivity.finish();
 				//startActivity(i);
+				
+				//add spark to player's inventory
+				Player.getInstance().getSparkInventory().addEntity(target);
+				
+				//and set it as the active spark
+				Player.getInstance().setActiveSpark(target);
 			}
 		});
 		

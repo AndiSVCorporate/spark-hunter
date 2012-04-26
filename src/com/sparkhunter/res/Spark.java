@@ -72,7 +72,12 @@ public class Spark implements Entity{
 		setStats();
 	}
 	public Spark() {
-		// TODO Auto-generated constructor stub
+		mAblty = new ArrayList<Ability>();
+		
+		//default abilities for everyone!
+		mAblty.add(new Ability("Choose an Attack",0)); //TODO: Spinner-work around
+		mAblty.add(new Ability("Herp",20));
+		mAblty.add(new Ability("Derp",50));
 	}
 
 	//sets
@@ -154,14 +159,9 @@ public class Spark implements Entity{
 
 	@Override
 	public void activate(Context c, int target) {
-		// TODO Auto-generated method stub
+		// TODO tie this to individual spark sound effects
 		Log.d("DEBUG", "quack.");
-		Intent itemSoundIntent = new Intent(c, BackgroundMusic.class);
-    	
-    	//KLUDGE-TASTIC, find a better way to package the sound data
-    	itemSoundIntent.setAction(Integer.toString(R.string.music_intent));
-    	itemSoundIntent.putExtra(Integer.toString(R.string.music_id), R.raw.squee);
-    	c.startService(itemSoundIntent);
+		GameAudioManager.getInstance().playEffect("quack");
     	
     	Toast.makeText(c, "quack.", Toast.LENGTH_SHORT).show();
 	}
@@ -356,5 +356,26 @@ public class Spark implements Entity{
 	@Override
 	public int getSoundResId() {
 		return mSoundResId;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		boolean retValue = false;
+		
+		//verify it's actually an Item
+		if(o.getClass() != Spark.class){
+			retValue = false;
+		}
+		else{
+			//IDs are unique to each spark
+			if(((Spark)o).getId() == this.getId()){
+				retValue = true;
+			}
+			else{
+				retValue = false;
+			}
+		}
+		
+		return retValue;
 	}
 }

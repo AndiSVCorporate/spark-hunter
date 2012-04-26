@@ -37,7 +37,6 @@ public class AdventureService extends Service {
 	
 	@Override
 	public void onCreate(){
-		//Toast.makeText(this, "Adventure Service Created", Toast.LENGTH_SHORT).show();
 		Log.v("ADV_SERV", "onCreate called");
 		 sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		 sparklocman.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,sparkloclistener);
@@ -52,7 +51,6 @@ public class AdventureService extends Service {
 	
 	@Override
 	public void onStart(Intent intent, int startid){
-		Toast.makeText(this, "Adventure Service Started", Toast.LENGTH_SHORT).show();
 		Log.v("ADV_SERV", "onStart called");
 		sparklocman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		sparklocman.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,sparkloclistener);

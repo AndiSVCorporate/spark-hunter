@@ -298,4 +298,25 @@ public class Item implements Entity {
 		
 		return information;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		boolean retValue = false;
+		
+		//verify it's actually an Item
+		if(o.getClass() != Item.class){
+			retValue = false;
+		}
+		else{
+			//IDs are unique to each item type (not like sparks!)
+			if(((Item)o).getId() == this.getId()){
+				retValue = true;
+			}
+			else{
+				retValue = false;
+			}
+		}
+		
+		return retValue;
+	}
 }

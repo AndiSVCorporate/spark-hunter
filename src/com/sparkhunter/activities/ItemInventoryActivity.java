@@ -44,7 +44,7 @@ public class ItemInventoryActivity extends Activity {
         
         itemGridView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	Item selected = (Item)items.getItemList().elementAt(position);
+            	Item selected = (Item)items.getEntityList().elementAt(position);
             	String itemInformation = selected.toString();
             	//activate the items
             	selected.activate(ItemInventoryActivity.this, 0);

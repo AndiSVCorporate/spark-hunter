@@ -71,7 +71,7 @@ public class FbfriendsActivity extends Activity {
         mList = (TextView) findViewById(R.id.friendlist);
         mFriends = new HashMap();
         
-        (new AddUserTask()).execute(Player.getInstance().playerID);
+        (new AddUserTask()).execute(Player.getInstance().getPlayerID());
         //get friend list
 		FacebookUtils.getFriends(new FriendListener());
     }

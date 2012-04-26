@@ -89,8 +89,8 @@ public class MultiplayerListActivity extends Activity {
 		      
 			}
 		});
-        mID = Player.getInstance().playerID;
-        mName = Player.getInstance().playerName;
+        mID = Player.getInstance().getPlayerID();
+        mName = Player.getInstance().getPlayerName();
 
         if ((mID == null || mName == null) && FacebookUtils.isSessionValid()) {
         	Toast.makeText(getApplicationContext(), "Getting ID from Facebook", Toast.LENGTH_SHORT).show();
@@ -105,8 +105,8 @@ public class MultiplayerListActivity extends Activity {
 		
 		//we need this for passing battle data back and forth
 		Player ash = Player.getInstance();
-		ash.playerID =mID;
-		ash.enemyID = mIDenemy;
+		ash.setPlayerID(mID);
+		ash.setEnemyID(mIDenemy);
 		
 		(new DeleteBattleTask()).execute(mID);
 		battleFound = false;

@@ -37,8 +37,8 @@ public class NetworkBattle extends Battle {
 		super(your, null);
 		mActivity = activity;
 		mPlayer = Player.getInstance();
-		mID = mPlayer.playerID;
-		mEnemyID = mPlayer.enemyID;
+		mID = mPlayer.getPlayerID();
+		mEnemyID = mPlayer.getEnemyID();
 		
 		(new SendTurnTask()).execute(mID,mYourSpark.getName(),Integer.toString(mYourSpark.mCurHp));
 		

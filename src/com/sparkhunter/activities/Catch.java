@@ -4,6 +4,7 @@ import com.sparkhunter.main.R;
 import com.sparkhunter.main.R.id;
 import com.sparkhunter.main.R.layout;
 import com.sparkhunter.mapping.Map;
+import com.sparkhunter.res.Player;
 import com.sparkhunter.res.Spark;
 
 import android.app.Activity;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.Random;
-import com.sparkhunter.res.BackgroundMusic;
 
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -33,7 +33,7 @@ public class Catch extends Activity {
 	        b.setOnClickListener(new View.OnClickListener() {
 				
 				public void onClick(View v) {
-					if(GetSpark.chosenSpark==null){
+					if(Player.getInstance().getActiveSpark() == null){
 						Toast.makeText(Catch.this, "Get a Spark first!", Toast.LENGTH_SHORT).show();
 					}
 					else {

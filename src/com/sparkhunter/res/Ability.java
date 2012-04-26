@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.util.Log;
+
 public class Ability{
 	private int mDmg;
 	private String mName;
@@ -22,6 +24,8 @@ public class Ability{
 	}
 	
 	 public static List<CharSequence> extractChar(List<Ability> list){
+		if(list == null)
+			Log.d("DEBUG", "Error: Ability list is null");
 		List<CharSequence> retVal = new ArrayList<CharSequence>();
 		Iterator<Ability> i = list.iterator();
 		while (i.hasNext()){

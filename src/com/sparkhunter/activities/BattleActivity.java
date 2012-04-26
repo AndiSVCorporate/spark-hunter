@@ -70,7 +70,14 @@ public class BattleActivity extends Activity {
 		setContentView(R.layout.battlescreen);
 		mLeftBar = (ProgressBar) findViewById(R.id.leftHP);
 		mRightBar = (ProgressBar) findViewById(R.id.rightHP);
-		
+		View battle = findViewById(R.id.AbsoluteLayout1);
+		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		if (hour >= 6 && hour <= 18){
+			battle.setBackgroundResource(R.drawable.battle1);
+		}
+		else {
+			battle.setBackgroundResource(R.drawable.battle0);
+		}
 		playerSpark = Player.getInstance().getActiveSpark();
 
 		// Adding Battle Location to Overlays

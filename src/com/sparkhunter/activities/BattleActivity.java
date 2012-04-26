@@ -122,8 +122,8 @@ public class BattleActivity extends Activity {
 					endBattle();
 				} else {
 					print("Run failed.");
-					print(mBattle.attack("Poke", mBattle.mHisSpark,
-							mBattle.mYourSpark, false));
+					print(mBattle.attack("Poke", mBattle.getmHisSpark(),
+							mBattle.getmYourSpark(), false));
 					endBattle();
 				}
 			}
@@ -158,7 +158,7 @@ public class BattleActivity extends Activity {
 		ArrayAdapter<CharSequence> adapter;
 		adapter = new ArrayAdapter<CharSequence>(this,
 				android.R.layout.simple_spinner_item,
-				Ability.extractChar(mBattle.mYourSpark.getAbilities()));
+				Ability.extractChar(mBattle.getmYourSpark().getAbilities()));
 		s.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -168,7 +168,7 @@ public class BattleActivity extends Activity {
 					GameAudioManager.getInstance().playEffect("click");
 					
 					print(mBattle.attack(((TextView) v).getText().toString(),
-							mBattle.mYourSpark, mBattle.mHisSpark, true));
+							mBattle.getmYourSpark(), mBattle.getmHisSpark(), true));
 					refresh();
 					parentView.setSelection(0);
 				}
@@ -200,6 +200,16 @@ public class BattleActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		playerSpark = Player.getInstance().getActiveSpark();
+		mBattle.setmYourSpark(playerSpark);
+		
+		refresh();
+	}
+	
+	@Override
+	public void onRestart(){
+		super.onRestart();
 	}
 
 	@Override
@@ -210,25 +220,25 @@ public class BattleActivity extends Activity {
 	public void refresh() {
 		// setup names
 		TextView temp = (TextView) findViewById(R.id.leftName);
-		temp.setText(mBattle.mYourSpark.getName());
+		temp.setText(mBattle.getmYourSpark().getName());
 		temp = (TextView) findViewById(R.id.leftlevel);
-		temp.setText(Integer.toString(mBattle.mYourSpark.getLevel()));
+		temp.setText(Integer.toString(mBattle.getmYourSpark().getLevel()));
 		temp = (TextView) findViewById(R.id.rightName);
-		temp.setText(mBattle.mHisSpark.getName());
+		temp.setText(mBattle.getmHisSpark().getName());
 		temp = (TextView) findViewById(R.id.rightlevel);
-		temp.setText(Integer.toString(mBattle.mHisSpark.getLevel()));
+		temp.setText(Integer.toString(mBattle.getmHisSpark().getLevel()));
 
 		mLeftBar.setMax(playerSpark.getMaxHp());
 		mRightBar.setMax(100);
 
 		ImageView temp2 = (ImageView) findViewById(R.id.leftImage);
-		temp2.setImageResource(mBattle.mYourSpark.getImageResId());
+		temp2.setImageResource(mBattle.getmYourSpark().getImageResId());
 		temp2 = (ImageView) findViewById(R.id.rightImage);
-		temp2.setImageResource(mBattle.mHisSpark.getImageResId());
+		temp2.setImageResource(mBattle.getmHisSpark().getImageResId());
 
-		mLeftBar.setProgress(mBattle.mYourSpark.mCurHp);
-		mRightBar.setProgress(mBattle.mHisSpark.mCurHp);
-		if (mBattle.mHisSpark.mCurHp <= 0) {
+		mLeftBar.setProgress(mBattle.getmYourSpark().mCurHp);
+		mRightBar.setProgress(mBattle.getmHisSpark().mCurHp);
+		if (mBattle.getmHisSpark().mCurHp <= 0) {
 			print(mBattle.setWin());
 			playerSpark.gainExp();
 			if (playerSpark.getExperience() >= 100) {
@@ -237,7 +247,7 @@ public class BattleActivity extends Activity {
 				startActivity(i);
 			}
 			endBattle();
-		} else if (mBattle.mYourSpark.mCurHp <= 0) {
+		} else if (mBattle.getmYourSpark().mCurHp <= 0) {
 			print(mBattle.setLose());
 			endBattle();
 		}
@@ -271,8 +281,8 @@ public class BattleActivity extends Activity {
 		//	}
 			//Toast toast =Toast.makeText(mActivity, current_city, Toast.LENGTH_LONG);
 			//toast.show();
-			String battle = "Battled " + mBattle.mHisSpark.getName() + " with "
-					+ mBattle.mYourSpark.getName();
+			String battle = "Battled " + mBattle.getmHisSpark().getName() + " with "
+					+ mBattle.getmYourSpark().getName();
 /*			
 			BattleField bf = new BattleField(battle, latitude, longitude, current_city);
 		
@@ -339,8 +349,8 @@ public class BattleActivity extends Activity {
 			/*Toast toast = Toast.makeText(applicationContext, "Locality: "
 					+ result, Toast.LENGTH_SHORT);
 			toast.show();
-			*/String battle = "Battled " + mBattle.mHisSpark.getName() + " with "
-					+ mBattle.mYourSpark.getName();
+			*/String battle = "Battled " + mBattle.getmHisSpark().getName() + " with "
+					+ mBattle.getmYourSpark().getName();
 			BattleField bf = new BattleField(battle, latitude, longitude, current_city);
 			
 			// Writing to a file using the HistoryWriter class.

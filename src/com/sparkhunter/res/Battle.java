@@ -5,11 +5,12 @@ import com.sparkhunter.main.R;
 
 
 public class Battle {
-	public Spark mYourSpark;
-	public Spark mHisSpark;
-	public boolean mVictory;
-	public boolean mLose;
+	protected Spark mYourSpark;
+	protected Spark mHisSpark;
+	protected boolean mVictory;
+	protected boolean mLose;
 	static public boolean ah;
+	
 	public Battle(Spark your, Spark his)
 	{
 		mVictory = false;
@@ -65,6 +66,30 @@ public class Battle {
 	public String setLose(){
 		mVictory = true;
 		return "You fail!";
-		
+	}
+	
+	public Spark getmYourSpark() {
+		return mYourSpark;
+	}
+	public void setmYourSpark(Spark mYourSpark) {
+		this.mYourSpark = mYourSpark;
+	}
+	public Spark getmHisSpark() {
+		return mHisSpark;
+	}
+	public void setmHisSpark(Spark mHisSpark) {
+		this.mHisSpark = mHisSpark;
+	}
+	public boolean ismVictory() {
+		return mVictory;
+	}
+	public void setmVictory(boolean mVictory) {
+		this.mVictory = mVictory;
+	}
+	public boolean ismLose() {
+		return mLose;
+	}
+	public void setmLose(boolean mLose) {
+		this.mLose = mLose;
 	}
 }

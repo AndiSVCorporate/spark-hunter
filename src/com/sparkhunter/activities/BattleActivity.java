@@ -76,13 +76,7 @@ public class BattleActivity extends Activity {
 		bgm = MediaPlayer.create(mActivity, R.raw.mlp_rainbowdash);
 		bgm.start();
 
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			if (extras.getBoolean("MP") == true)
-				mBattle = new NetworkBattle(mActivity, GetSpark.chosenSpark);
-		} else
-			mBattle = new Battle(GetSpark.chosenSpark, new Spark("Poke-man",
-					R.drawable.item_diamond));
+		initializePlayerData();
 
 		// setup log
 		mBattleLog = (TextView) findViewById(R.id.battleLog);
@@ -109,7 +103,7 @@ public class BattleActivity extends Activity {
 				} else {
 					print("Run failed.");
 					print(mBattle.attack("Poke", mBattle.mHisSpark,
-							mBattle.mYourSpark, false));
+							"Run", mBattle.mYourSpark, false));
 					endBattle();
 				}
 			}
@@ -138,7 +132,15 @@ public class BattleActivity extends Activity {
 		refresh();
 
 	}
-
+	private void initializePlayerData(){
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			if (extras.getBoolean("MP") == true)
+				mBattle = new NetworkBattle(mActivity, GetSpark.chosenSpark);
+		} else
+			mBattle = new Battle(GetSpark.chosenSpark, new Spark("Poke-man",
+					R.drawable.item_diamond));
+	}
 	private void initializeAttackMenu() {
 		Spinner s = (Spinner) findViewById(R.id.battleAttack);
 		ArrayAdapter<CharSequence> adapter;
@@ -152,7 +154,7 @@ public class BattleActivity extends Activity {
 					int pos, long id) {
 				if (parentView.getSelectedItemPosition() > 0) {
 					print(mBattle.attack(((TextView) v).getText().toString(),
-							mBattle.mYourSpark, mBattle.mHisSpark, true));
+							mBattle.mYourSpark,"Poke", mBattle.mHisSpark, true));
 					refresh();
 					parentView.setSelection(0);
 				}
@@ -170,6 +172,7 @@ public class BattleActivity extends Activity {
 	public void print(String text) {
 		mBattleLog.append(text + "\n");
 	}
+	
 
 	@Override
 	public void onPause() {

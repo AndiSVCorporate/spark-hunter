@@ -31,6 +31,8 @@ public class NetworkBattle extends Battle {
     String mEnemyID;
     String mID;
     Player mPlayer;
+    private boolean mTurnComplete; 
+    String mAttackUsed;
 	public NetworkBattle(BattleActivity activity, Spark your) {
 		super(your, null);
 		mActivity = activity;
@@ -45,7 +47,7 @@ public class NetworkBattle extends Battle {
 		mWait.setOnDismissListener(new DialogEnd());
 		mWait.show();
 	}
-	
+
 	private class DialogEnd implements DialogInterface.OnDismissListener{
 
 		@Override
@@ -60,9 +62,46 @@ public class NetworkBattle extends Battle {
 		}
 		
 	}
+
+	@Override
+	public String attack(String aAttack, Spark attacker, String dAttack ,Spark defender, boolean counter){
+		String retVal = "";
+		if(mTurnComplete){
+			retVal = super.attack(aAttack, attacker, dAttack, defender, counter);
+			mTurnComplete = false;
+		}
+		else{
+			(new SendTurnTask()).execute(PackageStats("ATTACK",aAttack));
+			mAttackUsed = aAttack;
+			PollPlayer();
+			mWait = new Waiting(mActivity);
+			mWait.setOnDismissListener(new DialogEnd());
+			mWait.show();
+		}
+		return retVal;
+	}
+	public void finishAttack(String hisAttack){
+		mTurnComplete = true;
+		mActivity.print(attack(mAttackUsed,mYourSpark,hisAttack,mHisSpark,true));
+	}
+	private String[] PackageStats(String ... args){
 	
+		String[] stats = {
+				mID,
+				mYourSpark.getName(),
+				Integer.toString(mYourSpark.mCurHp),
+				"0",
+				Integer.toString(mYourSpark.getAttack()),
+				"0",
+				"0",
+				"0"
+				};
+		String[] retVal =new String[stats.length + args.length];
+		System.arraycopy(stats, 0, retVal, 0, stats.length);
+		System.arraycopy(args, 0, retVal, stats.length, args.length);
+		return retVal;
+	}
 	private void PollPlayer(){
-		
 		
 		Runnable pollRun = new Runnable(){
 
@@ -96,6 +135,10 @@ public class NetworkBattle extends Battle {
         		mHisSpark = new Spark(mResponses[0]);
         		mHisSpark.setCurHp(Integer.parseInt(mResponses[1]));
         		mWait.dismiss();
+        		if(mResponses.length>3 && mResponses[2].contains("ATTACK")){
+        			Toast.makeText(mActivity.getApplicationContext(), mResponses[2], Toast.LENGTH_SHORT).show();
+        			 finishAttack(mResponses[3]);
+        		}
         	}
         }
     }

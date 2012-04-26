@@ -23,24 +23,24 @@ public class Battle {
 		}
 		
 	}
-	public String attack(String sName, Spark attacker, Spark defender, boolean counter)
+	public String attack(String aAttackName, Spark attacker, String dAttackName, Spark defender, boolean counter)
 	{
 		String retVal = null;
 		//TODO: this is hardcoded until there is a lookup table for abilites
 		int dmg = 0;
-		if(sName == "Herp")
+		if(aAttackName.equals("Herp"))
 			dmg = 20;
-		else if(sName == "Derp")
+		else if(aAttackName.equals("Derp"))
 			dmg = 5;
-		else if(sName == "Poke")
+		else if(aAttackName.equals("Poke"))
 			dmg = 7;
 			
-		retVal = attacker.getName() +" uses " + sName +" and does " + dmg +" damage!";
+		retVal = attacker.getName() +" uses " + aAttackName +" and does " + dmg +" damage!";
 		//TODO: Future complicated battle calculations go here
 		defender.mCurHp-=dmg;
 		if(defender.mCurHp>0){
 			if(counter==true) //stops infinite loop of counters
-				retVal = retVal + "\n" + attack("Poke",defender,attacker,false); // TODO:
+				retVal = retVal + "\n" + this.attack(dAttackName,defender,aAttackName,attacker,false); // TODO:
 		}
 		else
 			retVal = retVal + "\n" + defender.getName() +" dies a tragic death.";
@@ -49,7 +49,7 @@ public class Battle {
 		return retVal;
 		
 	}
-
+	
 	public boolean run(){
 		boolean retVal = true;
 		
@@ -65,6 +65,10 @@ public class Battle {
 	public String setLose(){
 		mVictory = true;
 		return "You fail!";
+		
+	}
+	public void initializePlayerData() {
+		// TODO Auto-generated method stub
 		
 	}
 }

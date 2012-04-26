@@ -134,6 +134,10 @@ public class ServerInterface {
 	            data += "&id=" + URLEncoder.encode(args[0],"UTF-8");
 	            data += "&spark=" + URLEncoder.encode(args[1],"UTF-8");
 	            data += "&hp=" + URLEncoder.encode(args[2],"UTF-8");
+	            if(args.length==10){
+	            	data += "&cmd=" + URLEncoder.encode(args[8],"UTF-8");
+	            	data += "&p1=" + URLEncoder.encode(args[9],"UTF-8");
+	            }
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

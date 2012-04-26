@@ -54,6 +54,7 @@ public class GetSpark extends Activity implements OnClickListener {
 			display.setImageResource(R.drawable.grass);
 			chosenSpark = new Spark("Puranto",R.drawable.grass);
 			chosenSpark.setDescript("A plant.");
+			chosenSpark.setAbilities("Grow","0","Chomp","25");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
@@ -61,6 +62,7 @@ public class GetSpark extends Activity implements OnClickListener {
 			display.setImageResource(R.drawable.water);
 			chosenSpark = new Spark("Mizu",R.drawable.water);
 			chosenSpark.setDescript("A derpy mad water drop.");
+			chosenSpark.setAbilities("Drop","3","Rainman","10");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;
@@ -68,6 +70,7 @@ public class GetSpark extends Activity implements OnClickListener {
 			display.setImageResource(R.drawable.fire);
 			chosenSpark = new Spark("Atsui",R.drawable.fire);
 			chosenSpark.setDescript("This is a fire, jellyfish, thing.");
+			chosenSpark.setAbilities("Fire?","1","Hadouken","20");
 			Info.target = chosenSpark;
 			target = chosenSpark;
 			break;

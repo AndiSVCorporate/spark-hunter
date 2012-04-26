@@ -54,7 +54,7 @@ public class ItemInventoryActivity extends Activity {
             	
             	//remove item from inventory
             	//this is gonna break
-            	items.removeEntity(selected.getIdentifier());
+            	items.removeEntityByPosition(position);
             	
             	//activity-ception right here
             	startActivity(((InventoryScreen)getParent()).getParentIntent());

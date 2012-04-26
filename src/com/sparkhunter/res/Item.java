@@ -5,6 +5,7 @@ import com.sun.xml.internal.ws.wsdl.parser.MexEntityResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
+import android.util.Log;
 
 public class Item implements Entity {
 	//ABC for in-game items
@@ -89,17 +90,28 @@ public class Item implements Entity {
 		Spark targetSpark = Player.getInstance().getActiveSpark();
 		
 		//item effects should always be differential quantities
-		targetSpark.setAttack(targetSpark.getAttack() + mAttack);
-		targetSpark.setAttackGain(targetSpark.getAttackGain() + mAttackGain);
-		targetSpark.setLevel(targetSpark.getLevel() + mLevel);
-		targetSpark.setMaxHp(targetSpark.getMaxHp() + mMaxHp);
-		targetSpark.setSpeed(targetSpark.getSpeed() + mSpeed);
-		targetSpark.setCurHp(targetSpark.getCurHp() + mCurHp);
-		targetSpark.setDefense(targetSpark.getDefense() + mDefense);
-		targetSpark.setSpeedGain(targetSpark.getSpeedGain() + mSpeedGain);
-		targetSpark.setHpGain(targetSpark.getHpGain() + mHpGain);
-		targetSpark.setDefenseGain(targetSpark.getDefenseGain() + mDefenseGain);
-		targetSpark.setExperience(targetSpark.getExperience() + mExp);
+		try{
+			targetSpark.setAttack(targetSpark.getAttack() + mAttack);
+			targetSpark.setAttackGain(targetSpark.getAttackGain() + mAttackGain);
+			targetSpark.setLevel(targetSpark.getLevel() + mLevel);
+			targetSpark.setMaxHp(targetSpark.getMaxHp() + mMaxHp);
+			targetSpark.setSpeed(targetSpark.getSpeed() + mSpeed);
+			
+			//current HP is special, limit to Max HP
+			if((targetSpark.getCurHp()+mCurHp) < targetSpark.getMaxHp())
+				targetSpark.setCurHp(targetSpark.getCurHp() + mCurHp);
+			else
+				targetSpark.setCurHp(targetSpark.getMaxHp());
+			
+			targetSpark.setDefense(targetSpark.getDefense() + mDefense);
+			targetSpark.setSpeedGain(targetSpark.getSpeedGain() + mSpeedGain);
+			targetSpark.setHpGain(targetSpark.getHpGain() + mHpGain);
+			targetSpark.setDefenseGain(targetSpark.getDefenseGain() + mDefenseGain);
+			targetSpark.setExperience(targetSpark.getExperience() + mExp);
+		}
+		catch(NullPointerException e){
+			Log.d("DEBUG", "Error: Player has no active spark!");
+		}
 	}
 
 	@Override

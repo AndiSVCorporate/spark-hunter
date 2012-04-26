@@ -26,6 +26,8 @@ public class Inventory {
 		try{
 			while(!found){
 				if(((Item) inventoryEntities.elementAt(i)).getIdentifier() == entityID){
+					Log.d("DEBUG", "Removing " + inventoryEntities.elementAt(i).getName());
+					
 					inventoryEntities.remove(i);
 					found = true;
 				}
@@ -37,5 +39,17 @@ public class Inventory {
 		}
 		
 		return found;
+	}
+	
+	public void removeEntityByPosition(int pos){
+		//directly remove the specified array element
+		//nothing other than EntityAdapter should call this
+		
+		try{
+			inventoryEntities.remove(pos);
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			Log.d("INVENTORY", "Invalid position specified.");
+		}
 	}
 }
